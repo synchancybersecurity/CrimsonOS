@@ -285,35 +285,7 @@ static void bm_route_clear(bm_tab_t* tab, const char* url)
 {
     bm_stats.requests_clear++;
     printk(KERN_DEBUG "bloodmoon: [ClearNet] fetching %s\n", url);
-
-    /* Parse hostname from URL */
-    char host[256];
-    int port = 80;
-    bm_parse_url(url, host, sizeof(host), &port, NULL, 0);
-
-    /* DNS resolve */
-    uint32_t ip = bm_dns_resolve(host);
-    if (ip == 0) {
-        printk(KERN_WARN "bloodmoon: DNS failed for %s\n", host);
-        tab->loading = 0;
-        return;
-    }
-
-    /* TCP connect and HTTP fetch */
-    int fd = tcp_socket_create();
-    if (fd >= 0 && tcp_connect(fd, ip, port) == 0) {
-        char req[512];
-        snprintf(req, sizeof(req), "GET %s HTTP/1.1\r\nHost: %s\r\n\r\n",
-                 tab->url, host);
-        tcp_send(fd, (uint8_t*)req, strlen(req));
-
-        /* Read response into tab buffer */
-        int len = tcp_recv(fd, tab->content_buf, tab->content_cap);
-        tab->content_len = len > 0 ? (uint32_t)len : 0;
-        tab->bytes_rx += len > 0 ? (uint64_t)len : 0;
-        tcp_close(fd);
-    }
-
+    bm_http_get(tab, url);
     tab->loading = 0;
     tab->progress = 100;
 }
@@ -518,10 +490,81 @@ static void bm_parse_url(const char* url, char* host, size_t host_size,
 
 static uint32_t bm_dns_resolve(const char* hostname)
 {
-    /* Stub DNS resolver */
-    /* Would query DNS server via UDP in production */
-    (void)hostname;
-    return 0x08080808;  /* 8.8.8.8 as placeholder */
+    return net_dns_resolve(hostname);
+}
+
+/* ---- HTTP GET test via TCP stack ---- */
+
+/*
+ * bm_http_get - Perform a real HTTP/1.0 GET request and return
+ * the response status code, or -1 on error.
+ * Content is stored in tab->content_buf / tab->content_len.
+ */
+static int bm_http_get(bm_tab_t* tab, const char* url)
+{
+    char host[256];
+    char path[512];
+    int  port = 80;
+
+    bm_parse_url(url, host, sizeof(host), &port, path, sizeof(path));
+    if (!path[0]) { path[0] = '/'; path[1] = '\0'; }
+
+    /* DNS resolution */
+    uint32_t ip = bm_dns_resolve(host);
+    if (!ip) {
+        printk(KERN_WARN "bloodmoon: DNS failed for '%s'\n", host);
+        return -1;
+    }
+
+    /* TCP connect */
+    int fd = tcp_socket_create();
+    if (fd < 0) return -1;
+
+    if (tcp_connect(fd, htonl(ip), (uint16_t)port) < 0) {
+        printk(KERN_WARN "bloodmoon: TCP connect to %u.%u.%u.%u:%d failed\n",
+               (ip>>24)&0xFF, (ip>>16)&0xFF, (ip>>8)&0xFF, ip&0xFF, port);
+        tcp_close(fd);
+        return -1;
+    }
+
+    /* Build HTTP/1.0 request — use 1.0 to avoid chunked encoding */
+    char req[768];
+    int rlen = snprintf(req, sizeof(req),
+        "GET %s HTTP/1.0\r\n"
+        "Host: %s\r\n"
+        "User-Agent: CrimsonOS/0.1 BloodMoon\r\n"
+        "Accept: */*\r\n"
+        "Connection: close\r\n"
+        "\r\n",
+        path, host);
+    tcp_send(fd, (uint8_t*)req, (uint32_t)rlen);
+
+    /* Receive response into tab buffer */
+    uint32_t total = 0;
+    int n;
+    while (total < tab->content_cap - 1) {
+        n = tcp_recv(fd, tab->content_buf + total,
+                     tab->content_cap - 1 - total);
+        if (n <= 0) break;
+        total += (uint32_t)n;
+    }
+    tab->content_buf[total] = '\0';
+    tab->content_len = total;
+    tab->bytes_rx += total;
+    tcp_close(fd);
+
+    /* Parse status line: "HTTP/1.x NNN ..." */
+    int status = -1;
+    if (total >= 12 && memcmp(tab->content_buf, "HTTP/", 5) == 0) {
+        const char* sp = (const char*)tab->content_buf + 8;
+        while (*sp == ' ') sp++;
+        status = atoi(sp);
+    }
+
+    printk(KERN_INFO "bloodmoon: HTTP %s -> %u.%u.%u.%u:%d  status=%d  rx=%u bytes\n",
+           url, (ip>>24)&0xFF, (ip>>16)&0xFF, (ip>>8)&0xFF, ip&0xFF,
+           port, status, total);
+    return status;
 }
 
 /* snprintf provided by printk.c */

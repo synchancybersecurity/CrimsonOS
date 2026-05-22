@@ -25,6 +25,8 @@
 #include <crimson/security.h>
 #include <crimson/gpio.h>
 #include <crimson/mm.h>
+#include <crimson/fs.h>
+#include <crimson/crfs.h>
 
 #define SHELL_PROMPT    "\n\x1B[31mcrimson\x1B[37m:\x1B[36m~\x1B[37m# "
 #define SHELL_MAX_LINE  256
@@ -506,15 +508,73 @@ static void cmd_sysctl(void)
 
 static void cmd_ls(void)
 {
-    printk("\n=== Device Listing ===\n");
-    printk("Devices:\n");
-    printk("  /dev/uart0     - Serial console\n");
-    printk("  /dev/null      - Null device\n");
-    printk("  /dev/zero      - Zero device\n");
-    printk("  /dev/random    - Random number generator\n");
-    printk("  /dev/mem       - Physical memory\n");
-    printk("  /dev/gpio      - GPIO interface\n");
-    printk("======================\n\n");
+    const char* path = (shell_argc > 1) ? shell_argv[1] : "/";
+
+    /* Stat the target to determine type */
+    fs_stat_t st;
+    if (fs_stat(path, &st) < 0) {
+        /* CrimsonFS may not be mounted yet — fall back to device listing */
+        if (shell_argc <= 1) {
+            printk("\nVirtual devices:\n");
+            printk("  /dev/uart0     serial console\n");
+            printk("  /dev/null      null sink\n");
+            printk("  /dev/zero      zero source\n");
+            printk("  /dev/random    CSPRNG\n");
+            printk("  /dev/mem       physical memory\n");
+            printk("  /dev/gpio      GPIO interface\n");
+        } else {
+            printk("ls: %s: no such file or directory\n", path);
+        }
+        return;
+    }
+
+    if (st.type != FS_TYPE_DIR) {
+        /* Single file — print stat info */
+        printk("%s  %lu bytes  mode=%04o\n", path, (unsigned long)st.size, st.mode);
+        return;
+    }
+
+    /* Directory: open in CrimsonFS and read raw directory blocks */
+    int fd = crfs_open(path, O_RDONLY, 0);
+    if (fd < 0) {
+        printk("ls: cannot open %s\n", path);
+        return;
+    }
+
+    /* Read up to one full block of directory data */
+    uint8_t blk[4096];
+    int64_t n = crfs_read(fd, blk, sizeof(blk));
+    crfs_close(fd);
+
+    if (n <= 0) {
+        printk("%s: (empty)\n", path);
+        return;
+    }
+
+    printk("\n%s:\n", path);
+
+    uint32_t off = 0;
+    int entry_count = 0;
+    while (off + sizeof(crfs_dirent_t) <= (uint32_t)n) {
+        crfs_dirent_t* de = (crfs_dirent_t*)(blk + off);
+        if (de->inode_no == 0 || de->rec_len == 0) break;
+
+        /* Name immediately follows the fixed header in the block */
+        char name[256];
+        uint8_t nlen = de->name_len < 255 ? de->name_len : 255;
+        memcpy(name, blk + off + sizeof(crfs_dirent_t), nlen);
+        name[nlen] = '\0';
+
+        char type_c = (de->type == 2) ? 'd' : '-';
+        printk("  %c  %s\n", type_c, name);
+        entry_count++;
+
+        off += de->rec_len;
+    }
+
+    if (entry_count == 0)
+        printk("  (empty directory)\n");
+    printk("\n");
 }
 
 static void cmd_cat(void)
@@ -523,13 +583,32 @@ static void cmd_cat(void)
         printk("Usage: cat <path>\n");
         return;
     }
-    
-    if (strcmp(shell_argv[1], "/dev/version") == 0) {
-        cmd_version();
+
+    const char* path = shell_argv[1];
+
+    /* Synthetic device paths */
+    if (strcmp(path, "/dev/version") == 0) { cmd_version(); return; }
+
+    /* Open via VFS */
+    int fd = fs_open(path, FS_O_RDONLY);
+    if (fd < 0) {
+        printk("cat: %s: no such file or directory\n", path);
+        return;
     }
-    else {
-        printk("cat: '%s': No such file or device\n", shell_argc > 1 ? shell_argv[1] : "");
+
+    /* Read and print in 512-byte chunks */
+    char buf[512];
+    ssize_t n;
+    while ((n = fs_read(fd, buf, sizeof(buf) - 1)) > 0) {
+        buf[n] = '\0';
+        uart_write(buf, (size_t)n);
     }
+    if (n < 0)
+        printk("\ncat: read error\n");
+    else
+        printk("\n");   /* trailing newline after file content */
+
+    fs_close(fd);
 }
 
 static void cmd_top(void)

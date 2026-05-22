@@ -36,6 +36,9 @@ void tcp_close(int sock_fd);
 /* DHCP */
 void dhcp_start(struct net_if* dev);
 
+/* DNS */
+uint32_t net_dns_resolve(const char* hostname);
+
 /* Helpers */
 static inline uint16_t htons(uint16_t v) { return ((v&0xFF)<<8)|((v>>8)&0xFF); }
 static inline uint16_t ntohs(uint16_t v) { return htons(v); }

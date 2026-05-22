@@ -830,10 +830,139 @@ static void icmp_rx(net_if_t* dev, const struct ip_hdr* ip,
     }
 }
 
+/* ---- UDP raw send (used by DNS) ---- */
+
+static int udp_send_raw(uint32_t dst_ip, uint16_t src_port, uint16_t dst_port,
+                         const uint8_t* payload, uint16_t payload_len)
+{
+    if (!num_net_ifs) return -1;
+    net_if_t* dev = net_ifs[0];
+
+    uint32_t pkt_len = ETH_HDR_LEN + sizeof(struct ip_hdr) +
+                       sizeof(struct udp_hdr) + payload_len;
+    uint8_t* pkt = kmalloc(pkt_len);
+    if (!pkt) return -1;
+
+    struct eth_hdr*  eth = (struct eth_hdr*)pkt;
+    struct ip_hdr*   ip  = (struct ip_hdr*)(pkt + ETH_HDR_LEN);
+    struct udp_hdr*  udp = (struct udp_hdr*)(pkt + ETH_HDR_LEN + sizeof(struct ip_hdr));
+    uint8_t*         pay = pkt + ETH_HDR_LEN + sizeof(struct ip_hdr) + sizeof(struct udp_hdr);
+
+    /* Ethernet */
+    uint8_t dst_mac[ETH_ALEN];
+    if (arp_lookup(dst_ip, dst_mac) < 0) {
+        /* ARP request sent; caller should retry after a brief delay */
+        kfree(pkt);
+        return -1;
+    }
+    memcpy(eth->dst, dst_mac, ETH_ALEN);
+    memcpy(eth->src, dev->mac, ETH_ALEN);
+    eth->type = htons(ETH_P_IP);
+
+    /* IPv4 */
+    ip->ver_ihl    = 0x45;
+    ip->tos        = 0;
+    ip->total_len  = htons(sizeof(struct ip_hdr) + sizeof(struct udp_hdr) + payload_len);
+    ip->id         = htons((uint16_t)timer_get_uptime_us());
+    ip->frag_off   = 0;
+    ip->ttl        = 64;
+    ip->protocol   = IP_PROTO_UDP;
+    ip->checksum   = 0;
+    ip->src        = dev->ip_addr;
+    ip->dst        = dst_ip;
+    ip->checksum   = ip_checksum(ip, sizeof(struct ip_hdr));
+
+    /* UDP */
+    udp->src_port  = htons(src_port);
+    udp->dst_port  = htons(dst_port);
+    udp->len       = htons(sizeof(struct udp_hdr) + payload_len);
+    udp->checksum  = 0;   /* optional for IPv4 */
+
+    memcpy(pay, payload, payload_len);
+    dev->transmit(dev, pkt, pkt_len);
+    kfree(pkt);
+    return 0;
+}
+
 static void udp_rx(const struct ip_hdr* ip, const uint8_t* data, uint16_t len)
 {
-    (void)ip; (void)data; (void)len;
-    /* UDP socket dispatch would go here */
+    if (len < sizeof(struct udp_hdr)) return;
+    const struct udp_hdr* udp = (const struct udp_hdr*)data;
+    uint16_t src_port = ntohs(udp->src_port);
+    uint16_t dst_port = ntohs(udp->dst_port);
+    const uint8_t* payload = (const uint8_t*)(udp + 1);
+    uint16_t plen = ntohs(udp->len);
+    if (plen < sizeof(struct udp_hdr)) return;
+    plen -= sizeof(struct udp_hdr);
+
+    (void)dst_port;
+
+    /* DNS response: port 53 → find matching query by ID */
+    if (src_port == DNS_PORT && plen >= 12) {
+        uint16_t dns_id = (uint16_t)((payload[0] << 8) | payload[1]);
+        uint16_t flags  = (uint16_t)((payload[2] << 8) | payload[3]);
+        uint16_t ancount = (uint16_t)((payload[6] << 8) | payload[7]);
+
+        /* QR bit must be 1 (response), RCODE must be 0 (no error) */
+        if (!(flags & 0x8000) || (flags & 0x000F)) return;
+
+        spin_lock(&arp_lock);   /* reuse arp_lock as a generic net lock */
+        for (int i = 0; i < DNS_MAX_QUERIES; i++) {
+            if (!dns_queries[i].in_use || dns_queries[i].resolved) continue;
+            if (dns_queries[i].id != dns_id) continue;
+
+            /* Skip question section: walk past DNS header (12 bytes) + QNAME + QTYPE + QCLASS */
+            uint32_t off = 12;
+            /* Skip question section questions */
+            uint16_t qdcount = (uint16_t)((payload[4] << 8) | payload[5]);
+            for (int q = 0; q < qdcount && off < plen; q++) {
+                /* Skip QNAME labels */
+                while (off < plen && payload[off] != 0) {
+                    if ((payload[off] & 0xC0) == 0xC0) { off += 2; break; }
+                    off += 1 + payload[off];
+                }
+                if (off < plen && payload[off] == 0) off++;
+                off += 4;  /* QTYPE + QCLASS */
+            }
+
+            /* Parse answer records looking for A (type 1, class 1) */
+            for (int a = 0; a < ancount && off + 10 < plen; a++) {
+                /* Skip name (possibly compressed pointer) */
+                if ((payload[off] & 0xC0) == 0xC0)
+                    off += 2;
+                else {
+                    while (off < plen && payload[off] != 0) {
+                        if ((payload[off] & 0xC0) == 0xC0) { off += 2; break; }
+                        off += 1 + payload[off];
+                    }
+                    if (off < plen && payload[off] == 0) off++;
+                }
+                if (off + 10 > plen) break;
+
+                uint16_t rtype  = (uint16_t)((payload[off] << 8) | payload[off+1]);
+                uint16_t rclass = (uint16_t)((payload[off+2] << 8) | payload[off+3]);
+                uint16_t rdlen  = (uint16_t)((payload[off+8] << 8) | payload[off+9]);
+                off += 10;  /* skip TYPE, CLASS, TTL (4), RDLENGTH */
+
+                if (rtype == 1 && rclass == 1 && rdlen == 4 && off + 4 <= plen) {
+                    /* A record — 4-byte IPv4 address */
+                    dns_queries[i].result_ip =
+                        ((uint32_t)payload[off]   << 24) |
+                        ((uint32_t)payload[off+1] << 16) |
+                        ((uint32_t)payload[off+2] <<  8) |
+                         (uint32_t)payload[off+3];
+                    dns_queries[i].resolved = 1;
+                    break;
+                }
+                off += rdlen;
+            }
+            break;
+        }
+        spin_unlock(&arp_lock);
+        return;
+    }
+
+    (void)ip;  /* no other UDP demux yet */
 }
 
 /* ---- TCP core ---- */
@@ -1147,6 +1276,127 @@ static uint16_t ip_checksum(const void* data, uint32_t len)
         sum = (sum & 0xFFFF) + (sum >> 16);
 
     return (uint16_t)~sum;
+}
+
+/* ---- DNS resolver (public API) ---- */
+
+/*
+ * net_dns_resolve - Resolve a hostname to an IPv4 address.
+ *
+ * Sends a DNS A-record query to the interface's DNS server (or 8.8.8.8
+ * as fallback) using the existing UDP send path, then polls for the
+ * response handled by udp_rx() above.
+ *
+ * Returns the host-byte-order IPv4 address, or 0 on failure/timeout.
+ */
+uint32_t net_dns_resolve(const char* hostname)
+{
+    if (!hostname || !num_net_ifs) return 0;
+
+    /* Check if hostname is already a dotted-decimal IP */
+    uint32_t a, b, c, d;
+    /* Simple numeric check */
+    const char* p = hostname;
+    int all_digits = 1;
+    while (*p) {
+        if (*p != '.' && (*p < '0' || *p > '9')) { all_digits = 0; break; }
+        p++;
+    }
+    if (all_digits) {
+        a = b = c = d = 0;
+        const char* q = hostname;
+        while (*q >= '0' && *q <= '9') { a = a*10 + (*q - '0'); q++; } q++;
+        while (*q >= '0' && *q <= '9') { b = b*10 + (*q - '0'); q++; } q++;
+        while (*q >= '0' && *q <= '9') { c = c*10 + (*q - '0'); q++; } q++;
+        while (*q >= '0' && *q <= '9') { d = d*10 + (*q - '0'); q++; }
+        return (a<<24)|(b<<16)|(c<<8)|d;
+    }
+
+    /* Pick DNS server: use interface's dns1 if set, else 8.8.8.8 */
+    uint32_t srv_ip = net_ifs[0]->dns1 ? net_ifs[0]->dns1 : 0x08080808U;
+
+    /* Allocate a dns_query slot */
+    spin_lock(&arp_lock);
+    int slot = -1;
+    for (int i = 0; i < DNS_MAX_QUERIES; i++) {
+        if (!dns_queries[i].in_use) { slot = i; break; }
+    }
+    if (slot < 0) { spin_unlock(&arp_lock); return 0; }
+
+    static uint16_t dns_next_id = 0x1234;
+    uint16_t qid = dns_next_id++;
+    dns_queries[slot].id = qid;
+    dns_queries[slot].result_ip = 0;
+    dns_queries[slot].resolved = 0;
+    dns_queries[slot].in_use = 1;
+    dns_queries[slot].timestamp = timer_get_uptime_ms();
+    spin_unlock(&arp_lock);
+
+    /* Build DNS query packet */
+    uint8_t pkt[512];
+    uint32_t off = 0;
+
+    /* DNS header */
+    pkt[off++] = (uint8_t)(qid >> 8);   pkt[off++] = (uint8_t)qid;   /* ID */
+    pkt[off++] = 0x01; pkt[off++] = 0x00; /* Flags: RD=1 */
+    pkt[off++] = 0x00; pkt[off++] = 0x01; /* QDCOUNT = 1 */
+    pkt[off++] = 0x00; pkt[off++] = 0x00; /* ANCOUNT = 0 */
+    pkt[off++] = 0x00; pkt[off++] = 0x00; /* NSCOUNT = 0 */
+    pkt[off++] = 0x00; pkt[off++] = 0x00; /* ARCOUNT = 0 */
+
+    /* Encode hostname as DNS labels: "www.example.com" → \x03www\x07example\x03com\x00 */
+    const char* h = hostname;
+    while (*h) {
+        const char* dot = h;
+        while (*dot && *dot != '.') dot++;
+        uint8_t llen = (uint8_t)(dot - h);
+        pkt[off++] = llen;
+        for (uint8_t i = 0; i < llen; i++) pkt[off++] = (uint8_t)h[i];
+        h = (*dot == '.') ? dot + 1 : dot;
+    }
+    pkt[off++] = 0x00;                     /* root label */
+    pkt[off++] = 0x00; pkt[off++] = 0x01;  /* QTYPE  = A (1) */
+    pkt[off++] = 0x00; pkt[off++] = 0x01;  /* QCLASS = IN (1) */
+
+    /* Send query — use ephemeral source port 1024+slot for demux */
+    uint16_t src_port = (uint16_t)(1024 + slot);
+    uint32_t srv_net  = htonl(srv_ip);  /* udp_send_raw takes host order for ip */
+
+    /* Retry up to 3 times waiting for ARP if needed */
+    for (int retry = 0; retry < 3; retry++) {
+        if (udp_send_raw(srv_net, src_port, DNS_PORT, pkt, (uint16_t)off) == 0)
+            break;
+        timer_delay_ms(50);   /* wait for ARP reply */
+    }
+
+    /* Poll for response, timeout 3 seconds */
+    uint64_t deadline = timer_get_uptime_ms() + 3000;
+    while (timer_get_uptime_ms() < deadline) {
+        /* Poll network device for incoming packets */
+        if (net_ifs[0]->poll) net_ifs[0]->poll(net_ifs[0]);
+
+        spin_lock(&arp_lock);
+        int resolved = dns_queries[slot].resolved;
+        uint32_t ip = dns_queries[slot].result_ip;
+        spin_unlock(&arp_lock);
+
+        if (resolved) {
+            spin_lock(&arp_lock);
+            dns_queries[slot].in_use = 0;
+            spin_unlock(&arp_lock);
+            printk(KERN_DEBUG "dns: %s -> %u.%u.%u.%u\n", hostname,
+                   (ip>>24)&0xFF, (ip>>16)&0xFF, (ip>>8)&0xFF, ip&0xFF);
+            return ip;
+        }
+        timer_delay_ms(10);
+    }
+
+    /* Timeout */
+    spin_lock(&arp_lock);
+    dns_queries[slot].in_use = 0;
+    spin_unlock(&arp_lock);
+    printk(KERN_WARNING "dns: timeout resolving %s\n", hostname);
+    return 0;
 }
 
 /* ---- Byte order helpers ---- */
