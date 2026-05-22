@@ -115,15 +115,31 @@ pid_t process_create(const struct process_attr* attr)
     proc->flags = attr->flags;
     proc->cpu = 0;
     
-    /* CPU context */
-    proc->ctx.sp = (uintptr_t)kmalloc(attr->stack_size) + attr->stack_size;
-    if (proc->ctx.sp == (uintptr_t)NULL + attr->stack_size) {
+    /* CPU context
+     * arch_context_switch and arch_jump_to_process use a COMPACT save area
+     * that maps onto the beginning of cpu_context at hardcoded byte offsets:
+     *   offset  0..72: callee-saved x19-x28 (left as 0 for new processes)
+     *   offset 80:     x29 (frame pointer — 0 = base frame)
+     *   offset 88:     x30 = entry point  (loaded into x30, branched via ret/blr)
+     *   offset 96:     sp  = initial stack pointer
+     * These map to ctx.x10, ctx.x11, ctx.x12 in the full cpu_context struct.
+     */
+    uintptr_t stack_top = (uintptr_t)kmalloc(attr->stack_size) + attr->stack_size;
+    if (stack_top == (uintptr_t)NULL + attr->stack_size) {
         free_pid(pid);
         proc->state = PROC_UNUSED;
         spin_unlock(&proc_table_lock);
         return -STATUS_NOMEM;
     }
-    proc->ctx.pc = (uintptr_t)attr->entry;
+    /* Align stack to 16 bytes (AArch64 ABI requirement) */
+    stack_top &= ~(uintptr_t)0xF;
+
+    proc->ctx.x11 = (uintptr_t)attr->entry;  /* offset 88 = x30 slot → entry */
+    proc->ctx.x12 = stack_top;               /* offset 96 = sp slot */
+
+    /* Also keep the named fields consistent for debugging */
+    proc->ctx.sp     = stack_top;
+    proc->ctx.pc     = (uintptr_t)attr->entry;
     proc->ctx.pstate = 0x345;  /* EL1, interrupts enabled */
     
     /* Memory */
