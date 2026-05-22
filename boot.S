@@ -266,8 +266,11 @@ _pt_clear:
     orr x2, x2, #0x3
     str x2, [x1, #8]
 
-    /* PMD_kernel + PMD_id_low: both map PA 0x0–0x3FFFFFFF with 2MB blocks */
-    mov x4, #(0x401 | (1 << 10) | (3 << 8))    /* AF=1, SH=inner, valid+block */
+    /* PMD block flags: AttrIndx=4 (Normal WB, MAIR[4]=0xFF), AF=1,
+     * SH=inner-shareable, valid+block.  Using Device (AttrIndx=0) for
+     * RAM causes the hardware page-table walker to take an External Abort
+     * when it fetches PUD entries that physically reside in "device" memory. */
+    mov x4, #(0x411 | (1 << 10) | (3 << 8))    /* AF=1, SH=inner, Normal WB */
 
     ldr x1, =(__page_tables_start + 0x3000)     /* PMD_kernel */
     mov x2, #0

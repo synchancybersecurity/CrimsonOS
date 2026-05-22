@@ -90,20 +90,30 @@ void timer_init(void)
     printk(KERN_DEBUG "Timer: ARM Generic Timer, freq=%u Hz\n", timer_frequency);
 }
 
+/* Wrapper matching irq_handler_t signature */
+static void timer_irq_dispatch(uint32_t irq, void* data)
+{
+    (void)irq; (void)data;
+    timer_irq_handler();
+}
+
 /*
  * timer_init_sched - Initialize scheduler timer
  */
 void timer_init_sched(void)
 {
+    /* Register IRQ handler for ARM virtual timer (IRQ 27 on virt machine) */
+    interrupt_register(IRQ_TIMER_VIRT, timer_irq_dispatch, "timer");
+
     /* Enable virtual timer with interrupt */
     uint32_t ctl = CTL_ENABLE;
     __asm__ volatile("msr " CNTV_CTL_EL0 ", %0" :: "r" (ctl));
-    
+
     /* Set initial tick interval */
     uint32_t ticks_per_tick = timer_frequency / 100; /* 100Hz */
     __asm__ volatile("msr " CNTV_TVAL_EL0 ", %0" :: "r" (ticks_per_tick));
-    
-    /* Enable timer interrupt */
+
+    /* Enable timer interrupt in GIC */
     interrupt_enable(IRQ_TIMER_VIRT);
 }
 
