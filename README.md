@@ -1,5 +1,7 @@
 # Crimson OS
 
+[![QEMU Boot](https://github.com/synchancybersecurity/CrimsonOS/actions/workflows/qemu-boot.yml/badge.svg)](https://github.com/synchancybersecurity/CrimsonOS/actions/workflows/qemu-boot.yml)
+
 ![Crimson OS Logo](IMG_0035.jpeg)
 
 **Version:** 0.1.0-alpha "BloodMoon"
