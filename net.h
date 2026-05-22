@@ -39,6 +39,10 @@ void dhcp_start(struct net_if* dev);
 /* DNS */
 uint32_t net_dns_resolve(const char* hostname);
 
+/* Rx injection (for WiFi/cellular drivers) */
+struct net_if;
+void net_rx_frame(struct net_if* dev, const uint8_t* data, uint32_t len);
+
 /* Helpers */
 static inline uint16_t htons(uint16_t v) { return ((v&0xFF)<<8)|((v>>8)&0xFF); }
 static inline uint16_t ntohs(uint16_t v) { return htons(v); }

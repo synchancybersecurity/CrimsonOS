@@ -360,6 +360,20 @@ void net_register_if(net_if_t* dev)
            dev->mac[3], dev->mac[4], dev->mac[5]);
 }
 
+/* Called by WiFi/cellular drivers to inject received Ethernet frames */
+void net_rx_frame(net_if_t* dev, const uint8_t* data, uint32_t len)
+{
+    if (!dev || len < ETH_HDR_LEN) return;
+    const struct eth_hdr* eth = (const struct eth_hdr*)data;
+    dev->rx_bytes   += len;
+    dev->rx_packets += 1;
+    switch (ntohs(eth->type)) {
+        case ETH_P_ARP: arp_rx(dev, data, len);    break;
+        case ETH_P_IP:  ip_rx(dev, data, len);     break;
+        default: break;
+    }
+}
+
 /* ---- DHCP ---- */
 
 void dhcp_start(net_if_t* dev)
