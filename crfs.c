@@ -804,23 +804,97 @@ static int crfs_write_inode(crfs_inode_t* inode)
     return crfs_write_block(addr, &inode->disk);
 }
 
+#define CRFS_PTRS_PER_BLOCK  (CRFS_BLOCK_SIZE / sizeof(uint64_t))   /* 512 */
+#define CRFS_INDIRECT_BASE   12
+#define CRFS_DINDIRECT_BASE  (CRFS_INDIRECT_BASE + CRFS_PTRS_PER_BLOCK)
+
 static uint64_t crfs_inode_get_block(crfs_inode_t* inode, uint32_t block_no)
 {
-    if (block_no < 12) {
+    uint64_t ptrs[CRFS_PTRS_PER_BLOCK];
+
+    if (block_no < CRFS_INDIRECT_BASE)
         return inode->disk.direct[block_no];
+
+    block_no -= CRFS_INDIRECT_BASE;
+
+    if (block_no < CRFS_PTRS_PER_BLOCK) {
+        if (!inode->disk.indirect) return 0;
+        crfs_read_block(inode->disk.indirect, ptrs);
+        return ptrs[block_no];
     }
-    /* TODO: indirect, double-indirect */
+
+    block_no -= CRFS_PTRS_PER_BLOCK;
+
+    if (block_no < CRFS_PTRS_PER_BLOCK * CRFS_PTRS_PER_BLOCK) {
+        if (!inode->disk.double_indirect) return 0;
+        crfs_read_block(inode->disk.double_indirect, ptrs);
+        uint64_t l1_addr = ptrs[block_no / CRFS_PTRS_PER_BLOCK];
+        if (!l1_addr) return 0;
+        crfs_read_block(l1_addr, ptrs);
+        return ptrs[block_no % CRFS_PTRS_PER_BLOCK];
+    }
+
     return 0;
 }
 
 static int crfs_inode_set_block(crfs_inode_t* inode, uint32_t block_no, uint64_t disk_addr)
 {
-    if (block_no < 12) {
+    uint64_t ptrs[CRFS_PTRS_PER_BLOCK];
+
+    if (block_no < CRFS_INDIRECT_BASE) {
         inode->disk.direct[block_no] = disk_addr;
         inode->dirty = 1;
         return 0;
     }
-    /* TODO: indirect, double-indirect */
+
+    block_no -= CRFS_INDIRECT_BASE;
+
+    if (block_no < CRFS_PTRS_PER_BLOCK) {
+        if (!inode->disk.indirect) {
+            uint64_t new_addr;
+            if (crfs_alloc_block(&new_addr) < 0) return -1;
+            memset(ptrs, 0, sizeof(ptrs));
+            crfs_write_block(new_addr, ptrs);
+            inode->disk.indirect = new_addr;
+        }
+        crfs_read_block(inode->disk.indirect, ptrs);
+        ptrs[block_no] = disk_addr;
+        crfs_write_block(inode->disk.indirect, ptrs);
+        inode->dirty = 1;
+        return 0;
+    }
+
+    block_no -= CRFS_PTRS_PER_BLOCK;
+
+    if (block_no < CRFS_PTRS_PER_BLOCK * CRFS_PTRS_PER_BLOCK) {
+        uint64_t l1_ptrs[CRFS_PTRS_PER_BLOCK];
+        uint32_t l1_idx = block_no / CRFS_PTRS_PER_BLOCK;
+        uint32_t l2_idx = block_no % CRFS_PTRS_PER_BLOCK;
+
+        if (!inode->disk.double_indirect) {
+            uint64_t new_addr;
+            if (crfs_alloc_block(&new_addr) < 0) return -1;
+            memset(l1_ptrs, 0, sizeof(l1_ptrs));
+            crfs_write_block(new_addr, l1_ptrs);
+            inode->disk.double_indirect = new_addr;
+        }
+        crfs_read_block(inode->disk.double_indirect, l1_ptrs);
+
+        if (!l1_ptrs[l1_idx]) {
+            uint64_t new_addr;
+            if (crfs_alloc_block(&new_addr) < 0) return -1;
+            memset(ptrs, 0, sizeof(ptrs));
+            crfs_write_block(new_addr, ptrs);
+            l1_ptrs[l1_idx] = new_addr;
+            crfs_write_block(inode->disk.double_indirect, l1_ptrs);
+        }
+        crfs_read_block(l1_ptrs[l1_idx], ptrs);
+        ptrs[l2_idx] = disk_addr;
+        crfs_write_block(l1_ptrs[l1_idx], ptrs);
+        inode->dirty = 1;
+        return 0;
+    }
+
     return -1;
 }
 

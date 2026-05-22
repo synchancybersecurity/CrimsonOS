@@ -358,11 +358,19 @@ void pipeline_set_render_callback(void (*cb)(gfx_ctx_t*))
     g_pipeline.render_callback = cb;
 }
 
+/* Declared in display_a64_dsi.c — board-specific DSI+panel init */
+extern int display_a64_dsi_init(void);
+
 int pipeline_init(void)
 {
     kmemset(&g_pipeline, 0, sizeof(g_pipeline));
     spin_lock_init(&g_pipeline.lock);
-    
+
+    /* Bring up A64 DSI controller and XBD599 panel */
+    if (display_a64_dsi_init() < 0) {
+        printk(KERN_WARNING "[PIPELINE] DSI init failed — continuing headless\n");
+    }
+
     /* Get display info from driver */
     void* fb_ptr;
     display_get_info(&g_pipeline.width, &g_pipeline.height,

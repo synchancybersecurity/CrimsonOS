@@ -17,6 +17,7 @@
 #include <crimson/spinlock.h>
 #include <crimson/syscall.h>
 #include <crimson/crfs.h>
+#include <crimson/fs.h>
 #include <crimson/net.h>
 #include <crimson/display.h>
 #include <crimson/touch.h>
@@ -206,37 +207,39 @@ void syscall_get_stats(void)
 
 static long sys_read(long fd, long buf, long count, long, long, long)
 {
-    (void)fd; (void)buf; (void)count;
-    /* TODO: read from fd_table */
-    return -STATUS_UNIMPL;
+    if (fd == 0) {
+        /* stdin: no keyboard input yet */
+        return 0;
+    }
+    return (long)fs_read((int)fd, (void*)(uintptr_t)buf, (size_t)count);
 }
 
 static long sys_write(long fd, long buf, long count, long, long, long)
 {
-    if (fd == 1 || fd == 2) {  /* stdout / stderr */
+    if (fd == 1 || fd == 2) {  /* stdout / stderr → UART */
         const char* str = (const char*)(uintptr_t)buf;
         for (long i = 0; i < count; i++)
             uart_putc(str[i]);
         return count;
     }
-    return -STATUS_UNIMPL;
+    return (long)fs_write((int)fd, (const void*)(uintptr_t)buf, (size_t)count);
 }
 
 static long sys_open(long path, long flags, long mode, long, long, long)
 {
-    return crfs_open((const char*)(uintptr_t)path, (uint32_t)flags, (uint32_t)mode);
+    (void)mode;
+    return (long)fs_open((const char*)(uintptr_t)path, (uint32_t)flags);
 }
 
 static long sys_close(long fd, long, long, long, long, long)
 {
-    crfs_close((int)fd);
+    fs_close((int)fd);
     return 0;
 }
 
 static long sys_lseek(long fd, long offset, long whence, long, long, long)
 {
-    (void)fd; (void)offset; (void)whence;
-    return -STATUS_UNIMPL;
+    return (long)fs_lseek((int)fd, (off_t)offset, (int)whence);
 }
 
 /* Userspace heap - brk-based allocation */
