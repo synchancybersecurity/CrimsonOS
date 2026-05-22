@@ -1,0 +1,98 @@
+name: Crimson OS — Build & QEMU Boot
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-boot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v4
+
+    - name: Install ARM64 toolchain and QEMU
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y \
+          gcc-aarch64-linux-gnu \
+          binutils-aarch64-linux-gnu \
+          qemu-system-arm \
+          make
+
+    - name: Verify toolchain
+      run: |
+        aarch64-linux-gnu-gcc --version
+        qemu-system-aarch64 --version
+
+    - name: Build Crimson OS kernel
+      run: |
+        make BOARD=qemu
+        ls -lh bin/crimson-os.img
+        echo "Kernel size: $(wc -c < bin/crimson-os.img) bytes"
+
+    - name: Boot in QEMU and capture serial output
+      run: |
+        timeout 30 qemu-system-aarch64 \
+          -M virt \
+          -cpu cortex-a72 \
+          -smp 4 \
+          -m 2G \
+          -kernel bin/crimson-os.img \
+          -nographic \
+          -serial stdio \
+          2>&1 | tee boot_output.txt || true
+
+        echo "=== BOOT OUTPUT ==="
+        cat boot_output.txt
+
+    - name: Verify boot phases completed
+      run: |
+        echo "Checking for successful boot markers..."
+
+        if grep -q "Crimson OS v0.1.0" boot_output.txt; then
+          echo "✓ Kernel loaded"
+        else
+          echo "✗ Kernel did not load" && exit 1
+        fi
+
+        if grep -q "Phase 1" boot_output.txt; then
+          echo "✓ Phase 1: Core subsystems"
+        else
+          echo "✗ Phase 1 failed" && exit 1
+        fi
+
+        if grep -q "Phase 4" boot_output.txt; then
+          echo "✓ Phase 4: Security subsystem"
+        else
+          echo "✗ Phase 4 failed" && exit 1
+        fi
+
+        if grep -q "Phase 11" boot_output.txt; then
+          echo "✓ Phase 11: User space started"
+        else
+          echo "✗ Phase 11 failed" && exit 1
+        fi
+
+        if grep -q "Crimson Shell\|crimson:~#\|initialization complete" boot_output.txt; then
+          echo "✓ Shell reached — boot verified"
+        else
+          echo "✗ Shell not reached" && exit 1
+        fi
+
+        echo ""
+        echo "============================================"
+        echo "  Crimson OS QEMU boot: VERIFIED"
+        echo "============================================"
+
+    - name: Upload boot log as artifact
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: crimson-boot-log
+        path: boot_output.txt
+        retention-days: 30
