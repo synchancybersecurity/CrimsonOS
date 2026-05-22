@@ -24,6 +24,7 @@
  */
 
 #include <crimson/types.h>
+#include <crimson/net.h>
 #include <crimson/printk.h>
 #include <crimson/spinlock.h>
 #include <crimson/memory.h>
@@ -32,13 +33,7 @@
 #include <crimson/scheduler.h>
 #include <crimson/mm.h>
 
-/* Byte-order conversion (must be before first use) */
-static inline uint16_t htons(uint16_t v) { return ((v & 0xFF) << 8) | ((v >> 8) & 0xFF); }
-static inline uint16_t ntohs(uint16_t v) { return htons(v); }
-static inline uint32_t htonl(uint32_t v) {
-    return ((v & 0xFF) << 24) | ((v & 0xFF00) << 8) |
-           ((v >> 8) & 0xFF00) | ((v >> 24) & 0xFF);
-}
+/* Byte-order helpers provided by net.h */
 static inline uint32_t ntohl(uint32_t v) { return htonl(v); }
 
 
@@ -249,30 +244,7 @@ static tcp_socket_t tcp_sockets[TCP_MAX_SOCKETS];
 static uint16_t next_ephemeral_port = 49152;
 static spinlock_t tcp_sock_lock = SPINLOCK_INIT;
 
-/* ---- Network interface ---- */
-typedef struct net_if {
-    uint8_t  mac[ETH_ALEN];
-    uint32_t ip_addr;
-    uint32_t netmask;
-    uint32_t gateway;
-    uint32_t dns1;
-    uint32_t dns2;
-    uint32_t mtu;
-    uint32_t flags;
-    char     name[16];
-
-    /* Statistics */
-    uint64_t rx_bytes;
-    uint64_t tx_bytes;
-    uint64_t rx_packets;
-    uint64_t tx_packets;
-    uint64_t rx_errors;
-    uint64_t tx_errors;
-
-    /* Driver hooks */
-    int  (*transmit)(struct net_if* dev, const uint8_t* data, uint32_t len);
-    void (*poll)(struct net_if* dev);
-} net_if_t;
+/* net_if_t defined in net.h */
 
 #define NET_IF_UP               (1 << 0)
 #define NET_IF_RUNNING          (1 << 1)
@@ -1409,7 +1381,7 @@ uint32_t net_dns_resolve(const char* hostname)
     spin_lock(&arp_lock);
     dns_queries[slot].in_use = 0;
     spin_unlock(&arp_lock);
-    printk(KERN_WARNING "dns: timeout resolving %s\n", hostname);
+    printk(KERN_WARN "dns: timeout resolving %s\n", hostname);
     return 0;
 }
 

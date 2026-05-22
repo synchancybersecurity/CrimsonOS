@@ -18,6 +18,7 @@
  */
 
 #include <crimson/types.h>
+#include <crimson/wifi.h>
 #include <crimson/printk.h>
 #include <crimson/interrupt.h>
 #include <crimson/memory.h>
@@ -25,10 +26,7 @@
 #include <crimson/string.h>
 #include <crimson/timer.h>
 
-#define WIFI_MAX_INTERFACES     4
-#define WIFI_MAX_SCAN_RESULTS   128
-#define WIFI_MAX_SSID_LEN       32
-#define WIFI_MAX_KEY_LEN        64
+/* WIFI_MAX_* constants defined in wifi.h */
 #define WIFI_FRAME_SIZE         2352
 
 /* 802.11 frame types */
@@ -90,77 +88,12 @@
 #define WIFI_4WAY_HANDSHAKE     4
 #define WIFI_CONNECTED          5
 
-/* Scan result entry */
-typedef struct {
-    uint8_t  bssid[6];
-    uint8_t  ssid[WIFI_MAX_SSID_LEN + 1];
-    int32_t  rssi;          /* dBm */
-    uint32_t freq;          /* MHz */
-    uint32_t beacon_int;    /* TU */
-    uint32_t caps;          /* Capability info */
-    uint8_t  channel;
-    uint8_t  ht:1, vht:1, he:1;
-    uint8_t  security;      /* 0=open, 1=WEP, 2=WPA, 3=WPA2, 4=WPA3 */
-    uint32_t akms;          /* Supported AKM suites */
-} wifi_scan_result_t;
-
-/* WiFi interface state */
-typedef struct {
-    uint32_t index;
-    uint32_t mode;
-    uint32_t state;
-    uint8_t  mac[6];
-
-    /* STA mode */
-    uint8_t  connected_bssid[6];
-    uint8_t  connected_ssid[WIFI_MAX_SSID_LEN + 1];
-    uint32_t auth_type;
-    uint8_t  pmk[32];       /* Pairwise Master Key */
-    uint32_t freq;
-    uint32_t bw;            /* 20/40/80/160 MHz */
-    int32_t  last_rssi;
-
-    /* AP mode */
-    uint8_t  ap_ssid[WIFI_MAX_SSID_LEN + 1];
-    uint8_t  ap_channel;
-    uint32_t ap_num_sta;
-
-    /* Monitor mode */
-    uint32_t monitor_active;
-    void (*monitor_rx_cb)(const uint8_t* frame, uint32_t len, int32_t rssi);
-
-    /* Scan results */
-    wifi_scan_result_t scan_results[WIFI_MAX_SCAN_RESULTS];
-    uint32_t scan_count;
-
-    /* Power management */
-    uint32_t power_save;    /* 0=off, 1=PSM, 2=U-APSD */
-    uint32_t dtim_period;
-
-    /* Driver hooks */
-    struct wifi_driver* driver;
-    void* driver_priv;
-
-    spinlock_t lock;
-} wifi_interface_t;
-
-/* Driver operations */
-typedef struct wifi_driver {
-    const char* name;
-    int  (*probe)(wifi_interface_t* iface);
-    void (*remove)(wifi_interface_t* iface);
-    int  (*tx_frame)(wifi_interface_t* iface, const uint8_t* frame, uint32_t len);
-    int  (*set_channel)(wifi_interface_t* iface, uint32_t freq, uint32_t bw);
-    int  (*set_mode)(wifi_interface_t* iface, uint32_t mode);
-    int  (*start_scan)(wifi_interface_t* iface);
-    int  (*connect)(wifi_interface_t* iface, const uint8_t* ssid, const uint8_t* key);
-    int  (*disconnect)(wifi_interface_t* iface);
-    int  (*set_power_save)(wifi_interface_t* iface, uint32_t ps_mode);
-    int  (*set_txpower)(wifi_interface_t* iface, int32_t dbm);
-} wifi_driver_t;
+/* Structs now defined in wifi.h */
 
 static wifi_interface_t wifi_ifaces[WIFI_MAX_INTERFACES];
 static uint32_t wifi_num_ifaces = 0;
+
+static void wifi_parse_ies(const uint8_t* ies, uint32_t len, wifi_scan_result_t* result);
 
 /* 802.11 frequency table (2.4 GHz and 5 GHz) */
 static const uint32_t wifi_2ghz_ch[] = {2412, 2417, 2422, 2427, 2432, 2437, 2442, 2447, 2452, 2457, 2462, 2467, 2472, 2484};

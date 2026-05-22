@@ -235,7 +235,7 @@ int touch_gt917s_init(void)
         /* Try secondary address */
         g_gt_addr = GT_ADDR_SECONDARY;
         if (gt_read_reg(0x8140, pid, 4) < 0) {
-            printk(KERN_WARNING "touch: GT917S not found on I2C\n");
+            printk(KERN_WARN "touch: GT917S not found on I2C\n");
             return -1;
         }
     }

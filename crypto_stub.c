@@ -111,88 +111,68 @@ static void aes256_encrypt_block(const aes256_rk_t* rk,
 
 /* ---- GCM helpers ---- */
 
-/* GF(2^128) multiply using ARM64 PMULL.
- * Irreducible polynomial: x^128 + x^7 + x^2 + x + 1 (0xE1...0 in reflected bit order)
- * Both operands and result are in big-endian byte order. */
+/*
+ * GF(2^128) multiply using ARM64 PMULL (hardware carry-less multiply).
+ * Irreducible polynomial: x^128 + x^7 + x^2 + x + 1.
+ * Reduction constant R = 0xE1 << 56 (reflected representation).
+ *
+ * Algorithm: Karatsuba 128×128→256 via PMULL/PMULL2, then
+ * two-step Montgomery reduction using the same PMULL.
+ */
 static void gcm_gmul(const uint8_t X[16], const uint8_t Y[16], uint8_t out[16])
 {
-    uint64_t x_lo, x_hi, y_lo, y_hi;
-    uint64_t r0, r1, r2, r3;
-    uint64_t t0, t1;
+    /* R = 0xE100000000000000 — the GCM reduction constant */
+    const uint64_t R = 0xE100000000000000ULL;
 
-    /* Load as little-endian 64-bit words (reversed for GCM bit-reflection) */
-    memcpy(&x_hi, X,   8); memcpy(&x_lo, X+8, 8);
-    memcpy(&y_hi, Y,   8); memcpy(&y_lo, Y+8, 8);
-
-    /* Karatsuba-style 128×128 multiply using PMULL */
     __asm__ volatile(
-        "fmov   d16, %x[xhi]\n\t"
-        "fmov   d17, %x[xlo]\n\t"
-        "fmov   d18, %x[yhi]\n\t"
-        "fmov   d19, %x[ylo]\n\t"
-        "pmull  v20.1q, v16.1d, v18.1d\n\t"   /* r0 = x_hi * y_hi */
-        "pmull  v21.1q, v17.1d, v19.1d\n\t"   /* r1 = x_lo * y_lo */
-        "pmull  v22.1q, v16.1d, v19.1d\n\t"   /* r2 = x_hi * y_lo */
-        "pmull  v23.1q, v17.1d, v18.1d\n\t"   /* r3 = x_lo * y_hi */
-        "eor    v22.16b, v22.16b, v23.16b\n\t" /* r2 ^= r3 */
-        /* Extract halves of r2 for folding into r0 and r1 */
-        "fmov   %x[r0], d20\n\t"
-        "mov    x10, v20.d[1]\n\t"
-        "fmov   %x[r1], d21\n\t"
-        "mov    x11, v21.d[1]\n\t"
-        "fmov   %x[r2], d22\n\t"
-        "mov    x12, v22.d[1]\n\t"
-        "fmov   %x[t0], d22\n\t"   /* low half of mid */
-        "mov    %x[t1], x10\n\t"   /* high of r0 */
-        : [r0]"=r"(r0), [r1]"=r"(r1), [r2]"=r"(r2), [r3]"=r"(r3),
-          [t0]"=r"(t0), [t1]"=r"(t1)
-        : [xhi]"r"(x_hi), [xlo]"r"(x_lo),
-          [yhi]"r"(y_hi), [ylo]"r"(y_lo)
-        : "x10","x11","x12","v16","v17","v18","v19","v20","v21","v22","v23","memory"
-    );
+        /* Load X and Y into 128-bit registers */
+        "ld1    {v0.16b}, [%[x]]\n\t"
+        "ld1    {v1.16b}, [%[y]]\n\t"
 
-    /* Fold the 256-bit product mod the GCM polynomial (0xE100...01).
-     * Use software reduction — PMULL handles the multiply, reduction is 4 XOR+shift ops. */
-    uint64_t lo_lo, lo_hi, hi_lo, hi_hi;
-    uint64_t tmp;
-    __asm__ volatile(
-        "fmov   d16, %x[xhi]\n\t"
-        "fmov   d17, %x[xlo]\n\t"
-        "fmov   d18, %x[yhi]\n\t"
-        "fmov   d19, %x[ylo]\n\t"
-        /* Full 128×128 → 256-bit product */
-        "pmull2 v20.1q, v16.2d, v18.2d\n\t"   /* hi×hi → bits 255:128 -- wait, wrong width */
-        /* Redo with correct lane ops */
-        "pmull  v20.1q, v16.1d, v18.1d\n\t"
-        "pmull  v21.1q, v17.1d, v19.1d\n\t"
-        "pmull  v22.1q, v16.1d, v19.1d\n\t"
-        "pmull  v23.1q, v17.1d, v18.1d\n\t"
-        "eor    v22.16b, v22.16b, v23.16b\n\t"
-        /* Spread mid term */
-        "ext    v23.16b, v22.16b, v20.16b, #8\n\t"
-        "ext    v22.16b, v21.16b, v22.16b, #8\n\t"
-        "eor    v20.16b, v20.16b, v23.16b\n\t"
-        "eor    v21.16b, v21.16b, v22.16b\n\t"
-        /* Now v21 = lo 128 bits, v20 = hi 128 bits of product */
-        /* Montgomery-style reduction for GCM polynomial x^128+x^7+x^2+x+1 */
-        "movi   v24.16b, #0xe1\n\t"
-        "shl    v24.2d,  v24.2d, #56\n\t"   /* v24 = 0xe100...0 */
-        "pmull2 v25.1q,  v20.2d, v24.1d\n\t"
-        "ext    v26.16b, v20.16b, v20.16b, #8\n\t"
-        "eor    v21.16b, v21.16b, v25.16b\n\t"
-        "eor    v21.16b, v21.16b, v26.16b\n\t"
-        "pmull  v25.1q,  v20.1d, v24.1d\n\t"
-        "eor    v21.16b, v21.16b, v25.16b\n\t"
+        /* --- 128×128 → 256-bit carryless multiply (Karatsuba) --- */
+        /* v2 = X_lo × Y_lo */
+        "pmull  v2.1q,  v0.1d,  v1.1d\n\t"
+        /* v3 = X_hi × Y_hi */
+        "pmull2 v3.1q,  v0.2d,  v1.2d\n\t"
+        /* Swap halves of Y, then compute cross terms */
+        "ext    v4.16b, v1.16b, v1.16b, #8\n\t"
+        /* v5 = X_lo × Y_hi */
+        "pmull  v5.1q,  v0.1d,  v4.1d\n\t"
+        /* v6 = X_hi × Y_lo  (v4 has swapped Y, so upper half = Y_lo) */
+        "pmull2 v6.1q,  v0.2d,  v4.2d\n\t"
+        /* mid = (X_lo×Y_hi) ^ (X_hi×Y_lo) */
+        "eor    v5.16b, v5.16b, v6.16b\n\t"
+        /* Spread mid into the 256-bit product:
+         *   hi ^= mid_lo  (low 64 of mid)
+         *   lo ^= mid_hi  (high 64 of mid) */
+        "movi   v6.16b, #0\n\t"
+        "ext    v4.16b, v5.16b, v6.16b, #8\n\t"  /* mid_hi:0  → shift right 64 */
+        "ext    v5.16b, v6.16b, v5.16b, #8\n\t"  /* 0:mid_lo  → shift left 64  */
+        "eor    v2.16b, v2.16b, v4.16b\n\t"       /* lo ^= mid_hi */
+        "eor    v3.16b, v3.16b, v5.16b\n\t"       /* hi ^= mid_lo */
+        /* v2 = product[127:0], v3 = product[255:128] */
+
+        /* --- Reduction mod x^128+x^7+x^2+x+1 --- */
+        /* Load reduction constant R into both lanes of v4 */
+        "dup    v4.2d,  %x[r]\n\t"
+
+        /* First reduction step: fold high 64 bits of v3 */
+        "pmull2 v5.1q,  v3.2d,  v4.2d\n\t"
+        "ext    v6.16b, v5.16b, v5.16b, #8\n\t"
+        "eor    v3.16b, v3.16b, v6.16b\n\t"
+        "eor    v2.16b, v2.16b, v5.16b\n\t"
+
+        /* Second reduction step: fold low 64 bits of v3 */
+        "pmull  v5.1q,  v3.1d,  v4.1d\n\t"
+        "eor    v2.16b, v2.16b, v5.16b\n\t"
+        "eor    v2.16b, v2.16b, v3.16b\n\t"
+
         /* Store result */
-        "st1    {v21.16b}, [%[out]]\n\t"
+        "st1    {v2.16b}, [%[out]]\n\t"
         :
-        : [xhi]"r"(x_hi), [xlo]"r"(x_lo),
-          [yhi]"r"(y_hi), [ylo]"r"(y_lo),
-          [out]"r"(out)
-        : "v16","v17","v18","v19","v20","v21","v22","v23","v24","v25","v26","memory"
+        : [x]"r"(X), [y]"r"(Y), [out]"r"(out), [r]"r"(R)
+        : "v0","v1","v2","v3","v4","v5","v6","memory"
     );
-    (void)r0; (void)r1; (void)r2; (void)r3; (void)t0; (void)t1;
-    (void)lo_lo; (void)lo_hi; (void)hi_lo; (void)hi_hi; (void)tmp;
 }
 
 /* GHASH: X = GHASH(H, A, C) per RFC 5116 / NIST SP 800-38D */

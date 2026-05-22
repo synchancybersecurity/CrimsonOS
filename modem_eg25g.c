@@ -26,6 +26,7 @@
 #include <crimson/timer.h>
 #include <crimson/gpio.h>
 #include <crimson/net.h>
+#include <crimson/cellular.h>
 
 /* ── A64 UART3 registers ─────────────────────────────────────── */
 
@@ -70,9 +71,7 @@
 #define RESET_BIT           (1U << 4)
 
 static inline uint32_t pio_rd(uintptr_t r) { return *(volatile uint32_t*)r; }
-static inline void     pio_wr(uintptr_t r, uint32_t v) { *(volatile uint32_t*)v = v; }
-#undef pio_wr
-static inline void pio_wr(uintptr_t r, uint32_t v) { *(volatile uint32_t*)r = v; }
+static inline void     pio_wr(uintptr_t r, uint32_t v) { *(volatile uint32_t*)r = v; }
 
 static inline uint32_t uart_rd(uintptr_t r) { return *(volatile uint32_t*)r; }
 static inline void     uart_wr(uintptr_t r, uint32_t v) { *(volatile uint32_t*)r = v; }
@@ -165,8 +164,7 @@ static void modem_reset_pulse(void)
 
 /* ── AT command engine ──────────────────────────────────────── */
 
-/* cell_modem_t forward ref — must match cellular.c layout */
-typedef struct cell_modem cell_modem_t;
+/* cell_modem_t and cell_driver_t defined in cellular.h */
 
 /*
  * at_cmd - Send `cmd` and collect response into `resp` up to `resp_size`.
@@ -275,11 +273,13 @@ static int eg25g_get_signal(cell_modem_t* modem)
     if (p) {
         modem->rat = 2; /* RAT_LTE */
         /* Parse RSSI,RSRP,SINR,RSRQ */
-        int rsrp = 0, sinr = 0, rsrq = 0;
-        sscanf(p, "%*d,%d,%d,%d", &rsrp, &sinr, &rsrq);
-        modem->lte.rsrp = rsrp;
-        modem->lte.snr  = sinr;
-        modem->lte.rsrq = rsrq;
+        /* Parse: skip first comma-field, then rsrp,sinr,rsrq */
+        while (*p && *p != ',') p++; if (*p) p++;
+        modem->lte.rsrp = (int32_t)atoi(p);
+        while (*p && *p != ',') p++; if (*p) p++;
+        modem->lte.snr  = (int32_t)atoi(p);
+        while (*p && *p != ',') p++; if (*p) p++;
+        modem->lte.rsrq = (int32_t)atoi(p);
     }
     return 0;
 }
@@ -290,9 +290,9 @@ static int eg25g_get_registration(cell_modem_t* modem)
     at_cmd("AT+CREG?",  resp, sizeof(resp), 2000);
     const char* p = at_extract(resp, "+CREG: ");
     if (p) {
-        int n, stat;
-        if (sscanf(p, "%d,%d", &n, &stat) >= 2)
-            modem->reg_state = (uint32_t)stat;
+        (void)atoi(p);  /* skip n */
+        const char* comma = strchr(p, ',');
+        if (comma) modem->reg_state = (uint32_t)atoi(comma + 1);
     }
     at_cmd("AT+CEREG?", resp, sizeof(resp), 2000);
 
@@ -509,7 +509,10 @@ static int eg25g_start_data(cell_modem_t* modem)
         if (p) {
             /* Parse IPv4: a.b.c.d */
             uint32_t a=0,b=0,c=0,d=0;
-            sscanf(p, "%u.%u.%u.%u", &a,&b,&c,&d);
+            a=(uint32_t)atoi(p); while(*p&&*p!='.') p++; if(*p) p++;
+            b=(uint32_t)atoi(p); while(*p&&*p!='.') p++; if(*p) p++;
+            c=(uint32_t)atoi(p); while(*p&&*p!='.') p++; if(*p) p++;
+            d=(uint32_t)atoi(p);
             g_cell_netif.ip_addr = (a<<24)|(b<<16)|(c<<8)|d;
             printk(KERN_INFO "eg25g: data connection, IP=%u.%u.%u.%u\n",a,b,c,d);
         }
@@ -581,12 +584,26 @@ static int eg25g_gnss_read(cell_modem_t* modem,
     /* Response: +QGPSLOC: <UTC>,<lat>,<lon>,<hdop>,<alt>,<fix>,<cog>,<spkm>,<spkn>,<date>,<nsat> */
     const char* p = at_extract(resp, "+QGPSLOC: ");
     if (!p) return -1;
-    /* Skip UTC field */
+    /* Skip UTC field, then parse lat/lon as integer degrees × 1e6 */
     while (*p && *p != ',') p++; if (*p) p++;
-    double la = 0, lo = 0, al = 0;
-    float hdop = 0;
-    sscanf(p, "%lf,%lf,%f,%lf", &la, &lo, &hdop, &al);
-    *lat = la; *lon = lo; *alt = al; *acc = hdop * 5.0f;  /* rough HDOP→metres */
+    /* lat: integer part + fractional — read as fixed-point */
+    long lat_int = atol(p);
+    while (*p && *p != '.') p++;
+    long lat_frac = 0;
+    if (*p == '.') { p++; lat_frac = atol(p); }
+    *lat = (double)lat_int + (double)lat_frac * 1e-6;
+    while (*p && *p != ',') p++; if (*p) p++;
+    long lon_int = atol(p);
+    while (*p && *p != '.') p++;
+    long lon_frac = 0;
+    if (*p == '.') { p++; lon_frac = atol(p); }
+    *lon = (double)lon_int + (double)lon_frac * 1e-6;
+    /* skip hdop, read alt */
+    while (*p && *p != ',') p++; if (*p) p++;
+    long hdop_i = atol(p);
+    *acc = (float)(hdop_i * 5);
+    while (*p && *p != ',') p++; if (*p) p++;
+    *alt = (double)atol(p);
     return 0;
 }
 
@@ -600,14 +617,18 @@ static int eg25g_get_cell_info(cell_modem_t* modem)
         modem->rat = 2;
         /* Skip to numeric fields: "LTE","FDD",mcc,mnc,... */
         for (int i = 0; i < 4; i++) { while (*p && *p != ',') p++; if (*p) p++; }
-        uint32_t mcc=0,mnc=0,cid=0,pci=0,earfcn=0,bw=0;
-        int rsrp=0,rsrq=0,sinr=0;
-        sscanf(p, "%u,%u,%X,%u,%u,%u,%d,%d,%d",
-               &mcc,&mnc,&cid,&pci,&earfcn,&bw,&rsrp,&rsrq,&sinr);
-        modem->lte.mcc   = mcc; modem->lte.mnc = mnc;
-        modem->lte.pci   = pci; modem->lte.earfcn = earfcn;
-        modem->lte.bw    = bw;  modem->lte.rsrp = rsrp;
-        modem->lte.rsrq  = rsrq; modem->lte.snr = sinr;
+        /* Parse comma-separated: mcc,mnc,cellid(hex),pci,earfcn,bw,rsrp,rsrq,sinr */
+        #define NEXT_FIELD(dst, type) do { dst=(type)strtoul(p,NULL,10); while(*p&&*p!=',')p++; if(*p)p++; } while(0)
+        NEXT_FIELD(modem->lte.mcc,   uint32_t);
+        NEXT_FIELD(modem->lte.mnc,   uint32_t);
+        { uint32_t cid=(uint32_t)strtoul(p,NULL,16); (void)cid; while(*p&&*p!=',')p++; if(*p)p++; }
+        NEXT_FIELD(modem->lte.pci,   uint32_t);
+        NEXT_FIELD(modem->lte.earfcn,uint32_t);
+        NEXT_FIELD(modem->lte.bw,    uint32_t);
+        NEXT_FIELD(modem->lte.rsrp,  int32_t);
+        NEXT_FIELD(modem->lte.rsrq,  int32_t);
+        NEXT_FIELD(modem->lte.snr,   int32_t);
+        #undef NEXT_FIELD
     }
     return 0;
 }
@@ -666,36 +687,7 @@ static void eg25g_reset(cell_modem_t* modem)
 
 /* ── Driver table and registration ──────────────────────────── */
 
-/* cell_driver_t must match the struct in cellular.c */
-typedef struct cell_driver {
-    const char* name;
-    int  (*probe)(cell_modem_t*);
-    void (*remove)(cell_modem_t*);
-    int  (*at_command)(cell_modem_t*, const char*, char*, uint32_t, uint32_t);
-    int  (*send_sms_pdu)(cell_modem_t*, const uint8_t*, uint32_t);
-    int  (*read_sms_pdu)(cell_modem_t*, uint32_t, uint8_t*, uint32_t*);
-    int  (*delete_sms)(cell_modem_t*, uint32_t);
-    int  (*setup_data)(cell_modem_t*, const void*);
-    int  (*start_data)(cell_modem_t*);
-    int  (*stop_data)(cell_modem_t*);
-    int  (*start_call)(cell_modem_t*, const char*);
-    int  (*answer_call)(cell_modem_t*);
-    int  (*hangup_call)(cell_modem_t*);
-    int  (*send_dtmf)(cell_modem_t*, char);
-    int  (*send_ussd)(cell_modem_t*, const char*);
-    int  (*get_signal)(cell_modem_t*);
-    int  (*get_registration)(cell_modem_t*);
-    int  (*get_cell_info)(cell_modem_t*);
-    int  (*enter_pin)(cell_modem_t*, const char*);
-    int  (*set_rat)(cell_modem_t*, uint32_t);
-    int  (*scan_operators)(cell_modem_t*);
-    int  (*gnss_start)(cell_modem_t*);
-    int  (*gnss_stop)(cell_modem_t*);
-    int  (*gnss_read)(cell_modem_t*, double*, double*, double*, float*);
-    void (*power_on)(cell_modem_t*);
-    void (*power_off)(cell_modem_t*);
-    void (*reset)(cell_modem_t*);
-} cell_driver_t;
+/* cell_driver_t defined in cellular.h */
 
 static cell_driver_t eg25g_driver = {
     .name            = "Quectel EG25-G",

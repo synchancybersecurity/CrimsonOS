@@ -247,7 +247,7 @@ static void a64_dphy_init(void)
     while (to-- && (reg_read(DSI_PHY_STATUS) & 0x05) != 0x05)
         ;
     if (!to)
-        printk(KERN_WARNING "a64_dsi: D-PHY lock timeout (status=0x%08x)\n",
+        printk(KERN_WARN "a64_dsi: D-PHY lock timeout (status=0x%08x)\n",
                reg_read(DSI_PHY_STATUS));
     else
         printk(KERN_DEBUG "a64_dsi: D-PHY locked\n");

@@ -448,7 +448,7 @@ int vmm_map(pgd_t* pgd, uintptr_t vaddr, uintptr_t paddr, uint32_t flags)
 /*
  * vmm_unmap - Unmap a virtual page
  */
-void vmm_unmap(pgd_t* pgd, uintptr_t vaddr)
+__attribute__((weak)) void vmm_unmap(pgd_t* pgd, uintptr_t vaddr)
 {
     if (pgd == NULL) return;
     

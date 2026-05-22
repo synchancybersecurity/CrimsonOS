@@ -114,6 +114,7 @@ typedef struct {
 
 /* Forward declarations for all static functions */
 static uint32_t bm_dns_resolve(const char* hostname);
+static int bm_http_get(bm_tab_t* tab, const char* url);
 static void bm_parse_url(const char* url, char* host, size_t host_size, int* port, char* path, size_t path_size);
 static void bm_route_clear(bm_tab_t* tab, const char* url);
 static void bm_route_freenet(bm_tab_t* tab, const char* url);
@@ -568,3 +569,5 @@ static int bm_http_get(bm_tab_t* tab, const char* url)
 }
 
 /* snprintf provided by printk.c */
+
+void bm_init(void) { bloodmoon_init(); }

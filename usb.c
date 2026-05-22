@@ -25,6 +25,7 @@
 
 #include <crimson/types.h>
 #include <crimson/printk.h>
+#include <crimson/timer.h>
 #include <crimson/interrupt.h>
 #include <crimson/memory.h>
 #include <crimson/spinlock.h>

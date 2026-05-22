@@ -7,7 +7,7 @@
 #include <crimson/types.h>
 #include <crimson/string.h>
 
-int atoi(const char* str)
+__attribute__((weak)) int atoi(const char* str)
 {
     int result = 0;
     int sign = 1;
@@ -32,7 +32,7 @@ int atoi(const char* str)
     return result * sign;
 }
 
-long atol(const char* str)
+__attribute__((weak)) long atol(const char* str)
 {
     long result = 0;
     int sign = 1;
@@ -54,7 +54,7 @@ long atol(const char* str)
     return result * sign;
 }
 
-unsigned long strtoul(const char* str, char** endptr, int base)
+__attribute__((weak)) unsigned long strtoul(const char* str, char** endptr, int base)
 {
     unsigned long result = 0;
     

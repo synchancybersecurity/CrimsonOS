@@ -31,7 +31,7 @@ static void handle_power_touch(touch_event_t* ev);
 /* ── Global GUI state ── */
 gui_state_t g_gui;
 static gfx_ctx_t g_fb_ctx;
-static spinlock_t gui_lock;
+static spinlock_t g_gui_spinlock;
 
 /* ── Internal views ── */
 #define VIEW_HOME       0
@@ -100,7 +100,7 @@ static uint32_t notif_next_id = 1;
 
 void gui_init(void)
 {
-    spinlock_init(&gui_lock);
+    spinlock_init(&g_gui_spinlock);
     memset(&g_gui, 0, sizeof(g_gui));
 
     g_gui.fb_width = DISP_WIDTH;
@@ -937,6 +937,17 @@ void gui_kill_app(pid_t pid)
             return;
         }
     }
+}
+
+void gui_add_notification(const char* title, const char* text, uint32_t color)
+{
+    if (notif_count >= GUI_NOTIFICATION_MAX) return;
+    gui_notification_t* n = &notif_buffer[notif_count++];
+    n->id         = notif_next_id++;
+    n->icon_color = color;
+    n->timestamp  = 0;
+    strncpy(n->title,   title, sizeof(n->title)   - 1);
+    strncpy(n->message, text,  sizeof(n->message) - 1);
 }
 
 /* ═══════════════════════════════════════════════════════════

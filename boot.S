@@ -193,8 +193,8 @@ _bss_done:
  * CPU Features Initialization
  */
 _cpu_features_init:
-    /* Enable FP/SIMD */
-    mov x0, #0x33FF
+    /* Enable FP/SIMD: CPACR_EL1.FPEN[21:20] = 11 (no trap at EL1/EL0) */
+    mov x0, #(3 << 20)      /* FPEN = 11 */
     msr CPACR_EL1, x0
     isb
     
@@ -239,36 +239,85 @@ _pt_clear:
     orr x2, x2, #0x3
     str x2, [x1, #0]
     
-    /* Level 1 - Higher half mapping */
+    /* Page table layout (all within cleared 4MB area):
+     *  PT_BASE+0x0000: PGD (L0, 512 entries)
+     *  PT_BASE+0x1000: PUD_kernel  (L1 for TTBR1 high-half, PGD[510])
+     *  PT_BASE+0x2000: PUD_identity (L1 for TTBR0, PGD[0])
+     *  PT_BASE+0x3000: PMD_kernel  (L2 for PUD_kernel[0], maps 0-1GB)
+     *  PT_BASE+0x4000: PMD_id_low  (L2 for PUD_identity[0], maps 0-1GB)
+     *  PT_BASE+0x5000: PMD_id_high (L2 for PUD_identity[1], maps 1-2GB)
+     * This gives a full 2GB identity map (0x0 to 0x7FFFFFFF), covering
+     * the kernel at 0x40080000 and page tables at 0x40bXXXXX. */
+
+    /* PUD_kernel[0] → PMD_kernel */
     ldr x1, =(__page_tables_start + 0x1000)
-    ldr x2, =(__page_tables_start + 0x3000)  /* Level 2 */
+    ldr x2, =(__page_tables_start + 0x3000)
     orr x2, x2, #0x3
     str x2, [x1, #0]
-    
-    /* Level 2 - 2MB block mappings for kernel */
-    ldr x1, =(__page_tables_start + 0x3000)
-    mov x2, #0x0               /* Start at physical 0 */
-    
-    /* Create 512 entries mapping 1GB */
+
+    /* PUD_identity[0] → PMD_id_low */
+    ldr x1, =(__page_tables_start + 0x2000)
+    ldr x2, =(__page_tables_start + 0x4000)
+    orr x2, x2, #0x3
+    str x2, [x1, #0]
+
+    /* PUD_identity[1] → PMD_id_high */
+    ldr x2, =(__page_tables_start + 0x5000)
+    orr x2, x2, #0x3
+    str x2, [x1, #8]
+
+    /* PMD_kernel + PMD_id_low: both map PA 0x0–0x3FFFFFFF with 2MB blocks */
+    mov x4, #(0x401 | (1 << 10) | (3 << 8))    /* AF=1, SH=inner, valid+block */
+
+    ldr x1, =(__page_tables_start + 0x3000)     /* PMD_kernel */
+    mov x2, #0
     mov x3, #512
-    mov x4, #(0x401 | (1 << 10) | (3 << 8))  /* AF=1, SH=3, AP=1 (RW) */
-    
-_pt_l2_loop:
-    orr x5, x2, x4             /* Combine address with attributes */
+_pt_kern_loop:
+    orr x5, x2, x4
     str x5, [x1], #8
-    add x2, x2, #0x200000      /* Next 2MB block */
+    add x2, x2, #0x200000
     sub x3, x3, #1
-    cbnz x3, _pt_l2_loop
-    
-    /* Set TTBR0_EL1 (user space - identity) */
+    cbnz x3, _pt_kern_loop
+
+    ldr x1, =(__page_tables_start + 0x4000)     /* PMD_id_low */
+    mov x2, #0
+    mov x3, #512
+_pt_idlo_loop:
+    orr x5, x2, x4
+    str x5, [x1], #8
+    add x2, x2, #0x200000
+    sub x3, x3, #1
+    cbnz x3, _pt_idlo_loop
+
+    /* PMD_id_high: map PA 0x40000000–0x7FFFFFFF with 2MB blocks */
+    ldr x1, =(__page_tables_start + 0x5000)     /* PMD_id_high */
+    mov x2, #0x40000000
+    mov x3, #512
+
+_pt_idhi_loop:
+    orr x5, x2, x4
+    str x5, [x1], #8
+    add x2, x2, #0x200000
+    sub x3, x3, #1
+    cbnz x3, _pt_idhi_loop
+
+    /* Ensure all table writes are visible before programming TTBR */
+    dsb ish
+
+    /* Set TTBR0_EL1 (identity map: 0x0 – 0x7FFFFFFF) */
     ldr x0, =__page_tables_start
     msr TTBR0_EL1, x0
-    
-    /* Set TTBR1_EL1 (kernel space) */
+
+    /* Set TTBR1_EL1 (same PGD for high-half kernel space) */
     msr TTBR1_EL1, x0
     
-    /* Configure TCR_EL1 */
-    ldr x0, =0x80803520        /* 4K granule, 48-bit VA, 48-bit PA */
+    /* Configure TCR_EL1:
+     *   T0SZ=16 (48-bit VA for TTBR0), T1SZ=16 (48-bit VA for TTBR1)
+     *   TG0=0 (4KB), TG1=10 (4KB), SH0=10 (outer shareable)
+     *   IRGN0=ORGN0=01 (write-back), EPD1=0 (TTBR1 enabled)
+     *   IPS=0 (32-bit PA, sufficient for QEMU at 0x40000000)
+     */
+    ldr x0, =0x80103510
     msr TCR_EL1, x0
     isb
     
@@ -375,9 +424,29 @@ _sync_handler:
     stp x28, x29, [sp, #224]
     str x30, [sp, #240]
     
-    /* Call C handler */
+    /* Pass ESR, ELR, SPSR to C handler */
+    mrs x0, esr_el1
+    mrs x1, elr_el1
+    mrs x2, spsr_el1
+
+    /* For external aborts (EC=0x24/0x25, DFSC[5:3]=0b010 = external abort):
+     * advance ELR by 4 so we skip the faulting instruction and resume.
+     * This lets hardware-absent writes/reads fail gracefully on QEMU. */
+    ubfx x9, x0, #26, #6       /* x9 = EC = ESR[31:26] */
+    cmp  x9, #0x24
+    b.eq _check_external_abort
+    cmp  x9, #0x25
+    b.ne _sync_call_handler
+_check_external_abort:
+    ubfx x10, x0, #0, #6       /* x10 = DFSC = ISS[5:0] */
+    ubfx x10, x10, #3, #3      /* x10 = DFSC[5:3] */
+    cmp  x10, #0x2              /* 0b010 = external abort */
+    b.ne _sync_call_handler
+    add  x1, x1, #4             /* skip faulting instruction */
+    msr  elr_el1, x1
+_sync_call_handler:
     bl sync_exception_handler
-    
+
     /* Restore context */
     ldp x0, x1, [sp, #0]
     ldp x2, x3, [sp, #16]

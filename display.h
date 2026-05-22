@@ -118,6 +118,13 @@ uint32_t    gfx_color_lerp(uint32_t a, uint32_t b, uint8_t t);
 uint32_t    gfx_darken(uint32_t c, uint8_t amt);
 uint32_t    gfx_lighten(uint32_t c, uint8_t amt);
 
-void display_blit(uint32_t dx, uint32_t dy, uint32_t w, uint32_t h, const void* src, uint32_t stride);
+void display_blit(uint32_t dx, uint32_t dy, uint32_t w, uint32_t h,
+                  const uint32_t* src, uint32_t stride, bool use_alpha);
+
+/* Font metrics used by graphics and widget layers */
+#ifndef FONT_W
+#define FONT_W  8
+#define FONT_H  16
+#endif
 
 #endif

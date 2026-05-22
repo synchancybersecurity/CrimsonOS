@@ -13,6 +13,24 @@
 
 #include <crimson/types.h>
 #include <crimson/spinlock.h>
+
+/* Freestanding compare-and-swap for uint32_t using ldaxr/stlxr */
+static inline int cas32(uint32_t* ptr, uint32_t expected, uint32_t desired)
+{
+    uint32_t old, tmp;
+    __asm__ volatile(
+        "1: ldaxr  %w[old], [%[ptr]]\n\t"
+        "   cmp    %w[old], %w[exp]\n\t"
+        "   b.ne   2f\n\t"
+        "   stlxr  %w[tmp], %w[des], [%[ptr]]\n\t"
+        "   cbnz   %w[tmp], 1b\n\t"
+        "2:"
+        : [old]"=&r"(old), [tmp]"=&r"(tmp), "+m"(*ptr)
+        : [ptr]"r"(ptr), [exp]"r"(expected), [des]"r"(desired)
+        : "cc", "memory"
+    );
+    return (old == expected);
+}
 #include <crimson/printk.h>
 #include <crimson/memory.h>
 #include <crimson/mutex.h>
@@ -174,7 +192,7 @@ void mutex_lock(mutex_t* mutex)
     struct process* current = scheduler_get_current();
     
     /* Fast path: try to acquire */
-    if (!mutex->locked && __sync_bool_compare_and_swap(&mutex->locked, 0, 1)) {
+    if (!mutex->locked && cas32(&mutex->locked, 0, 1)) {
         mutex->owner = current;
         return;
     }
@@ -245,7 +263,7 @@ bool mutex_trylock(mutex_t* mutex)
     
     struct process* current = scheduler_get_current();
     
-    if (!mutex->locked && __sync_bool_compare_and_swap(&mutex->locked, 0, 1)) {
+    if (!mutex->locked && cas32(&mutex->locked, 0, 1)) {
         mutex->owner = current;
         return true;
     }

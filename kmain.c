@@ -90,7 +90,10 @@ void kernel_main(uintptr_t heap_start, size_t heap_size)
     
     /* Initialize serial output ASAP for debug messages */
     uart_early_init();
-    
+
+    /* Wire printk to UART so all kernel messages appear on console */
+    printk_init(uart_puts);
+
     /* Show the Crimson OS boot banner */
     crimson_show_banner();
     
@@ -384,7 +387,13 @@ static void crimson_init_filesystem(void)
  */
 static void crimson_init_gui(void)
 {
+#ifdef BOARD_QEMU
+    /* No real display hardware on QEMU virt — skip DSI/framebuffer init.
+     * The kernel continues to Phase 9+ and the shell runs headlessly. */
+    printk(KERN_INFO "[INIT] Display: QEMU mode — skipping hardware init\n");
+#else
     gui_init();
+#endif
 }
 
 /*

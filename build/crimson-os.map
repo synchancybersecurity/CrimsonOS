@@ -1,0 +1,2472 @@
+
+Merging object attributes
+
+
+Merging program properties
+
+
+Discarded input sections
+
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .group         0x0000000000000000        0xc build/kmain.o
+ .comment       0x0000000000000000       0x20 build/kmain.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/kmain.o
+ .eh_frame      0x0000000000000000       0xc0 build/kmain.o
+ .group         0x0000000000000000        0xc build/mm.o
+ .group         0x0000000000000000        0xc build/mm.o
+ .group         0x0000000000000000        0xc build/mm.o
+ .group         0x0000000000000000        0xc build/mm.o
+ .group         0x0000000000000000        0xc build/mm.o
+ .debug_macro   0x0000000000000000      0xb9e build/mm.o
+ .debug_macro   0x0000000000000000       0x28 build/mm.o
+ .debug_macro   0x0000000000000000       0x7c build/mm.o
+ .debug_macro   0x0000000000000000       0x10 build/mm.o
+ .debug_macro   0x0000000000000000       0xc4 build/mm.o
+ .comment       0x0000000000000000       0x20 build/mm.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/mm.o
+ .eh_frame      0x0000000000000000      0x280 build/mm.o
+ .group         0x0000000000000000        0xc build/sched.o
+ .group         0x0000000000000000        0xc build/sched.o
+ .group         0x0000000000000000        0xc build/sched.o
+ .group         0x0000000000000000        0xc build/sched.o
+ .group         0x0000000000000000        0xc build/sched.o
+ .group         0x0000000000000000        0xc build/sched.o
+ .group         0x0000000000000000        0xc build/sched.o
+ .debug_macro   0x0000000000000000      0xb9e build/sched.o
+ .debug_macro   0x0000000000000000       0x28 build/sched.o
+ .debug_macro   0x0000000000000000       0x7c build/sched.o
+ .debug_macro   0x0000000000000000       0x10 build/sched.o
+ .debug_macro   0x0000000000000000       0x10 build/sched.o
+ .debug_macro   0x0000000000000000       0xc4 build/sched.o
+ .comment       0x0000000000000000       0x20 build/sched.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/sched.o
+ .eh_frame      0x0000000000000000      0x2e8 build/sched.o
+ .group         0x0000000000000000        0xc build/process.o
+ .group         0x0000000000000000        0xc build/process.o
+ .group         0x0000000000000000        0xc build/process.o
+ .group         0x0000000000000000        0xc build/process.o
+ .group         0x0000000000000000        0xc build/process.o
+ .group         0x0000000000000000        0xc build/process.o
+ .group         0x0000000000000000        0xc build/process.o
+ .group         0x0000000000000000        0xc build/process.o
+ .group         0x0000000000000000        0xc build/process.o
+ .debug_macro   0x0000000000000000      0xb9e build/process.o
+ .debug_macro   0x0000000000000000       0x28 build/process.o
+ .debug_macro   0x0000000000000000       0x7c build/process.o
+ .debug_macro   0x0000000000000000       0x10 build/process.o
+ .debug_macro   0x0000000000000000       0x1c build/process.o
+ .debug_macro   0x0000000000000000       0xc4 build/process.o
+ .debug_macro   0x0000000000000000       0x10 build/process.o
+ .comment       0x0000000000000000       0x20 build/process.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/process.o
+ .eh_frame      0x0000000000000000      0x220 build/process.o
+ .group         0x0000000000000000        0xc build/printk.o
+ .group         0x0000000000000000        0xc build/printk.o
+ .group         0x0000000000000000        0xc build/printk.o
+ .group         0x0000000000000000        0xc build/printk.o
+ .group         0x0000000000000000        0xc build/printk.o
+ .debug_macro   0x0000000000000000      0xb9e build/printk.o
+ .debug_macro   0x0000000000000000       0x28 build/printk.o
+ .debug_macro   0x0000000000000000       0xc4 build/printk.o
+ .debug_macro   0x0000000000000000       0x10 build/printk.o
+ .debug_macro   0x0000000000000000       0x10 build/printk.o
+ .comment       0x0000000000000000       0x20 build/printk.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/printk.o
+ .eh_frame      0x0000000000000000      0x248 build/printk.o
+ .group         0x0000000000000000        0xc build/sync.o
+ .group         0x0000000000000000        0xc build/sync.o
+ .group         0x0000000000000000        0xc build/sync.o
+ .group         0x0000000000000000        0xc build/sync.o
+ .group         0x0000000000000000        0xc build/sync.o
+ .group         0x0000000000000000        0xc build/sync.o
+ .group         0x0000000000000000        0xc build/sync.o
+ .debug_macro   0x0000000000000000      0xb9e build/sync.o
+ .debug_macro   0x0000000000000000       0x28 build/sync.o
+ .debug_macro   0x0000000000000000       0x10 build/sync.o
+ .debug_macro   0x0000000000000000       0xc4 build/sync.o
+ .debug_macro   0x0000000000000000       0x22 build/sync.o
+ .debug_macro   0x0000000000000000       0x10 build/sync.o
+ .comment       0x0000000000000000       0x20 build/sync.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/sync.o
+ .eh_frame      0x0000000000000000      0x300 build/sync.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .group         0x0000000000000000        0xc build/shell.o
+ .debug_macro   0x0000000000000000      0xb9e build/shell.o
+ .debug_macro   0x0000000000000000       0x28 build/shell.o
+ .debug_macro   0x0000000000000000       0xc4 build/shell.o
+ .debug_macro   0x0000000000000000       0x7c build/shell.o
+ .debug_macro   0x0000000000000000       0x10 build/shell.o
+ .debug_macro   0x0000000000000000       0x1c build/shell.o
+ .debug_macro   0x0000000000000000       0x16 build/shell.o
+ .debug_macro   0x0000000000000000       0x10 build/shell.o
+ .debug_macro   0x0000000000000000       0x3a build/shell.o
+ .debug_macro   0x0000000000000000       0xee build/shell.o
+ .debug_macro   0x0000000000000000      0x314 build/shell.o
+ .debug_macro   0x0000000000000000       0x3a build/shell.o
+ .comment       0x0000000000000000       0x20 build/shell.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/shell.o
+ .eh_frame      0x0000000000000000      0x590 build/shell.o
+ .group         0x0000000000000000        0xc build/board.o
+ .group         0x0000000000000000        0xc build/board.o
+ .group         0x0000000000000000        0xc build/board.o
+ .group         0x0000000000000000        0xc build/board.o
+ .group         0x0000000000000000        0xc build/board.o
+ .group         0x0000000000000000        0xc build/board.o
+ .debug_macro   0x0000000000000000      0xb9e build/board.o
+ .debug_macro   0x0000000000000000       0x28 build/board.o
+ .debug_macro   0x0000000000000000       0x7c build/board.o
+ .debug_macro   0x0000000000000000       0x10 build/board.o
+ .debug_macro   0x0000000000000000       0x1c build/board.o
+ .debug_macro   0x0000000000000000       0xc4 build/board.o
+ .comment       0x0000000000000000       0x20 build/board.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/board.o
+ .eh_frame      0x0000000000000000      0x108 build/board.o
+ .group         0x0000000000000000        0xc build/driver.o
+ .group         0x0000000000000000        0xc build/driver.o
+ .group         0x0000000000000000        0xc build/driver.o
+ .group         0x0000000000000000        0xc build/driver.o
+ .debug_macro   0x0000000000000000      0xb9e build/driver.o
+ .debug_macro   0x0000000000000000       0x28 build/driver.o
+ .debug_macro   0x0000000000000000       0x10 build/driver.o
+ .debug_macro   0x0000000000000000       0xc4 build/driver.o
+ .comment       0x0000000000000000       0x20 build/driver.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/driver.o
+ .eh_frame      0x0000000000000000       0x98 build/driver.o
+ .group         0x0000000000000000        0xc build/crypto_stub.o
+ .group         0x0000000000000000        0xc build/crypto_stub.o
+ .group         0x0000000000000000        0xc build/crypto_stub.o
+ .group         0x0000000000000000        0xc build/crypto_stub.o
+ .debug_macro   0x0000000000000000       0x28 build/crypto_stub.o
+ .debug_macro   0x0000000000000000       0xc4 build/crypto_stub.o
+ .comment       0x0000000000000000       0x20 build/crypto_stub.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/crypto_stub.o
+ .eh_frame      0x0000000000000000      0x3a0 build/crypto_stub.o
+ .group         0x0000000000000000        0xc build/vmm_stub.o
+ .group         0x0000000000000000        0xc build/vmm_stub.o
+ .group         0x0000000000000000        0xc build/vmm_stub.o
+ .group         0x0000000000000000        0xc build/vmm_stub.o
+ .debug_macro   0x0000000000000000      0xb9e build/vmm_stub.o
+ .debug_macro   0x0000000000000000       0x28 build/vmm_stub.o
+ .debug_macro   0x0000000000000000       0x7c build/vmm_stub.o
+ .debug_macro   0x0000000000000000       0x10 build/vmm_stub.o
+ .comment       0x0000000000000000       0x20 build/vmm_stub.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/vmm_stub.o
+ .eh_frame      0x0000000000000000      0x128 build/vmm_stub.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .group         0x0000000000000000        0xc build/syscall.o
+ .debug_macro   0x0000000000000000      0xb9e build/syscall.o
+ .debug_macro   0x0000000000000000       0x28 build/syscall.o
+ .debug_macro   0x0000000000000000       0xc4 build/syscall.o
+ .debug_macro   0x0000000000000000       0x7c build/syscall.o
+ .debug_macro   0x0000000000000000       0x10 build/syscall.o
+ .debug_macro   0x0000000000000000       0x1c build/syscall.o
+ .debug_macro   0x0000000000000000       0x16 build/syscall.o
+ .debug_macro   0x0000000000000000       0xd6 build/syscall.o
+ .debug_macro   0x0000000000000000       0x3a build/syscall.o
+ .debug_macro   0x0000000000000000       0x6a build/syscall.o
+ .debug_macro   0x0000000000000000       0x64 build/syscall.o
+ .debug_macro   0x0000000000000000       0x4c build/syscall.o
+ .debug_macro   0x0000000000000000       0x10 build/syscall.o
+ .comment       0x0000000000000000       0x20 build/syscall.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/syscall.o
+ .eh_frame      0x0000000000000000      0x368 build/syscall.o
+ .group         0x0000000000000000        0xc build/security.o
+ .group         0x0000000000000000        0xc build/security.o
+ .group         0x0000000000000000        0xc build/security.o
+ .group         0x0000000000000000        0xc build/security.o
+ .group         0x0000000000000000        0xc build/security.o
+ .group         0x0000000000000000        0xc build/security.o
+ .group         0x0000000000000000        0xc build/security.o
+ .group         0x0000000000000000        0xc build/security.o
+ .group         0x0000000000000000        0xc build/security.o
+ .group         0x0000000000000000        0xc build/security.o
+ .group         0x0000000000000000        0xc build/security.o
+ .group         0x0000000000000000        0xc build/security.o
+ .group         0x0000000000000000        0xc build/security.o
+ .debug_macro   0x0000000000000000      0xb9e build/security.o
+ .debug_macro   0x0000000000000000       0x28 build/security.o
+ .debug_macro   0x0000000000000000       0x7c build/security.o
+ .debug_macro   0x0000000000000000       0x10 build/security.o
+ .debug_macro   0x0000000000000000       0x1c build/security.o
+ .debug_macro   0x0000000000000000       0xc4 build/security.o
+ .debug_macro   0x0000000000000000       0x1c build/security.o
+ .debug_macro   0x0000000000000000       0x10 build/security.o
+ .debug_macro   0x0000000000000000       0xee build/security.o
+ .debug_macro   0x0000000000000000       0x3a build/security.o
+ .debug_macro   0x0000000000000000       0x64 build/security.o
+ .comment       0x0000000000000000       0x20 build/security.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/security.o
+ .eh_frame      0x0000000000000000      0x988 build/security.o
+ .group         0x0000000000000000        0xc build/net.o
+ .group         0x0000000000000000        0xc build/net.o
+ .group         0x0000000000000000        0xc build/net.o
+ .group         0x0000000000000000        0xc build/net.o
+ .group         0x0000000000000000        0xc build/net.o
+ .group         0x0000000000000000        0xc build/net.o
+ .group         0x0000000000000000        0xc build/net.o
+ .group         0x0000000000000000        0xc build/net.o
+ .group         0x0000000000000000        0xc build/net.o
+ .debug_macro   0x0000000000000000      0xb9e build/net.o
+ .debug_macro   0x0000000000000000       0x28 build/net.o
+ .debug_macro   0x0000000000000000       0xc4 build/net.o
+ .debug_macro   0x0000000000000000       0x10 build/net.o
+ .debug_macro   0x0000000000000000       0x82 build/net.o
+ .debug_macro   0x0000000000000000       0x10 build/net.o
+ .debug_macro   0x0000000000000000       0x22 build/net.o
+ .debug_macro   0x0000000000000000       0x10 build/net.o
+ .debug_macro   0x0000000000000000       0x1c build/net.o
+ .comment       0x0000000000000000       0x20 build/net.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/net.o
+ .eh_frame      0x0000000000000000      0x580 build/net.o
+ .group         0x0000000000000000        0xc build/bloodmoon.o
+ .group         0x0000000000000000        0xc build/bloodmoon.o
+ .group         0x0000000000000000        0xc build/bloodmoon.o
+ .group         0x0000000000000000        0xc build/bloodmoon.o
+ .group         0x0000000000000000        0xc build/bloodmoon.o
+ .group         0x0000000000000000        0xc build/bloodmoon.o
+ .group         0x0000000000000000        0xc build/bloodmoon.o
+ .group         0x0000000000000000        0xc build/bloodmoon.o
+ .debug_macro   0x0000000000000000      0xb9e build/bloodmoon.o
+ .debug_macro   0x0000000000000000       0x28 build/bloodmoon.o
+ .debug_macro   0x0000000000000000       0xc4 build/bloodmoon.o
+ .debug_macro   0x0000000000000000       0x7c build/bloodmoon.o
+ .debug_macro   0x0000000000000000       0x10 build/bloodmoon.o
+ .debug_macro   0x0000000000000000       0x10 build/bloodmoon.o
+ .debug_macro   0x0000000000000000       0x4c build/bloodmoon.o
+ .debug_macro   0x0000000000000000       0x1c build/bloodmoon.o
+ .comment       0x0000000000000000       0x20 build/bloodmoon.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/bloodmoon.o
+ .eh_frame      0x0000000000000000      0x1c8 build/bloodmoon.o
+ .group         0x0000000000000000        0xc build/compositor.o
+ .group         0x0000000000000000        0xc build/compositor.o
+ .group         0x0000000000000000        0xc build/compositor.o
+ .group         0x0000000000000000        0xc build/compositor.o
+ .group         0x0000000000000000        0xc build/compositor.o
+ .group         0x0000000000000000        0xc build/compositor.o
+ .group         0x0000000000000000        0xc build/compositor.o
+ .group         0x0000000000000000        0xc build/compositor.o
+ .group         0x0000000000000000        0xc build/compositor.o
+ .group         0x0000000000000000        0xc build/compositor.o
+ .group         0x0000000000000000        0xc build/compositor.o
+ .group         0x0000000000000000        0xc build/compositor.o
+ .debug_macro   0x0000000000000000      0xb9e build/compositor.o
+ .debug_macro   0x0000000000000000       0x28 build/compositor.o
+ .debug_macro   0x0000000000000000       0xd6 build/compositor.o
+ .debug_macro   0x0000000000000000       0x64 build/compositor.o
+ .debug_macro   0x0000000000000000       0x88 build/compositor.o
+ .debug_macro   0x0000000000000000       0x7c build/compositor.o
+ .debug_macro   0x0000000000000000       0x10 build/compositor.o
+ .debug_macro   0x0000000000000000       0x1c build/compositor.o
+ .debug_macro   0x0000000000000000       0x10 build/compositor.o
+ .debug_macro   0x0000000000000000       0xc4 build/compositor.o
+ .debug_macro   0x0000000000000000       0x10 build/compositor.o
+ .debug_macro   0x0000000000000000       0x1c build/compositor.o
+ .comment       0x0000000000000000       0x20 build/compositor.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/compositor.o
+ .eh_frame      0x0000000000000000      0x498 build/compositor.o
+ .group         0x0000000000000000        0xc build/gui_graphics.o
+ .group         0x0000000000000000        0xc build/gui_graphics.o
+ .group         0x0000000000000000        0xc build/gui_graphics.o
+ .group         0x0000000000000000        0xc build/gui_graphics.o
+ .debug_macro   0x0000000000000000      0xb9e build/gui_graphics.o
+ .debug_macro   0x0000000000000000       0x28 build/gui_graphics.o
+ .debug_macro   0x0000000000000000       0xca build/gui_graphics.o
+ .debug_macro   0x0000000000000000       0xc4 build/gui_graphics.o
+ .comment       0x0000000000000000       0x20 build/gui_graphics.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/gui_graphics.o
+ .eh_frame      0x0000000000000000      0x430 build/gui_graphics.o
+ .group         0x0000000000000000        0xc build/gui_widgets.o
+ .group         0x0000000000000000        0xc build/gui_widgets.o
+ .group         0x0000000000000000        0xc build/gui_widgets.o
+ .group         0x0000000000000000        0xc build/gui_widgets.o
+ .group         0x0000000000000000        0xc build/gui_widgets.o
+ .group         0x0000000000000000        0xc build/gui_widgets.o
+ .group         0x0000000000000000        0xc build/gui_widgets.o
+ .group         0x0000000000000000        0xc build/gui_widgets.o
+ .debug_macro   0x0000000000000000      0xb9e build/gui_widgets.o
+ .debug_macro   0x0000000000000000       0x28 build/gui_widgets.o
+ .debug_macro   0x0000000000000000       0xca build/gui_widgets.o
+ .debug_macro   0x0000000000000000       0x64 build/gui_widgets.o
+ .debug_macro   0x0000000000000000       0x7c build/gui_widgets.o
+ .debug_macro   0x0000000000000000       0x10 build/gui_widgets.o
+ .debug_macro   0x0000000000000000       0x1c build/gui_widgets.o
+ .comment       0x0000000000000000       0x20 build/gui_widgets.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/gui_widgets.o
+ .eh_frame      0x0000000000000000      0x548 build/gui_widgets.o
+ .group         0x0000000000000000        0xc build/phone.o
+ .group         0x0000000000000000        0xc build/phone.o
+ .group         0x0000000000000000        0xc build/phone.o
+ .group         0x0000000000000000        0xc build/phone.o
+ .group         0x0000000000000000        0xc build/phone.o
+ .group         0x0000000000000000        0xc build/phone.o
+ .group         0x0000000000000000        0xc build/phone.o
+ .group         0x0000000000000000        0xc build/phone.o
+ .group         0x0000000000000000        0xc build/phone.o
+ .group         0x0000000000000000        0xc build/phone.o
+ .debug_macro   0x0000000000000000      0xb9e build/phone.o
+ .debug_macro   0x0000000000000000       0x28 build/phone.o
+ .debug_macro   0x0000000000000000       0xc4 build/phone.o
+ .debug_macro   0x0000000000000000       0x7c build/phone.o
+ .debug_macro   0x0000000000000000       0x10 build/phone.o
+ .debug_macro   0x0000000000000000       0x10 build/phone.o
+ .debug_macro   0x0000000000000000       0x22 build/phone.o
+ .debug_macro   0x0000000000000000       0x10 build/phone.o
+ .debug_macro   0x0000000000000000       0x4c build/phone.o
+ .debug_macro   0x0000000000000000       0xa0 build/phone.o
+ .comment       0x0000000000000000       0x20 build/phone.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/phone.o
+ .eh_frame      0x0000000000000000      0x218 build/phone.o
+ .group         0x0000000000000000        0xc build/pkg.o
+ .group         0x0000000000000000        0xc build/pkg.o
+ .group         0x0000000000000000        0xc build/pkg.o
+ .group         0x0000000000000000        0xc build/pkg.o
+ .group         0x0000000000000000        0xc build/pkg.o
+ .group         0x0000000000000000        0xc build/pkg.o
+ .group         0x0000000000000000        0xc build/pkg.o
+ .group         0x0000000000000000        0xc build/pkg.o
+ .group         0x0000000000000000        0xc build/pkg.o
+ .group         0x0000000000000000        0xc build/pkg.o
+ .group         0x0000000000000000        0xc build/pkg.o
+ .group         0x0000000000000000        0xc build/pkg.o
+ .group         0x0000000000000000        0xc build/pkg.o
+ .debug_macro   0x0000000000000000      0xb9e build/pkg.o
+ .debug_macro   0x0000000000000000       0x28 build/pkg.o
+ .debug_macro   0x0000000000000000       0xee build/pkg.o
+ .debug_macro   0x0000000000000000       0xc4 build/pkg.o
+ .debug_macro   0x0000000000000000       0x7c build/pkg.o
+ .debug_macro   0x0000000000000000       0x10 build/pkg.o
+ .debug_macro   0x0000000000000000       0x22 build/pkg.o
+ .debug_macro   0x0000000000000000       0x3a build/pkg.o
+ .debug_macro   0x0000000000000000       0x64 build/pkg.o
+ .debug_macro   0x0000000000000000       0x10 build/pkg.o
+ .debug_macro   0x0000000000000000       0xd6 build/pkg.o
+ .debug_macro   0x0000000000000000       0x5f build/pkg.o
+ .comment       0x0000000000000000       0x20 build/pkg.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/pkg.o
+ .eh_frame      0x0000000000000000      0xb48 build/pkg.o
+ .group         0x0000000000000000        0xc build/crfs.o
+ .group         0x0000000000000000        0xc build/crfs.o
+ .group         0x0000000000000000        0xc build/crfs.o
+ .group         0x0000000000000000        0xc build/crfs.o
+ .group         0x0000000000000000        0xc build/crfs.o
+ .group         0x0000000000000000        0xc build/crfs.o
+ .group         0x0000000000000000        0xc build/crfs.o
+ .group         0x0000000000000000        0xc build/crfs.o
+ .debug_macro   0x0000000000000000      0xb9e build/crfs.o
+ .debug_macro   0x0000000000000000       0x28 build/crfs.o
+ .debug_macro   0x0000000000000000       0xc4 build/crfs.o
+ .debug_macro   0x0000000000000000       0x10 build/crfs.o
+ .debug_macro   0x0000000000000000       0x82 build/crfs.o
+ .debug_macro   0x0000000000000000       0x10 build/crfs.o
+ .debug_macro   0x0000000000000000       0x4c build/crfs.o
+ .debug_macro   0x0000000000000000       0x1c build/crfs.o
+ .comment       0x0000000000000000       0x20 build/crfs.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/crfs.o
+ .eh_frame      0x0000000000000000      0x548 build/crfs.o
+ .group         0x0000000000000000        0xc build/vfs.o
+ .group         0x0000000000000000        0xc build/vfs.o
+ .group         0x0000000000000000        0xc build/vfs.o
+ .group         0x0000000000000000        0xc build/vfs.o
+ .group         0x0000000000000000        0xc build/vfs.o
+ .group         0x0000000000000000        0xc build/vfs.o
+ .group         0x0000000000000000        0xc build/vfs.o
+ .group         0x0000000000000000        0xc build/vfs.o
+ .debug_macro   0x0000000000000000      0xb9e build/vfs.o
+ .debug_macro   0x0000000000000000       0x28 build/vfs.o
+ .debug_macro   0x0000000000000000       0x3a build/vfs.o
+ .debug_macro   0x0000000000000000       0x64 build/vfs.o
+ .debug_macro   0x0000000000000000       0x10 build/vfs.o
+ .debug_macro   0x0000000000000000       0xc4 build/vfs.o
+ .debug_macro   0x0000000000000000       0x82 build/vfs.o
+ .debug_macro   0x0000000000000000       0x16 build/vfs.o
+ .comment       0x0000000000000000       0x20 build/vfs.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/vfs.o
+ .eh_frame      0x0000000000000000      0x290 build/vfs.o
+ .group         0x0000000000000000        0xc build/stubs.o
+ .group         0x0000000000000000        0xc build/stubs.o
+ .group         0x0000000000000000        0xc build/stubs.o
+ .group         0x0000000000000000        0xc build/stubs.o
+ .group         0x0000000000000000        0xc build/stubs.o
+ .group         0x0000000000000000        0xc build/stubs.o
+ .debug_macro   0x0000000000000000      0xb9e build/stubs.o
+ .debug_macro   0x0000000000000000       0x28 build/stubs.o
+ .debug_macro   0x0000000000000000       0xc4 build/stubs.o
+ .debug_macro   0x0000000000000000       0x64 build/stubs.o
+ .debug_macro   0x0000000000000000       0xd6 build/stubs.o
+ .debug_macro   0x0000000000000000       0x88 build/stubs.o
+ .comment       0x0000000000000000       0x20 build/stubs.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/stubs.o
+ .eh_frame      0x0000000000000000      0x2d8 build/stubs.o
+ .group         0x0000000000000000        0xc build/uart.o
+ .group         0x0000000000000000        0xc build/uart.o
+ .group         0x0000000000000000        0xc build/uart.o
+ .group         0x0000000000000000        0xc build/uart.o
+ .group         0x0000000000000000        0xc build/uart.o
+ .group         0x0000000000000000        0xc build/uart.o
+ .debug_macro   0x0000000000000000      0xb9e build/uart.o
+ .debug_macro   0x0000000000000000       0x28 build/uart.o
+ .debug_macro   0x0000000000000000       0x22 build/uart.o
+ .debug_macro   0x0000000000000000       0x7c build/uart.o
+ .debug_macro   0x0000000000000000       0x10 build/uart.o
+ .debug_macro   0x0000000000000000       0xc4 build/uart.o
+ .comment       0x0000000000000000       0x20 build/uart.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/uart.o
+ .eh_frame      0x0000000000000000      0x138 build/uart.o
+ .group         0x0000000000000000        0xc build/gpio.o
+ .group         0x0000000000000000        0xc build/gpio.o
+ .group         0x0000000000000000        0xc build/gpio.o
+ .group         0x0000000000000000        0xc build/gpio.o
+ .debug_macro   0x0000000000000000      0xb9e build/gpio.o
+ .debug_macro   0x0000000000000000       0x28 build/gpio.o
+ .debug_macro   0x0000000000000000       0x22 build/gpio.o
+ .debug_macro   0x0000000000000000       0xc4 build/gpio.o
+ .comment       0x0000000000000000       0x20 build/gpio.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/gpio.o
+ .eh_frame      0x0000000000000000      0x1d0 build/gpio.o
+ .group         0x0000000000000000        0xc build/timer.o
+ .group         0x0000000000000000        0xc build/timer.o
+ .group         0x0000000000000000        0xc build/timer.o
+ .group         0x0000000000000000        0xc build/timer.o
+ .group         0x0000000000000000        0xc build/timer.o
+ .debug_macro   0x0000000000000000      0xb9e build/timer.o
+ .debug_macro   0x0000000000000000       0x28 build/timer.o
+ .debug_macro   0x0000000000000000       0x10 build/timer.o
+ .debug_macro   0x0000000000000000       0xc4 build/timer.o
+ .debug_macro   0x0000000000000000       0x10 build/timer.o
+ .comment       0x0000000000000000       0x20 build/timer.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/timer.o
+ .eh_frame      0x0000000000000000      0x258 build/timer.o
+ .group         0x0000000000000000        0xc build/gic.o
+ .group         0x0000000000000000        0xc build/gic.o
+ .group         0x0000000000000000        0xc build/gic.o
+ .debug_macro   0x0000000000000000      0xb9e build/gic.o
+ .debug_macro   0x0000000000000000       0x28 build/gic.o
+ .debug_macro   0x0000000000000000       0xc4 build/gic.o
+ .comment       0x0000000000000000       0x20 build/gic.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/gic.o
+ .eh_frame      0x0000000000000000      0x1b0 build/gic.o
+ .group         0x0000000000000000        0xc build/display.o
+ .group         0x0000000000000000        0xc build/display.o
+ .group         0x0000000000000000        0xc build/display.o
+ .group         0x0000000000000000        0xc build/display.o
+ .group         0x0000000000000000        0xc build/display.o
+ .group         0x0000000000000000        0xc build/display.o
+ .group         0x0000000000000000        0xc build/display.o
+ .group         0x0000000000000000        0xc build/display.o
+ .group         0x0000000000000000        0xc build/display.o
+ .debug_macro   0x0000000000000000      0xb9e build/display.o
+ .debug_macro   0x0000000000000000       0x28 build/display.o
+ .debug_macro   0x0000000000000000       0x7c build/display.o
+ .debug_macro   0x0000000000000000       0x10 build/display.o
+ .debug_macro   0x0000000000000000       0x16 build/display.o
+ .debug_macro   0x0000000000000000       0xc4 build/display.o
+ .debug_macro   0x0000000000000000       0x22 build/display.o
+ .debug_macro   0x0000000000000000       0x10 build/display.o
+ .debug_macro   0x0000000000000000       0xd6 build/display.o
+ .comment       0x0000000000000000       0x20 build/display.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/display.o
+ .eh_frame      0x0000000000000000      0x1a8 build/display.o
+ .group         0x0000000000000000        0xc build/display_a64_dsi.o
+ .group         0x0000000000000000        0xc build/display_a64_dsi.o
+ .group         0x0000000000000000        0xc build/display_a64_dsi.o
+ .group         0x0000000000000000        0xc build/display_a64_dsi.o
+ .debug_macro   0x0000000000000000      0xb9e build/display_a64_dsi.o
+ .debug_macro   0x0000000000000000       0x28 build/display_a64_dsi.o
+ .debug_macro   0x0000000000000000       0xc4 build/display_a64_dsi.o
+ .debug_macro   0x0000000000000000       0x10 build/display_a64_dsi.o
+ .comment       0x0000000000000000       0x20 build/display_a64_dsi.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/display_a64_dsi.o
+ .eh_frame      0x0000000000000000       0x78 build/display_a64_dsi.o
+ .group         0x0000000000000000        0xc build/touch.o
+ .group         0x0000000000000000        0xc build/touch.o
+ .group         0x0000000000000000        0xc build/touch.o
+ .group         0x0000000000000000        0xc build/touch.o
+ .group         0x0000000000000000        0xc build/touch.o
+ .group         0x0000000000000000        0xc build/touch.o
+ .group         0x0000000000000000        0xc build/touch.o
+ .group         0x0000000000000000        0xc build/touch.o
+ .group         0x0000000000000000        0xc build/touch.o
+ .debug_macro   0x0000000000000000      0xb9e build/touch.o
+ .debug_macro   0x0000000000000000       0x28 build/touch.o
+ .debug_macro   0x0000000000000000       0xc4 build/touch.o
+ .debug_macro   0x0000000000000000       0x10 build/touch.o
+ .debug_macro   0x0000000000000000       0x82 build/touch.o
+ .debug_macro   0x0000000000000000       0x22 build/touch.o
+ .debug_macro   0x0000000000000000       0x10 build/touch.o
+ .debug_macro   0x0000000000000000       0x22 build/touch.o
+ .debug_macro   0x0000000000000000       0x10 build/touch.o
+ .comment       0x0000000000000000       0x20 build/touch.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/touch.o
+ .eh_frame      0x0000000000000000      0x150 build/touch.o
+ .group         0x0000000000000000        0xc build/touch_gt917s.o
+ .group         0x0000000000000000        0xc build/touch_gt917s.o
+ .group         0x0000000000000000        0xc build/touch_gt917s.o
+ .group         0x0000000000000000        0xc build/touch_gt917s.o
+ .debug_macro   0x0000000000000000      0xb9e build/touch_gt917s.o
+ .debug_macro   0x0000000000000000       0x28 build/touch_gt917s.o
+ .debug_macro   0x0000000000000000       0xc4 build/touch_gt917s.o
+ .debug_macro   0x0000000000000000       0x10 build/touch_gt917s.o
+ .comment       0x0000000000000000       0x20 build/touch_gt917s.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/touch_gt917s.o
+ .eh_frame      0x0000000000000000       0x80 build/touch_gt917s.o
+ .group         0x0000000000000000        0xc build/usb.o
+ .group         0x0000000000000000        0xc build/usb.o
+ .group         0x0000000000000000        0xc build/usb.o
+ .group         0x0000000000000000        0xc build/usb.o
+ .group         0x0000000000000000        0xc build/usb.o
+ .group         0x0000000000000000        0xc build/usb.o
+ .group         0x0000000000000000        0xc build/usb.o
+ .group         0x0000000000000000        0xc build/usb.o
+ .group         0x0000000000000000        0xc build/usb.o
+ .debug_macro   0x0000000000000000      0xb9e build/usb.o
+ .debug_macro   0x0000000000000000       0x28 build/usb.o
+ .debug_macro   0x0000000000000000       0xc4 build/usb.o
+ .debug_macro   0x0000000000000000       0x10 build/usb.o
+ .debug_macro   0x0000000000000000       0x7c build/usb.o
+ .debug_macro   0x0000000000000000       0x10 build/usb.o
+ .debug_macro   0x0000000000000000       0x22 build/usb.o
+ .debug_macro   0x0000000000000000       0x10 build/usb.o
+ .debug_macro   0x0000000000000000       0x1c build/usb.o
+ .comment       0x0000000000000000       0x20 build/usb.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/usb.o
+ .eh_frame      0x0000000000000000      0x160 build/usb.o
+ .group         0x0000000000000000        0xc build/wifi.o
+ .group         0x0000000000000000        0xc build/wifi.o
+ .group         0x0000000000000000        0xc build/wifi.o
+ .group         0x0000000000000000        0xc build/wifi.o
+ .group         0x0000000000000000        0xc build/wifi.o
+ .group         0x0000000000000000        0xc build/wifi.o
+ .group         0x0000000000000000        0xc build/wifi.o
+ .debug_macro   0x0000000000000000      0xb9e build/wifi.o
+ .debug_macro   0x0000000000000000       0x28 build/wifi.o
+ .debug_macro   0x0000000000000000       0x10 build/wifi.o
+ .debug_macro   0x0000000000000000       0xc4 build/wifi.o
+ .debug_macro   0x0000000000000000       0x82 build/wifi.o
+ .debug_macro   0x0000000000000000       0x10 build/wifi.o
+ .comment       0x0000000000000000       0x20 build/wifi.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/wifi.o
+ .eh_frame      0x0000000000000000      0x200 build/wifi.o
+ .group         0x0000000000000000        0xc build/wifi_rtl8723cs.o
+ .group         0x0000000000000000        0xc build/wifi_rtl8723cs.o
+ .group         0x0000000000000000        0xc build/wifi_rtl8723cs.o
+ .group         0x0000000000000000        0xc build/wifi_rtl8723cs.o
+ .group         0x0000000000000000        0xc build/wifi_rtl8723cs.o
+ .group         0x0000000000000000        0xc build/wifi_rtl8723cs.o
+ .group         0x0000000000000000        0xc build/wifi_rtl8723cs.o
+ .group         0x0000000000000000        0xc build/wifi_rtl8723cs.o
+ .group         0x0000000000000000        0xc build/wifi_rtl8723cs.o
+ .group         0x0000000000000000        0xc build/wifi_rtl8723cs.o
+ .debug_macro   0x0000000000000000      0xbc8 build/wifi_rtl8723cs.o
+ .debug_macro   0x0000000000000000       0x28 build/wifi_rtl8723cs.o
+ .debug_macro   0x0000000000000000       0x10 build/wifi_rtl8723cs.o
+ .debug_macro   0x0000000000000000       0x58 build/wifi_rtl8723cs.o
+ .debug_macro   0x0000000000000000       0xc4 build/wifi_rtl8723cs.o
+ .debug_macro   0x0000000000000000       0x82 build/wifi_rtl8723cs.o
+ .debug_macro   0x0000000000000000       0x10 build/wifi_rtl8723cs.o
+ .debug_macro   0x0000000000000000       0x3a build/wifi_rtl8723cs.o
+ .debug_macro   0x0000000000000000       0x64 build/wifi_rtl8723cs.o
+ .debug_macro   0x0000000000000000       0x4c build/wifi_rtl8723cs.o
+ .comment       0x0000000000000000       0x20 build/wifi_rtl8723cs.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/wifi_rtl8723cs.o
+ .eh_frame      0x0000000000000000      0x3d0 build/wifi_rtl8723cs.o
+ .group         0x0000000000000000        0xc build/cellular.o
+ .group         0x0000000000000000        0xc build/cellular.o
+ .group         0x0000000000000000        0xc build/cellular.o
+ .group         0x0000000000000000        0xc build/cellular.o
+ .group         0x0000000000000000        0xc build/cellular.o
+ .group         0x0000000000000000        0xc build/cellular.o
+ .group         0x0000000000000000        0xc build/cellular.o
+ .group         0x0000000000000000        0xc build/cellular.o
+ .debug_macro   0x0000000000000000      0xb9e build/cellular.o
+ .debug_macro   0x0000000000000000       0x28 build/cellular.o
+ .debug_macro   0x0000000000000000       0xc4 build/cellular.o
+ .debug_macro   0x0000000000000000       0x7c build/cellular.o
+ .debug_macro   0x0000000000000000       0x10 build/cellular.o
+ .debug_macro   0x0000000000000000       0x10 build/cellular.o
+ .debug_macro   0x0000000000000000       0x22 build/cellular.o
+ .debug_macro   0x0000000000000000       0x10 build/cellular.o
+ .comment       0x0000000000000000       0x20 build/cellular.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/cellular.o
+ .eh_frame      0x0000000000000000      0x328 build/cellular.o
+ .group         0x0000000000000000        0xc build/modem_eg25g.o
+ .group         0x0000000000000000        0xc build/modem_eg25g.o
+ .group         0x0000000000000000        0xc build/modem_eg25g.o
+ .group         0x0000000000000000        0xc build/modem_eg25g.o
+ .group         0x0000000000000000        0xc build/modem_eg25g.o
+ .group         0x0000000000000000        0xc build/modem_eg25g.o
+ .group         0x0000000000000000        0xc build/modem_eg25g.o
+ .debug_macro   0x0000000000000000      0xbc8 build/modem_eg25g.o
+ .debug_macro   0x0000000000000000       0x28 build/modem_eg25g.o
+ .debug_macro   0x0000000000000000       0xc4 build/modem_eg25g.o
+ .debug_macro   0x0000000000000000       0x7c build/modem_eg25g.o
+ .debug_macro   0x0000000000000000       0x10 build/modem_eg25g.o
+ .debug_macro   0x0000000000000000       0x10 build/modem_eg25g.o
+ .debug_macro   0x0000000000000000       0x22 build/modem_eg25g.o
+ .comment       0x0000000000000000       0x20 build/modem_eg25g.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/modem_eg25g.o
+ .eh_frame      0x0000000000000000      0x508 build/modem_eg25g.o
+ .group         0x0000000000000000        0xc build/audio.o
+ .group         0x0000000000000000        0xc build/audio.o
+ .group         0x0000000000000000        0xc build/audio.o
+ .group         0x0000000000000000        0xc build/audio.o
+ .group         0x0000000000000000        0xc build/audio.o
+ .group         0x0000000000000000        0xc build/audio.o
+ .group         0x0000000000000000        0xc build/audio.o
+ .group         0x0000000000000000        0xc build/audio.o
+ .debug_macro   0x0000000000000000      0xb9e build/audio.o
+ .debug_macro   0x0000000000000000       0x28 build/audio.o
+ .debug_macro   0x0000000000000000       0xc4 build/audio.o
+ .debug_macro   0x0000000000000000       0x10 build/audio.o
+ .debug_macro   0x0000000000000000       0x7c build/audio.o
+ .debug_macro   0x0000000000000000       0x10 build/audio.o
+ .debug_macro   0x0000000000000000       0x22 build/audio.o
+ .debug_macro   0x0000000000000000       0x10 build/audio.o
+ .comment       0x0000000000000000       0x20 build/audio.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/audio.o
+ .eh_frame      0x0000000000000000      0x1b0 build/audio.o
+ .group         0x0000000000000000        0xc build/camera.o
+ .group         0x0000000000000000        0xc build/camera.o
+ .group         0x0000000000000000        0xc build/camera.o
+ .group         0x0000000000000000        0xc build/camera.o
+ .group         0x0000000000000000        0xc build/camera.o
+ .group         0x0000000000000000        0xc build/camera.o
+ .group         0x0000000000000000        0xc build/camera.o
+ .group         0x0000000000000000        0xc build/camera.o
+ .debug_macro   0x0000000000000000      0xb9e build/camera.o
+ .debug_macro   0x0000000000000000       0x28 build/camera.o
+ .debug_macro   0x0000000000000000       0xc4 build/camera.o
+ .debug_macro   0x0000000000000000       0x7c build/camera.o
+ .debug_macro   0x0000000000000000       0x10 build/camera.o
+ .debug_macro   0x0000000000000000       0x10 build/camera.o
+ .debug_macro   0x0000000000000000       0x22 build/camera.o
+ .debug_macro   0x0000000000000000       0x1c build/camera.o
+ .comment       0x0000000000000000       0x20 build/camera.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/camera.o
+ .eh_frame      0x0000000000000000      0x200 build/camera.o
+ .group         0x0000000000000000        0xc build/power.o
+ .group         0x0000000000000000        0xc build/power.o
+ .group         0x0000000000000000        0xc build/power.o
+ .group         0x0000000000000000        0xc build/power.o
+ .group         0x0000000000000000        0xc build/power.o
+ .group         0x0000000000000000        0xc build/power.o
+ .group         0x0000000000000000        0xc build/power.o
+ .group         0x0000000000000000        0xc build/power.o
+ .group         0x0000000000000000        0xc build/power.o
+ .debug_macro   0x0000000000000000      0xb9e build/power.o
+ .debug_macro   0x0000000000000000       0x28 build/power.o
+ .debug_macro   0x0000000000000000       0xc4 build/power.o
+ .debug_macro   0x0000000000000000       0x7c build/power.o
+ .debug_macro   0x0000000000000000       0x10 build/power.o
+ .debug_macro   0x0000000000000000       0x10 build/power.o
+ .debug_macro   0x0000000000000000       0x22 build/power.o
+ .debug_macro   0x0000000000000000       0x10 build/power.o
+ .debug_macro   0x0000000000000000       0x22 build/power.o
+ .comment       0x0000000000000000       0x20 build/power.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/power.o
+ .eh_frame      0x0000000000000000      0x200 build/power.o
+ .group         0x0000000000000000        0xc build/string.o
+ .group         0x0000000000000000        0xc build/string.o
+ .group         0x0000000000000000        0xc build/string.o
+ .group         0x0000000000000000        0xc build/string.o
+ .debug_macro   0x0000000000000000      0xb9e build/string.o
+ .debug_macro   0x0000000000000000       0x28 build/string.o
+ .debug_macro   0x0000000000000000       0x7c build/string.o
+ .debug_macro   0x0000000000000000       0x10 build/string.o
+ .comment       0x0000000000000000       0x20 build/string.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/string.o
+ .eh_frame      0x0000000000000000      0x168 build/string.o
+ .group         0x0000000000000000        0xc build/stdlib.o
+ .group         0x0000000000000000        0xc build/stdlib.o
+ .debug_macro   0x0000000000000000      0xb9e build/stdlib.o
+ .debug_macro   0x0000000000000000       0x28 build/stdlib.o
+ .comment       0x0000000000000000       0x20 build/stdlib.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/stdlib.o
+ .eh_frame      0x0000000000000000       0x68 build/stdlib.o
+ .note.gnu.property
+                0x0000000000000000        0x0 build/stdlib.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+RAM              0x0000000040080000 0x0000000010000000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+                0x0000000040080000                KERNEL_BASE = 0x40080000
+                0x0000000040080000                . = KERNEL_BASE
+
+.boot           0x0000000040080000     0x1208
+ *(.boot)
+ .boot          0x0000000040080000     0x1208 build/boot.o
+                0x0000000040080000                _start
+                0x0000000040080064                _el3_to_el1
+                0x0000000040080124                _setup_page_tables
+                0x000000004008020c                _enable_mmu
+                0x0000000040080234                _hang
+                0x00000000400810dc                syscall_entry
+
+.text           0x0000000040082000    0x22f68
+                0x0000000040082000                __text_start = .
+ *(.text .text.*)
+ .text          0x0000000040082000        0x0 build/boot.o
+ .text          0x0000000040082000      0x510 build/kmain.o
+                0x00000000400820d0                crimson_shell_task
+                0x0000000040082140                crimson_idle_task
+                0x0000000040082150                kernel_main
+                0x0000000040082490                kernel_panic
+                0x0000000040082500                arch_hang
+ .text          0x0000000040082510      0x9b0 build/mm.o
+                0x0000000040082510                pmm_alloc
+                0x00000000400825d0                pmm_alloc_n
+                0x00000000400826c0                pmm_free
+                0x0000000040082750                pmm_mark_used
+                0x00000000400827b0                pmm_init
+                0x0000000040082870                pmm_get_free_pages
+                0x0000000040082880                kmalloc_init
+                0x00000000400828c0                kmalloc
+                0x0000000040082a60                kfree
+                0x0000000040082b10                kcalloc
+                0x0000000040082b50                krealloc
+                0x0000000040082bd0                vmm_init
+                0x0000000040082bf0                vmm_map
+                0x0000000040082d70                vmm_alloc_pages
+                0x0000000040082e60                vmm_get_phys
+ .text          0x0000000040082ec0      0xb34 build/sched.o
+                0x00000000400830f0                scheduler_init
+                0x00000000400831d0                scheduler_start
+                0x0000000040083270                scheduler_tick
+                0x0000000040083480                scheduler_yield
+                0x0000000040083550                scheduler_add_process
+                0x0000000040083560                scheduler_remove_process
+                0x0000000040083610                scheduler_sleep_on
+                0x0000000040083700                scheduler_wakeup
+                0x0000000040083760                scheduler_wakeup_one
+                0x00000000400837b0                scheduler_get_current
+                0x00000000400837f0                scheduler_set_idle
+                0x0000000040083830                scheduler_get_load
+                0x00000000400838a0                scheduler_stats
+ *fill*         0x00000000400839f4        0xc 
+ .text          0x0000000040083a00      0xa70 build/process.o
+                0x0000000040083a00                process_init
+                0x0000000040083a60                process_create
+                0x0000000040083d70                process_exit
+                0x0000000040083e50                process_kill
+                0x0000000040083f70                process_wait
+                0x0000000040084140                process_get_by_pid
+                0x0000000040084190                process_list
+                0x0000000040084310                process_reap_zombies
+                0x0000000040084450                current_pid
+ .text          0x0000000040084470     0x144c build/printk.o
+                0x0000000040084770                vprintk
+                0x0000000040084e50                printk
+                0x0000000040084ea0                printk_init
+                0x0000000040084ec0                printk_set_level
+                0x0000000040084ee0                printk_get_level
+                0x0000000040084ef0                dmesg
+                0x0000000040084fc0                dmesg_clear
+                0x0000000040084ff0                printk_hexdump
+                0x0000000040085170                vsnprintf
+                0x0000000040085870                snprintf
+ *fill*         0x00000000400858bc        0x4 
+ .text          0x00000000400858c0      0xab4 build/sync.o
+                0x00000000400858c0                spinlock_init
+                0x00000000400858e0                spin_lock
+                0x0000000040085940                spin_unlock
+                0x0000000040085970                spin_trylock
+                0x00000000400859e0                spin_lock_irqsave
+                0x0000000040085a50                spin_unlock_irqrestore
+                0x0000000040085a90                mutex_init
+                0x0000000040085ac0                mutex_lock
+                0x0000000040085bc0                mutex_unlock
+                0x0000000040085cb0                mutex_trylock
+                0x0000000040085d10                sem_init
+                0x0000000040085d40                sem_wait
+                0x0000000040085e10                sem_signal
+                0x0000000040085ee0                sem_trywait
+                0x0000000040085fa0                rwlock_init
+                0x0000000040085fc0                rwlock_read_lock
+                0x0000000040086070                rwlock_read_unlock
+                0x0000000040086100                rwlock_write_lock
+                0x00000000400861b0                rwlock_write_unlock
+                0x0000000040086230                barrier_init
+                0x0000000040086260                barrier_wait
+ *fill*         0x0000000040086374        0xc 
+ .text          0x0000000040086380     0x1768 build/shell.o
+                0x0000000040087870                shell_run
+ *fill*         0x0000000040087ae8        0x8 
+ .text          0x0000000040087af0      0x188 build/board.o
+                0x0000000040087af0                board_get_name
+                0x0000000040087b00                board_get_ram_size
+                0x0000000040087b10                board_get_cpu_cores
+                0x0000000040087b20                board_init_early
+                0x0000000040087b50                board_init
+                0x0000000040087b80                dtb_parse
+                0x0000000040087b90                cpu_get_id
+                0x0000000040087ba0                cpu_get_core_count
+                0x0000000040087bb0                arch_context_switch
+                0x0000000040087c00                arch_jump_to_process
+                0x0000000040087c20                debug_stack_trace
+ *fill*         0x0000000040087c78        0x8 
+ .text          0x0000000040087c80       0xfc build/driver.o
+                0x0000000040087c80                driver_register
+                0x0000000040087ca0                driver_register_all
+                0x0000000040087cb0                driver_probe_all
+                0x0000000040087d50                driver_shutdown_all
+ *fill*         0x0000000040087d7c        0x4 
+ .text          0x0000000040087d80      0xff8 build/crypto_stub.o
+                0x0000000040088360                crypto_init
+                0x0000000040088370                keystore_init
+                0x0000000040088380                aes_gcm_encrypt
+                0x00000000400885d0                aes_gcm_decrypt
+                0x0000000040088850                chacha20_poly1305_encrypt
+                0x00000000400888a0                chacha20_poly1305_decrypt
+                0x00000000400888e0                sha256_init
+                0x0000000040088910                sha256_update
+                0x0000000040088920                sha256_final
+                0x0000000040088930                sha512_init
+                0x0000000040088940                sha512_update
+                0x0000000040088950                sha512_final
+                0x0000000040088960                ed25519_generate_keypair
+                0x00000000400889b0                ed25519_sign
+                0x00000000400889d0                ed25519_verify
+                0x00000000400889e0                x25519
+                0x0000000040088a00                hkdf_sha256
+                0x0000000040088a20                argon2id
+                0x0000000040088a40                rng_init
+                0x0000000040088b00                rng_get_bytes
+                0x0000000040088bc0                rng_get_u32
+                0x0000000040088ca0                rng_get_u64
+ *fill*         0x0000000040088d78        0x8 
+ .text          0x0000000040088d80      0x390 build/vmm_stub.o
+                0x0000000040088ed0                vmm_free_all
+                0x0000000040088ee0                vmm_free_page_tables
+                0x0000000040088ef0                vmm_unmap
+                0x0000000040088f50                vmm_unmap_page
+                0x0000000040088f60                vmm_copy_page_tables
+ .text          0x0000000040089110      0x770 build/syscall.o
+                0x00000000400895e0                syscall_init
+                0x0000000040089740                syscall_dispatch
+                0x00000000400897f0                syscall_get_stats
+ .text          0x0000000040089880     0x3098 build/security.o
+                0x0000000040089880                security_print_status
+                0x0000000040089a80                mac_init
+                0x0000000040089b20                mac_label_init
+                0x0000000040089b80                mac_check_capability
+                0x0000000040089b90                mac_print_labels
+                0x0000000040089ec0                mac_domain_name
+                0x0000000040089f40                mac_context_name
+                0x0000000040089fc0                vb_init
+                0x000000004008a030                vb_verify_partition
+                0x000000004008a170                vb_print_status
+                0x000000004008a2b0                vb_state_name
+                0x000000004008a320                sandbox_init
+                0x000000004008a3a0                sandbox_add_rule
+                0x000000004008a4b0                sandbox_set_limits
+                0x000000004008a530                sandbox_get
+                0x000000004008a570                sandbox_list
+                0x000000004008a660                sandbox_print_rules
+                0x000000004008a820                sandbox_target_name
+                0x000000004008a8a0                sandbox_action_name
+                0x000000004008a910                aslr_init
+                0x000000004008a970                aslr_randomize_stack
+                0x000000004008a9d0                aslr_randomize_mmap
+                0x000000004008aa30                aslr_randomize_pie
+                0x000000004008aa90                aslr_print_status
+                0x000000004008ab30                cfi_init
+                0x000000004008ab60                cfi_register_function
+                0x000000004008abd0                cfi_shadow_push
+                0x000000004008abe0                cfi_shadow_pop
+                0x000000004008abf0                cfi_set_strict
+                0x000000004008ac00                cfi_print_status
+                0x000000004008ac90                nx_init
+                0x000000004008acb0                nx_enable
+                0x000000004008acc0                nx_set_page_nx
+                0x000000004008acd0                nx_set_page_exec
+                0x000000004008ace0                nx_check_region
+                0x000000004008acf0                canary_init
+                0x000000004008ad30                canary_generate
+                0x000000004008ad80                canary_set_thread
+                0x000000004008ad90                canary_print_status
+                0x000000004008add0                audit_init
+                0x000000004008ae20                audit_log
+                0x000000004008b080                mac_check_access
+                0x000000004008b0a0                mac_set_domain
+                0x000000004008b140                mac_set_context
+                0x000000004008b1e0                mac_add_policy
+                0x000000004008b340                mac_load_default_policies
+                0x000000004008b3c0                security_init
+                0x000000004008b590                mac_set_enforcing
+                0x000000004008b5d0                vb_verify_chain
+                0x000000004008b660                vb_set_state
+                0x000000004008b730                sandbox_create
+                0x000000004008b950                sandbox_destroy
+                0x000000004008ba10                security_run_tests
+                0x000000004008bda0                sandbox_apply
+                0x000000004008be00                sandbox_check_access
+                0x000000004008bf50                aslr_set_enabled
+                0x000000004008bf90                cfi_violation
+                0x000000004008c010                cfi_verify_target
+                0x000000004008c090                canary_verify
+                0x000000004008c130                sandbox_enter
+                0x000000004008c1a0                audit_enable
+                0x000000004008c1d0                audit_clear
+                0x000000004008c220                audit_type_name
+                0x000000004008c2e0                audit_print_recent
+                0x000000004008c480                security_shell_help
+                0x000000004008c500                security_shell_dispatch
+ *fill*         0x000000004008c918        0x8 
+ .text          0x000000004008c920     0x2354 build/net.o
+                0x000000004008da40                net_init
+                0x000000004008daf0                net_register_if
+                0x000000004008db40                net_rx_frame
+                0x000000004008dbb0                dhcp_start
+                0x000000004008dcb0                tcp_socket_create
+                0x000000004008ddc0                tcp_bind
+                0x000000004008de90                tcp_connect
+                0x000000004008df90                tcp_listen
+                0x000000004008e010                tcp_accept
+                0x000000004008e0f0                tcp_send
+                0x000000004008e2d0                tcp_recv
+                0x000000004008e460                tcp_close
+                0x000000004008e5a0                net_rx_packet
+                0x000000004008e640                net_dns_resolve
+ *fill*         0x000000004008ec74        0xc 
+ .text          0x000000004008ec80      0xbf4 build/bloodmoon.o
+                0x000000004008efc0                bloodmoon_init
+                0x000000004008f060                bm_tab_open
+                0x000000004008f1e0                bm_tab_navigate
+                0x000000004008f650                bm_tab_close
+                0x000000004008f720                bm_tab_set_network
+                0x000000004008f7a0                bm_get_stats
+                0x000000004008f7c0                bm_list_tabs
+                0x000000004008f870                bm_init
+ *fill*         0x000000004008f874        0xc 
+ .text          0x000000004008f880     0x1e90 build/compositor.o
+                0x000000004008f880                gui_draw_lock_screen
+                0x000000004008fb90                gui_draw_app_launcher
+                0x000000004008fd50                gui_draw_status_bar
+                0x000000004008ff00                gui_draw_notification_panel
+                0x00000000400901a0                gui_render_frame
+                0x0000000040090840                gui_handle_touch
+                0x0000000040090cd0                gui_create_surface
+                0x0000000040090de0                gui_destroy_surface
+                0x0000000040090e10                gui_show_surface
+                0x0000000040090e20                gui_hide_surface
+                0x0000000040090e30                gui_focus_surface
+                0x0000000040090e40                gui_move_surface
+                0x0000000040090e50                gui_resize_surface
+                0x0000000040090eb0                gui_notify
+                0x0000000040091050                gui_notify_clear
+                0x0000000040091120                gui_notify_clear_all
+                0x0000000040091130                gui_register_app
+                0x0000000040091210                gui_init
+                0x0000000040091390                gui_launch_app
+                0x00000000400914a0                gui_kill_app
+                0x0000000040091510                gui_add_notification
+                0x00000000400915c0                gui_lock
+                0x0000000040091610                gui_unlock
+                0x0000000040091670                gui_set_pin
+                0x0000000040091690                gui_color
+                0x00000000400916b0                gui_set_brightness
+                0x00000000400916d0                gui_screenshot
+                0x00000000400916f0                gui_show_power_menu
+ .text          0x0000000040091710     0x1460 build/gui_graphics.o
+                0x0000000040091710                gfx_blend
+                0x00000000400917d0                gfx_putpixel
+                0x0000000040091870                gfx_color_lerp
+                0x0000000040091910                gfx_darken
+                0x0000000040091970                gfx_lighten
+                0x00000000400919f0                gfx_fill_rect
+                0x0000000040091b00                gfx_rect
+                0x0000000040091bb0                gfx_line
+                0x0000000040091ca0                gfx_rounded_rect
+                0x0000000040091ea0                gfx_fill_circle
+                0x0000000040091fc0                gfx_fill_rounded
+                0x0000000040092100                gfx_circle
+                0x0000000040092220                gfx_fill_triangle
+                0x0000000040092490                gfx_gradient_rect
+                0x00000000400925a0                gfx_gradient_rounded
+                0x00000000400925b0                gfx_draw_text
+                0x0000000040092730                gfx_draw_text_center
+                0x0000000040092780                gfx_draw_text_right
+                0x00000000400927d0                gfx_text_width
+                0x0000000040092800                gfx_blit
+                0x00000000400928b0                gfx_blit_alpha
+                0x0000000040092960                gfx_blit_key
+                0x0000000040092a00                gfx_blit_scaled
+                0x0000000040092af0                gfx_set_clip
+                0x0000000040092b20                gfx_reset_clip
+                0x0000000040092b40                gfx_create_context
+ .text          0x0000000040092b70     0x166c build/gui_widgets.o
+                0x0000000040093560                gui_button
+                0x00000000400935d0                gui_icon_button
+                0x0000000040093640                gui_label
+                0x0000000040093700                gui_text_input
+                0x0000000040093780                gui_switch
+                0x0000000040093860                gui_slider
+                0x0000000040093950                gui_list
+                0x0000000040093a20                gui_progress
+                0x0000000040093b00                gui_draw_widget
+                0x0000000040093b20                gui_draw_all
+                0x0000000040093b90                gui_handle_touch_widget
+                0x0000000040093e20                gui_handle_touch_all
+                0x0000000040093e80                gui_button_set_handler
+                0x0000000040093e90                gui_button_set_style
+                0x0000000040093ec0                gui_label_set_align
+                0x0000000040093ed0                gui_label_set_scale
+                0x0000000040093f20                gui_input_set_text
+                0x0000000040093f70                gui_input_get_text
+                0x0000000040093f80                gui_list_add
+                0x0000000040094030                gui_list_clear
+                0x0000000040094050                gui_progress_set
+                0x0000000040094070                gui_progress_set_indeterminate
+                0x0000000040094080                gui_widget_set_visible
+                0x0000000040094090                gui_widget_set_enabled
+                0x00000000400940a0                gui_widget_move
+                0x00000000400940b0                gui_widget_set_size
+                0x00000000400940c0                gui_widget_set_color
+                0x00000000400940d0                gui_widget_destroy
+                0x0000000040094170                gui_widgets_clear
+                0x00000000400941d0                gui_widget_count
+ *fill*         0x00000000400941dc        0x4 
+ .text          0x00000000400941e0      0xaf0 build/phone.o
+                0x0000000040094320                phone_init
+                0x0000000040094390                phone_dial
+                0x0000000040094560                phone_answer
+                0x0000000040094640                phone_hangup
+                0x00000000400947a0                phone_send_sms
+                0x0000000040094890                phone_receive_sms
+                0x00000000400949f0                phone_add_contact
+                0x0000000040094af0                phone_dial_emergency
+                0x0000000040094b40                phone_get_status
+ .text          0x0000000040094cd0     0x2d5c build/pkg.o
+                0x0000000040094cd0                pkg_get_state
+                0x0000000040094ce0                pkg_hash_sha256
+                0x0000000040094e10                pkg_ed25519_verify
+                0x0000000040094ee0                pkg_read_header
+                0x0000000040094ff0                pkg_verify_signature
+                0x0000000040095200                pkg_verify_hash
+                0x0000000040095340                pkg_extract
+                0x00000000400955c0                pkg_db_load
+                0x00000000400956f0                pkg_db_save
+                0x00000000400957b0                pkg_shutdown
+                0x00000000400957f0                pkg_db_find
+                0x0000000040095840                pkg_db_find_installed
+                0x00000000400958a0                pkg_db_add
+                0x00000000400958d0                pkg_db_remove
+                0x0000000040095940                pkg_repo_add
+                0x0000000040095a40                pkg_init
+                0x0000000040095b80                pkg_repo_remove
+                0x0000000040095c20                pkg_repo_enable
+                0x0000000040095c50                pkg_repo_sync
+                0x0000000040095cf0                pkg_repo_sync_all
+                0x0000000040095d70                pkg_repo_get
+                0x0000000040095da0                pkg_repo_list
+                0x0000000040095e80                pkg_resolve_deps
+                0x0000000040095ea0                pkg_check_deps
+                0x0000000040095ef0                pkg_install_deps
+                0x0000000040095f30                pkg_remove
+                0x0000000040096020                pkg_purge
+                0x0000000040096030                pkg_upgrade_all
+                0x00000000400960d0                pkg_list_available
+                0x0000000040096140                pkg_search
+                0x0000000040096270                pkg_is_installed
+                0x00000000400962d0                pkg_has_update
+                0x0000000040096320                pkg_list_files
+                0x00000000400963a0                pkg_verify_files
+                0x0000000040096430                pkg_verify_all
+                0x0000000040096530                pkg_parse_version
+                0x0000000040096620                pkg_version_compare
+                0x00000000400966a0                pkg_format_size
+                0x0000000040096730                pkg_list_installed
+                0x00000000400968e0                pkg_perm_name
+                0x0000000040096a10                pkg_install
+                0x0000000040096d30                pkg_upgrade
+                0x0000000040096f90                pkg_info_header
+                0x0000000040096fa0                pkg_info
+                0x00000000400970c0                pkg_cmd_remove
+                0x00000000400970f0                pkg_cmd_purge
+                0x0000000040097120                pkg_cmd_upgrade
+                0x0000000040097130                pkg_cmd_search
+                0x00000000400971c0                pkg_cmd_info
+                0x00000000400971e0                pkg_cmd_list
+                0x00000000400972c0                pkg_cmd_verify
+                0x0000000040097340                pkg_cmd_repo
+                0x00000000400974b0                pkg_cmd_sync
+                0x0000000040097550                pkg_cmd_clean
+                0x0000000040097570                pkg_shell_help
+                0x0000000040097620                pkg_install_from_repo
+                0x0000000040097730                pkg_cmd_install
+                0x0000000040097780                pkg_shell_dispatch
+ *fill*         0x0000000040097a2c        0x4 
+ .text          0x0000000040097a30     0x1b3c build/crfs.o
+                0x00000000400981e0                crfs_format
+                0x0000000040098580                crfs_mount
+                0x0000000040098700                crfs_open
+                0x0000000040098ca0                crfs_read
+                0x0000000040098ec0                crfs_write
+                0x00000000400991b0                crfs_close
+                0x00000000400992b0                crfs_readdir
+                0x0000000040099470                crfs_unlink
+                0x0000000040099480                crfs_stat
+                0x00000000400994a0                crfs_sync
+                0x0000000040099550                crfs_init
+ *fill*         0x000000004009956c        0x4 
+ .text          0x0000000040099570      0x6f0 build/vfs.o
+                0x0000000040099570                fs_init
+                0x00000000400995e0                fs_open
+                0x00000000400996f0                fs_close
+                0x0000000040099760                fs_read
+                0x0000000040099800                fs_write
+                0x00000000400998a0                fs_lseek
+                0x0000000040099950                fs_fstat
+                0x00000000400999c0                fs_stat
+                0x0000000040099a40                fs_mkdir
+                0x0000000040099a60                fs_mkdir_recursive
+                0x0000000040099ad0                fs_rmdir
+                0x0000000040099af0                fs_rmdir_recursive
+                0x0000000040099b10                fs_unlink
+                0x0000000040099b30                fs_rename
+                0x0000000040099b40                fs_chmod
+                0x0000000040099b60                fs_chown
+                0x0000000040099b80                fs_exists
+                0x0000000040099bc0                fs_is_dir
+                0x0000000040099c10                fs_is_file
+ .text          0x0000000040099c60      0x334 build/stubs.o
+                0x0000000040099ed0                gui_render_frame_ctx
+ *fill*         0x0000000040099f94        0xc 
+ .text          0x0000000040099fa0      0x41c build/uart.o
+                0x0000000040099fa0                uart_early_init
+                0x0000000040099fe0                uart_init
+                0x000000004009a070                uart_putc
+                0x000000004009a0c0                uart_getc
+                0x000000004009a0f0                uart_getc_blocking
+                0x000000004009a120                uart_puts
+                0x000000004009a180                uart_write
+                0x000000004009a1e0                uart_read
+                0x000000004009a240                uart_tx_ready
+                0x000000004009a260                uart_rx_ready
+                0x000000004009a280                uart_flush
+                0x000000004009a2b0                uart_irq_handler
+                0x000000004009a2f0                uart_set_baud
+                0x000000004009a340                uart_debug_dump
+ *fill*         0x000000004009a3bc        0x4 
+ .text          0x000000004009a3c0      0x6b0 build/gpio.o
+                0x000000004009a470                gpio_init
+                0x000000004009a4d0                gpio_set_function
+                0x000000004009a530                gpio_set_input
+                0x000000004009a580                gpio_set_output
+                0x000000004009a5e0                gpio_write
+                0x000000004009a630                gpio_read
+                0x000000004009a670                gpio_set_pull
+                0x000000004009a690                gpio_set_pull_up
+                0x000000004009a6b0                gpio_set_pull_down
+                0x000000004009a6d0                gpio_set_pull_off
+                0x000000004009a6f0                gpio_toggle
+                0x000000004009a750                gpio_enable_irq
+                0x000000004009a7e0                gpio_disable_irq
+                0x000000004009a850                gpio_irq_handler
+                0x000000004009a930                gpio_config_led
+                0x000000004009a9c0                gpio_led_on
+                0x000000004009a9f0                gpio_led_off
+                0x000000004009aa20                gpio_config_button
+ .text          0x000000004009aa70      0x624 build/timer.o
+                0x000000004009aa70                timer_init
+                0x000000004009aab0                timer_init_sched
+                0x000000004009aae0                timer_get_uptime_ms
+                0x000000004009ab10                timer_get_uptime_us
+                0x000000004009ab30                timer_get_ticks
+                0x000000004009ab40                timer_get_uptime_seconds
+                0x000000004009ab80                timer_get_frequency
+                0x000000004009ab90                timer_get_freq_mhz
+                0x000000004009abb0                timer_delay_ms
+                0x000000004009ac10                timer_delay_us
+                0x000000004009ac60                timer_set_callback
+                0x000000004009ac70                timer_start_periodic
+                0x000000004009ac90                timer_stop
+                0x000000004009aca0                timer_create
+                0x000000004009ad60                timer_set_oneshot
+                0x000000004009adf0                timer_set_periodic
+                0x000000004009ae80                timer_cancel
+                0x000000004009aed0                timer_destroy
+                0x000000004009af20                timer_irq_handler
+                0x000000004009b000                timer_cycles_to_ns
+                0x000000004009b020                timer_cycles_to_us
+                0x000000004009b040                timer_cycles_to_ms
+                0x000000004009b060                timer_perf_start
+                0x000000004009b070                timer_perf_end
+ *fill*         0x000000004009b094        0xc 
+ .text          0x000000004009b0a0      0x5a0 build/gic.o
+                0x000000004009b0a0                gic_init
+                0x000000004009b1c0                interrupt_register
+                0x000000004009b1e0                interrupt_register_with_data
+                0x000000004009b210                interrupt_enable
+                0x000000004009b250                interrupt_disable
+                0x000000004009b290                interrupt_set_priority
+                0x000000004009b2e0                interrupt_set_target
+                0x000000004009b330                interrupt_trigger_sgi
+                0x000000004009b350                interrupt_init
+                0x000000004009b360                irq_handler
+                0x000000004009b3e0                sync_exception_handler
+                0x000000004009b5d0                arch_disable_interrupts
+                0x000000004009b5e0                arch_enable_interrupts
+                0x000000004009b5f0                arch_save_irq_disable
+                0x000000004009b600                arch_restore_irq
+                0x000000004009b610                arch_wfe
+                0x000000004009b620                arch_trigger_reschedule
+ .text          0x000000004009b640      0x8c8 build/display.o
+                0x000000004009b640                display_init
+                0x000000004009ba80                display_shutdown
+                0x000000004009bae0                display_get_ctx
+                0x000000004009bb10                display_swap_buffers
+                0x000000004009bb70                display_clear
+                0x000000004009bba0                display_get_info
+                0x000000004009bbf0                display_set_brightness
+                0x000000004009bc20                display_vsync_wait
+                0x000000004009bc80                display_get_vsync_count
+                0x000000004009bc90                display_putpixel
+                0x000000004009bcd0                display_rect
+                0x000000004009bd70                display_blit
+                0x000000004009be30                display_draw_text
+ *fill*         0x000000004009bf08        0x8 
+ .text          0x000000004009bf10      0x89c build/display_a64_dsi.o
+                0x000000004009c090                display_a64_dsi_init
+                0x000000004009c6c0                display_a64_dsi_shutdown
+ *fill*         0x000000004009c7ac        0x4 
+ .text          0x000000004009c7b0      0x608 build/touch.o
+                0x000000004009c9f0                touch_init
+                0x000000004009cb00                touch_read_event
+                0x000000004009cb90                touch_read_event_nb
+                0x000000004009cc20                touch_get_active_points
+                0x000000004009cc30                touch_get_point
+                0x000000004009ccd0                touch_get_gesture
+                0x000000004009ccf0                touch_set_calibration
+                0x000000004009cd40                touch_fw_update
+ *fill*         0x000000004009cdb8        0x8 
+ .text          0x000000004009cdc0      0x604 build/touch_gt917s.o
+                0x000000004009d150                touch_gt917s_init
+                0x000000004009d270                touch_read_hw
+ *fill*         0x000000004009d3c4        0xc 
+ .text          0x000000004009d3d0      0x8c8 build/usb.o
+                0x000000004009d8c0                usb_init
+                0x000000004009d9e0                usb_gadget_enable_function
+                0x000000004009da50                usb_gadget_disable_function
+                0x000000004009da70                usb_gadget_start
+                0x000000004009dbc0                usb_gadget_stop
+                0x000000004009dbf0                usb_gadget_set_adb_callback
+                0x000000004009dc00                usb_gadget_adb_write
+                0x000000004009dc80                usb_host_init
+                0x000000004009dc90                usb_host_enumerate
+ *fill*         0x000000004009dc98        0x8 
+ .text          0x000000004009dca0      0x74c build/wifi.o
+                0x000000004009dca0                wifi_init
+                0x000000004009dd00                wifi_create_interface
+                0x000000004009ddb0                wifi_scan
+                0x000000004009de40                wifi_get_scan_results
+                0x000000004009deb0                wifi_connect
+                0x000000004009df50                wifi_disconnect
+                0x000000004009dfd0                wifi_start_ap
+                0x000000004009e0a0                wifi_start_monitor
+                0x000000004009e110                wifi_tx_frame
+                0x000000004009e130                wifi_get_rssi
+                0x000000004009e150                wifi_set_power_save
+                0x000000004009e190                wifi_4way_handshake
+                0x000000004009e1a0                wifi_rx_frame
+ *fill*         0x000000004009e3ec        0x4 
+ .text          0x000000004009e3f0     0x2130 build/wifi_rtl8723cs.o
+                0x00000000400a0430                rtl8723cs_eapol_rx
+                0x00000000400a0460                wifi_rtl8723cs_get_driver
+                0x00000000400a0470                wifi_rtl8723cs_init
+ .text          0x00000000400a0520      0xbd0 build/cellular.o
+                0x00000000400a0520                cellular_init
+                0x00000000400a0560                cellular_probe
+                0x00000000400a05f0                cellular_enter_pin
+                0x00000000400a06c0                cellular_get_signal
+                0x00000000400a0760                cellular_send_sms
+                0x00000000400a08c0                cellular_read_sms
+                0x00000000400a0950                cellular_start_call
+                0x00000000400a09c0                cellular_answer_call
+                0x00000000400a09f0                cellular_hangup
+                0x00000000400a0a20                cellular_send_dtmf
+                0x00000000400a0a50                cellular_send_ussd
+                0x00000000400a0ac0                cellular_setup_data
+                0x00000000400a0c00                cellular_start_data
+                0x00000000400a0c70                cellular_stop_data
+                0x00000000400a0cb0                cellular_gnss_start
+                0x00000000400a0d20                cellular_gnss_read
+                0x00000000400a0d70                cellular_get_status
+                0x00000000400a0ff0                cellular_at_command
+                0x00000000400a1030                cellular_power_on
+                0x00000000400a1070                cellular_power_off
+                0x00000000400a10b0                cellular_reset
+ .text          0x00000000400a10f0     0x17c4 build/modem_eg25g.o
+                0x00000000400a2860                modem_eg25g_get_driver
+                0x00000000400a2870                modem_eg25g_init
+ *fill*         0x00000000400a28b4        0xc 
+ .text          0x00000000400a28c0      0x6c0 build/audio.o
+                0x00000000400a2a30                audio_init
+                0x00000000400a2b80                audio_open_stream
+                0x00000000400a2c40                audio_write
+                0x00000000400a2d80                audio_close_stream
+                0x00000000400a2dc0                audio_set_stream_volume
+                0x00000000400a2de0                audio_set_master_volume
+                0x00000000400a2e10                audio_play_system_sound
+                0x00000000400a2ea0                audio_set_call_route
+                0x00000000400a2f30                audio_start_call
+                0x00000000400a2f60                audio_end_call
+ .text          0x00000000400a2f80      0x8b8 build/camera.o
+                0x00000000400a30b0                camera_init
+                0x00000000400a31e0                camera_detect_sensors
+                0x00000000400a3250                camera_open_preview
+                0x00000000400a3380                camera_capture
+                0x00000000400a3480                camera_start_video
+                0x00000000400a3500                camera_stop_video
+                0x00000000400a3520                camera_set_flash
+                0x00000000400a35a0                camera_set_focus_mode
+                0x00000000400a3630                camera_focus_trigger
+ *fill*         0x00000000400a3838        0x8 
+ .text          0x00000000400a3840      0xe38 build/power.o
+                0x00000000400a3da0                pm_init
+                0x00000000400a3f40                pm_request_suspend
+                0x00000000400a40d0                pm_request_resume
+                0x00000000400a4200                pm_set_governor
+                0x00000000400a42f0                pm_boostpulse
+                0x00000000400a4370                pm_get_battery_status
+                0x00000000400a4390                pm_set_display_state
+                0x00000000400a4440                pm_power_domain
+                0x00000000400a4500                pm_get_stats
+ *fill*         0x00000000400a4678        0x8 
+ .text          0x00000000400a4680      0x5fc build/string.o
+                0x00000000400a4680                memset
+                0x00000000400a4700                memcpy
+                0x00000000400a4790                memmove
+                0x00000000400a47e0                memcmp
+                0x00000000400a4820                strlen
+                0x00000000400a4850                strcpy
+                0x00000000400a4870                strncpy
+                0x00000000400a48b0                strcmp
+                0x00000000400a48f0                strncmp
+                0x00000000400a4940                strcat
+                0x00000000400a4980                strchr
+                0x00000000400a49b0                strrchr
+                0x00000000400a49e0                strstr
+                0x00000000400a4a70                strnlen
+                0x00000000400a4aa0                atoi
+                0x00000000400a4b40                atol
+                0x00000000400a4be0                strtoul
+ *fill*         0x00000000400a4c7c        0x4 
+ .text          0x00000000400a4c80      0x2e8 build/stdlib.o
+                0x00000000400a4ed0                itoa
+                0x00000000400a4f68                __text_end = .
+
+.iplt           0x00000000400a4f68        0x0
+ .iplt          0x00000000400a4f68        0x0 build/boot.o
+
+.rodata         0x00000000400a5000     0x9f58
+                0x00000000400a5000                __rodata_start = .
+ *(.rodata .rodata.*)
+ .rodata.str1.8
+                0x00000000400a5000     0x94c5 build/kmain.o
+                                       0x1120 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400ae4c5        0x0 build/mm.o
+                                         0xf6 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400ae4c5        0x0 build/sched.o
+                                        0x1ed (size before relaxing)
+ *fill*         0x00000000400ae4c5        0x3 
+ .rodata        0x00000000400ae4c8       0x14 build/sched.o
+ .rodata.str1.8
+                0x00000000400ae4dc        0x0 build/process.o
+                                        0x1f2 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400ae4dc        0x0 build/printk.o
+                                         0x9b (size before relaxing)
+ .rodata.str1.8
+                0x00000000400ae4dc        0x0 build/sync.o
+                                         0x80 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400ae4dc        0x0 build/shell.o
+                                       0x21c9 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400ae4dc        0x0 build/board.o
+                                         0x68 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400ae4dc        0x0 build/driver.o
+                                         0x71 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400ae4dc        0x0 build/crypto_stub.o
+                                        0x143 (size before relaxing)
+ *fill*         0x00000000400ae4dc        0x4 
+ .rodata        0x00000000400ae4e0      0x107 build/crypto_stub.o
+ .rodata.str1.8
+                0x00000000400ae5e7        0x0 build/syscall.o
+                                         0xc5 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400ae5e7        0x0 build/security.o
+                                       0x1507 (size before relaxing)
+ *fill*         0x00000000400ae5e7        0x1 
+ .rodata        0x00000000400ae5e8       0x28 build/security.o
+ .rodata.str1.8
+                0x00000000400ae610        0x0 build/net.o
+                                        0x11e (size before relaxing)
+ .rodata.str1.8
+                0x00000000400ae610        0x0 build/bloodmoon.o
+                                        0x5b0 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400ae610        0x0 build/compositor.o
+                                        0x5f0 (size before relaxing)
+ .rodata        0x00000000400ae610       0x40 build/compositor.o
+ .rodata        0x00000000400ae650      0x5f0 build/gui_graphics.o
+ .rodata.cst16  0x00000000400aec40       0x10 build/gui_widgets.o
+ .rodata.str1.8
+                0x00000000400aec50        0x0 build/phone.o
+                                        0x2d6 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400aec50        0x0 build/pkg.o
+                                       0x1592 (size before relaxing)
+ .rodata        0x00000000400aec50       0x40 build/pkg.o
+ .rodata.str1.8
+                0x00000000400aec90        0x0 build/crfs.o
+                                        0x166 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400aec90        0x0 build/stubs.o
+                                        0x32a (size before relaxing)
+ .rodata.str1.8
+                0x00000000400aec90        0x0 build/uart.o
+                                         0x90 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400aec90        0x0 build/gpio.o
+                                         0x29 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400aec90        0x0 build/timer.o
+                                         0x56 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400aec90        0x0 build/gic.o
+                                        0x28f (size before relaxing)
+ .rodata.str1.8
+                0x00000000400aec90        0x0 build/display.o
+                                        0x209 (size before relaxing)
+ .rodata        0x00000000400aec90       0xbc build/display.o
+ .rodata.str1.8
+                0x00000000400aed4c        0x0 build/display_a64_dsi.o
+                                        0x175 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400aed4c        0x0 build/touch.o
+                                         0xe4 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400aed4c        0x0 build/touch_gt917s.o
+                                         0x5c (size before relaxing)
+ .rodata.str1.8
+                0x00000000400aed4c        0x0 build/usb.o
+                                        0x228 (size before relaxing)
+ *fill*         0x00000000400aed4c        0x4 
+ .rodata        0x00000000400aed50       0x38 build/usb.o
+ .rodata.str1.8
+                0x00000000400aed88        0x0 build/wifi.o
+                                        0x116 (size before relaxing)
+ .rodata        0x00000000400aed88       0x98 build/wifi.o
+ .rodata.str1.8
+                0x00000000400aee20        0x0 build/wifi_rtl8723cs.o
+                                        0x28a (size before relaxing)
+ .rodata.cst8   0x00000000400aee20       0x20 build/wifi_rtl8723cs.o
+                                         0x18 (size before relaxing)
+ .rodata        0x00000000400aee40       0x76 build/wifi_rtl8723cs.o
+ .rodata.str1.8
+                0x00000000400aeeb6        0x0 build/cellular.o
+                                        0x492 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400aeeb6        0x0 build/modem_eg25g.o
+                                        0x477 (size before relaxing)
+ .rodata.cst8   0x00000000400aeeb6        0x0 build/modem_eg25g.o
+                                          0x8 (size before relaxing)
+ *fill*         0x00000000400aeeb6        0xa 
+ .rodata        0x00000000400aeec0       0x11 build/modem_eg25g.o
+ .rodata.str1.8
+                0x00000000400aeed1        0x0 build/audio.o
+                                        0x106 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400aeed1        0x0 build/camera.o
+                                        0x187 (size before relaxing)
+ .rodata.str1.8
+                0x00000000400aeed1        0x0 build/power.o
+                                        0x404 (size before relaxing)
+ *fill*         0x00000000400aeed1        0xf 
+ .rodata        0x00000000400aeee0       0x78 build/power.o
+ .rodata.str1.8
+                0x00000000400aef58        0x0 build/stdlib.o
+                                         0x25 (size before relaxing)
+                0x00000000400aef58                __rodata_end = .
+
+.rela.dyn       0x00000000400aef58        0x0
+ .rela.iplt     0x00000000400aef58        0x0 build/boot.o
+ .rela.boot     0x00000000400aef58        0x0 build/boot.o
+ .rela.got      0x00000000400aef58        0x0 build/boot.o
+
+.data           0x00000000400af000      0xa00
+                0x00000000400af000                __data_start = .
+ *(.data .data.*)
+ .data          0x00000000400af000        0x0 build/boot.o
+ .data          0x00000000400af000       0x78 build/kmain.o
+ .data.rel.ro.local
+                0x00000000400af078       0x70 build/kmain.o
+ .data          0x00000000400af0e8       0x20 build/mm.o
+ .data          0x00000000400af108       0x30 build/sched.o
+ .data          0x00000000400af138       0x20 build/process.o
+ .data          0x00000000400af158       0x18 build/printk.o
+ .data          0x00000000400af170        0x0 build/sync.o
+ .data          0x00000000400af170        0x1 build/shell.o
+ *fill*         0x00000000400af171        0x7 
+ .data.rel.ro.local
+                0x00000000400af178      0x3c0 build/shell.o
+ .data          0x00000000400af538        0x4 build/board.o
+ *fill*         0x00000000400af53c        0x4 
+ .data.rel.local
+                0x00000000400af540        0x8 build/board.o
+ .data          0x00000000400af548        0x0 build/driver.o
+ .data          0x00000000400af548        0x0 build/crypto_stub.o
+ .data          0x00000000400af548        0x0 build/vmm_stub.o
+ .data          0x00000000400af548       0x10 build/syscall.o
+ .data          0x00000000400af558        0x8 build/security.o
+ .data          0x00000000400af560       0x28 build/net.o
+ .data          0x00000000400af588        0x4 build/bloodmoon.o
+ *fill*         0x00000000400af58c        0x4 
+ .data.rel.ro.local
+                0x00000000400af590       0x20 build/bloodmoon.o
+ .data          0x00000000400af5b0       0x6c build/compositor.o
+ *fill*         0x00000000400af61c        0x4 
+ .data.rel.ro.local
+                0x00000000400af620      0x100 build/compositor.o
+ .data          0x00000000400af720        0x0 build/gui_graphics.o
+ .data          0x00000000400af720        0x0 build/gui_widgets.o
+ .data          0x00000000400af720        0x0 build/phone.o
+ .data          0x00000000400af720        0x0 build/pkg.o
+ .data          0x00000000400af720        0x0 build/crfs.o
+ .data          0x00000000400af720        0x0 build/vfs.o
+ .data          0x00000000400af720        0x0 build/stubs.o
+ .data          0x00000000400af720        0x0 build/uart.o
+ .data          0x00000000400af720        0x0 build/gpio.o
+ .data          0x00000000400af720       0x10 build/timer.o
+ .data          0x00000000400af730        0x0 build/gic.o
+ .data          0x00000000400af730        0x4 build/display.o
+ .data          0x00000000400af734        0x0 build/display_a64_dsi.o
+ .data          0x00000000400af734        0x0 build/touch.o
+ .data          0x00000000400af734        0x1 build/touch_gt917s.o
+ .data          0x00000000400af735        0x0 build/usb.o
+ *fill*         0x00000000400af735        0x3 
+ .data.rel.ro.local
+                0x00000000400af738       0x20 build/usb.o
+ .data          0x00000000400af758        0x0 build/wifi.o
+ .data          0x00000000400af758        0x0 build/wifi_rtl8723cs.o
+ .data.rel.local
+                0x00000000400af758       0x58 build/wifi_rtl8723cs.o
+ .data          0x00000000400af7b0        0x0 build/cellular.o
+ .data          0x00000000400af7b0        0x0 build/modem_eg25g.o
+ .data.rel.local
+                0x00000000400af7b0       0xd8 build/modem_eg25g.o
+ .data          0x00000000400af888        0x0 build/audio.o
+ .data          0x00000000400af888        0x0 build/camera.o
+ .data.rel.local
+                0x00000000400af888       0x78 build/camera.o
+ .data          0x00000000400af900       0x78 build/power.o
+ .data.rel.local
+                0x00000000400af978       0x60 build/power.o
+ .data.rel.ro.local
+                0x00000000400af9d8       0x28 build/power.o
+ .data          0x00000000400afa00        0x0 build/string.o
+ .data          0x00000000400afa00        0x0 build/stdlib.o
+                0x00000000400afa00                __data_end = .
+
+.igot.plt       0x00000000400afa00        0x0
+ .igot.plt      0x00000000400afa00        0x0 build/boot.o
+
+.got            0x00000000400afa00       0x40
+ .got           0x00000000400afa00       0x40 build/boot.o
+                0x00000000400afa00                _GLOBAL_OFFSET_TABLE_
+
+.got.plt        0x00000000400afa40       0x18
+ .got.plt       0x00000000400afa40       0x18 build/boot.o
+
+.bss            0x00000000400b0000   0x9c1838
+                0x00000000400b0000                __bss_start = .
+ *(.bss .bss.*)
+ .bss           0x00000000400b0000        0x0 build/boot.o
+ .bss           0x00000000400b0000        0x0 build/kmain.o
+ .bss           0x00000000400b0000       0x28 build/mm.o
+                0x00000000400b0008                total_pages
+ .bss           0x00000000400b0028        0xc build/sched.o
+ *fill*         0x00000000400b0034        0x4 
+ .bss           0x00000000400b0038    0xfa090 build/process.o
+ .bss           0x00000000401aa0c8     0x4018 build/printk.o
+ .bss           0x00000000401ae0e0        0x0 build/sync.o
+ .bss           0x00000000401ae0e0     0x1190 build/shell.o
+ .bss           0x00000000401af270        0x4 build/board.o
+ *fill*         0x00000000401af274        0x4 
+ .bss           0x00000000401af278        0x8 build/driver.o
+ .bss           0x00000000401af280       0x88 build/crypto_stub.o
+ .bss           0x00000000401af308        0x0 build/vmm_stub.o
+ *fill*         0x00000000401af308        0x8 
+ .bss           0x00000000401af310     0x44d0 build/syscall.o
+ .bss           0x00000000401b37e0   0x1d2cf8 build/security.o
+                0x00000000401b37e0                g_security
+ .bss           0x00000000403864d8   0x10e648 build/net.o
+ .bss           0x0000000040494b20    0x13690 build/bloodmoon.o
+ .bss           0x00000000404a81b0     0x9ac0 build/compositor.o
+                0x00000000404a9d90                g_gui
+ .bss           0x00000000404b1c70       0x28 build/gui_graphics.o
+ .bss           0x00000000404b1c98      0x808 build/gui_widgets.o
+ .bss           0x00000000404b24a0   0x59ac48 build/phone.o
+ .bss           0x0000000040a4d0e8     0x1b48 build/pkg.o
+ .bss           0x0000000040a4ec30       0x18 build/crfs.o
+ .bss           0x0000000040a4ec48     0x2018 build/vfs.o
+ .bss           0x0000000040a50c60        0x0 build/stubs.o
+ .bss           0x0000000040a50c60        0xc build/uart.o
+ *fill*         0x0000000040a50c6c        0x4 
+ .bss           0x0000000040a50c70      0x370 build/gpio.o
+ .bss           0x0000000040a50fe0      0x2a0 build/timer.o
+ .bss           0x0000000040a51280     0x2020 build/gic.o
+ .bss           0x0000000040a532a0       0x34 build/display.o
+ .bss           0x0000000040a532d4        0x0 build/display_a64_dsi.o
+ *fill*         0x0000000040a532d4        0x4 
+ .bss           0x0000000040a532d8     0x21f0 build/touch.o
+ .bss           0x0000000040a554c8        0x4 build/touch_gt917s.o
+ *fill*         0x0000000040a554cc        0x4 
+ .bss           0x0000000040a554d0     0x1760 build/usb.o
+ .bss           0x0000000040a56c30     0x8348 build/wifi.o
+ *fill*         0x0000000040a5ef78        0x8 
+ .bss           0x0000000040a5ef80      0x170 build/wifi_rtl8723cs.o
+ .bss           0x0000000040a5f0f0    0x117d8 build/cellular.o
+ *fill*         0x0000000040a708c8        0x8 
+ .bss           0x0000000040a708d0      0x888 build/modem_eg25g.o
+ .bss           0x0000000040a71158      0x270 build/audio.o
+ .bss           0x0000000040a713c8      0x17c build/camera.o
+ *fill*         0x0000000040a71544        0x4 
+ .bss           0x0000000040a71548      0x2f0 build/power.o
+ .bss           0x0000000040a71838        0x0 build/string.o
+ .bss           0x0000000040a71838        0x0 build/stdlib.o
+ *(COMMON)
+                0x0000000040a71838                __bss_end = .
+                0x0000000040a72000                . = ALIGN (0x1000)
+                0x0000000040a72000                __kernel_end = .
+                0x00000000009f2000                __kernel_size = (__kernel_end - KERNEL_BASE)
+                0x0000000040a72000                . = ALIGN (0x10)
+                0x0000000040a72000                __stack_bottom = .
+                0x0000000040b72000                . = (. + 0x100000)
+                0x0000000040b72000                __stack_top = .
+                0x0000000040b72000                . = ALIGN (0x1000)
+                0x0000000040b72000                __page_tables_start = .
+                0x0000000040f72000                . = (. + 0x400000)
+                0x0000000040f72000                __page_tables_end = .
+                0x0000000040f72000                . = ALIGN (0x1000)
+                0x0000000040f72000                __heap_start = .
+                0x0000000050080000                __heap_end = (ORIGIN (RAM) + LENGTH (RAM))
+
+/DISCARD/
+ *(.comment)
+ *(.note*)
+ *(.eh_frame*)
+ *(.ARM.attributes)
+LOAD build/boot.o
+LOAD build/kmain.o
+LOAD build/mm.o
+LOAD build/sched.o
+LOAD build/process.o
+LOAD build/printk.o
+LOAD build/sync.o
+LOAD build/shell.o
+LOAD build/board.o
+LOAD build/driver.o
+LOAD build/crypto_stub.o
+LOAD build/vmm_stub.o
+LOAD build/syscall.o
+LOAD build/security.o
+LOAD build/net.o
+LOAD build/bloodmoon.o
+LOAD build/compositor.o
+LOAD build/gui_graphics.o
+LOAD build/gui_widgets.o
+LOAD build/phone.o
+LOAD build/pkg.o
+LOAD build/crfs.o
+LOAD build/vfs.o
+LOAD build/stubs.o
+LOAD build/uart.o
+LOAD build/gpio.o
+LOAD build/timer.o
+LOAD build/gic.o
+LOAD build/display.o
+LOAD build/display_a64_dsi.o
+LOAD build/touch.o
+LOAD build/touch_gt917s.o
+LOAD build/usb.o
+LOAD build/wifi.o
+LOAD build/wifi_rtl8723cs.o
+LOAD build/cellular.o
+LOAD build/modem_eg25g.o
+LOAD build/audio.o
+LOAD build/camera.o
+LOAD build/power.o
+LOAD build/string.o
+LOAD build/stdlib.o
+OUTPUT(bin/crimson-os.elf elf64-littleaarch64)
+LOAD linker stubs
+
+.debug_info     0x0000000000000000    0x49279
+ .debug_info    0x0000000000000000     0x14ef build/kmain.o
+ .debug_info    0x00000000000014ef     0x118a build/mm.o
+ .debug_info    0x0000000000002679     0x1633 build/sched.o
+ .debug_info    0x0000000000003cac     0x13b6 build/process.o
+ .debug_info    0x0000000000005062     0x1687 build/printk.o
+ .debug_info    0x00000000000066e9     0x1f4c build/sync.o
+ .debug_info    0x0000000000008635     0x2e2b build/shell.o
+ .debug_info    0x000000000000b460      0x7b2 build/board.o
+ .debug_info    0x000000000000bc12      0x2a4 build/driver.o
+ .debug_info    0x000000000000beb6     0x1c10 build/crypto_stub.o
+ .debug_info    0x000000000000dac6      0x927 build/vmm_stub.o
+ .debug_info    0x000000000000e3ed     0x1ce2 build/syscall.o
+ .debug_info    0x00000000000100cf     0x4cba build/security.o
+ .debug_info    0x0000000000014d89     0x3816 build/net.o
+ .debug_info    0x000000000001859f     0x1c0a build/bloodmoon.o
+ .debug_info    0x000000000001a1a9     0x3606 build/compositor.o
+ .debug_info    0x000000000001d7af     0x2600 build/gui_graphics.o
+ .debug_info    0x000000000001fdaf     0x27e9 build/gui_widgets.o
+ .debug_info    0x0000000000022598     0x13b3 build/phone.o
+ .debug_info    0x000000000002394b     0x59f9 build/pkg.o
+ .debug_info    0x0000000000029344     0x2e4d build/crfs.o
+ .debug_info    0x000000000002c191      0xe97 build/vfs.o
+ .debug_info    0x000000000002d028      0x99d build/stubs.o
+ .debug_info    0x000000000002d9c5      0x5fe build/uart.o
+ .debug_info    0x000000000002dfc3     0x1084 build/gpio.o
+ .debug_info    0x000000000002f047      0xb8e build/timer.o
+ .debug_info    0x000000000002fbd5      0xa78 build/gic.o
+ .debug_info    0x000000000003064d     0x24a7 build/display.o
+ .debug_info    0x0000000000032af4     0x2157 build/display_a64_dsi.o
+ .debug_info    0x0000000000034c4b     0x14cf build/touch.o
+ .debug_info    0x000000000003611a     0x1317 build/touch_gt917s.o
+ .debug_info    0x0000000000037431     0x1154 build/usb.o
+ .debug_info    0x0000000000038585      0xf26 build/wifi.o
+ .debug_info    0x00000000000394ab     0x68c5 build/wifi_rtl8723cs.o
+ .debug_info    0x000000000003fd70     0x179a build/cellular.o
+ .debug_info    0x000000000004150a     0x3f4d build/modem_eg25g.o
+ .debug_info    0x0000000000045457      0xc45 build/audio.o
+ .debug_info    0x000000000004609c     0x1161 build/camera.o
+ .debug_info    0x00000000000471fd     0x15f2 build/power.o
+ .debug_info    0x00000000000487ef      0x7f1 build/string.o
+ .debug_info    0x0000000000048fe0      0x299 build/stdlib.o
+
+.debug_abbrev   0x0000000000000000     0x9ba1
+ .debug_abbrev  0x0000000000000000      0x3ac build/kmain.o
+ .debug_abbrev  0x00000000000003ac      0x325 build/mm.o
+ .debug_abbrev  0x00000000000006d1      0x43c build/sched.o
+ .debug_abbrev  0x0000000000000b0d      0x482 build/process.o
+ .debug_abbrev  0x0000000000000f8f      0x4a5 build/printk.o
+ .debug_abbrev  0x0000000000001434      0x47f build/sync.o
+ .debug_abbrev  0x00000000000018b3      0x43e build/shell.o
+ .debug_abbrev  0x0000000000001cf1      0x264 build/board.o
+ .debug_abbrev  0x0000000000001f55      0x1ce build/driver.o
+ .debug_abbrev  0x0000000000002123      0x4d5 build/crypto_stub.o
+ .debug_abbrev  0x00000000000025f8      0x2ab build/vmm_stub.o
+ .debug_abbrev  0x00000000000028a3      0x4b1 build/syscall.o
+ .debug_abbrev  0x0000000000002d54      0x66e build/security.o
+ .debug_abbrev  0x00000000000033c2      0x51f build/net.o
+ .debug_abbrev  0x00000000000038e1      0x401 build/bloodmoon.o
+ .debug_abbrev  0x0000000000003ce2      0x4c3 build/compositor.o
+ .debug_abbrev  0x00000000000041a5      0x3d1 build/gui_graphics.o
+ .debug_abbrev  0x0000000000004576      0x465 build/gui_widgets.o
+ .debug_abbrev  0x00000000000049db      0x330 build/phone.o
+ .debug_abbrev  0x0000000000004d0b      0x4a9 build/pkg.o
+ .debug_abbrev  0x00000000000051b4      0x42c build/crfs.o
+ .debug_abbrev  0x00000000000055e0      0x37a build/vfs.o
+ .debug_abbrev  0x000000000000595a      0x2c0 build/stubs.o
+ .debug_abbrev  0x0000000000005c1a      0x2cb build/uart.o
+ .debug_abbrev  0x0000000000005ee5      0x39d build/gpio.o
+ .debug_abbrev  0x0000000000006282      0x430 build/timer.o
+ .debug_abbrev  0x00000000000066b2      0x327 build/gic.o
+ .debug_abbrev  0x00000000000069d9      0x437 build/display.o
+ .debug_abbrev  0x0000000000006e10      0x2bc build/display_a64_dsi.o
+ .debug_abbrev  0x00000000000070cc      0x452 build/touch.o
+ .debug_abbrev  0x000000000000751e      0x39d build/touch_gt917s.o
+ .debug_abbrev  0x00000000000078bb      0x37a build/usb.o
+ .debug_abbrev  0x0000000000007c35      0x393 build/wifi.o
+ .debug_abbrev  0x0000000000007fc8      0x57d build/wifi_rtl8723cs.o
+ .debug_abbrev  0x0000000000008545      0x2d3 build/cellular.o
+ .debug_abbrev  0x0000000000008818      0x530 build/modem_eg25g.o
+ .debug_abbrev  0x0000000000008d48      0x34a build/audio.o
+ .debug_abbrev  0x0000000000009092      0x48a build/camera.o
+ .debug_abbrev  0x000000000000951c      0x3ea build/power.o
+ .debug_abbrev  0x0000000000009906      0x1aa build/string.o
+ .debug_abbrev  0x0000000000009ab0       0xf1 build/stdlib.o
+
+.debug_loclists
+                0x0000000000000000    0x244d2
+ .debug_loclists
+                0x0000000000000000      0x10c build/kmain.o
+ .debug_loclists
+                0x000000000000010c      0xf9b build/mm.o
+ .debug_loclists
+                0x00000000000010a7      0x985 build/sched.o
+ .debug_loclists
+                0x0000000000001a2c      0x89a build/process.o
+ .debug_loclists
+                0x00000000000022c6     0x1fbe build/printk.o
+ .debug_loclists
+                0x0000000000004284      0xd6f build/sync.o
+ .debug_loclists
+                0x0000000000004ff3      0x88c build/shell.o
+ .debug_loclists
+                0x000000000000587f       0x9b build/board.o
+ .debug_loclists
+                0x000000000000591a       0x87 build/driver.o
+ .debug_loclists
+                0x00000000000059a1      0xe57 build/crypto_stub.o
+ .debug_loclists
+                0x00000000000067f8      0x859 build/vmm_stub.o
+ .debug_loclists
+                0x0000000000007051      0xa54 build/syscall.o
+ .debug_loclists
+                0x0000000000007aa5     0x2b74 build/security.o
+ .debug_loclists
+                0x000000000000a619     0x2a87 build/net.o
+ .debug_loclists
+                0x000000000000d0a0      0xcbe build/bloodmoon.o
+ .debug_loclists
+                0x000000000000dd5e     0x176d build/compositor.o
+ .debug_loclists
+                0x000000000000f4cb     0x2574 build/gui_graphics.o
+ .debug_loclists
+                0x0000000000011a3f     0x1d07 build/gui_widgets.o
+ .debug_loclists
+                0x0000000000013746      0x4c3 build/phone.o
+ .debug_loclists
+                0x0000000000013c09     0x2c0a build/pkg.o
+ .debug_loclists
+                0x0000000000016813     0x13f2 build/crfs.o
+ .debug_loclists
+                0x0000000000017c05      0x564 build/vfs.o
+ .debug_loclists
+                0x0000000000018169      0x283 build/stubs.o
+ .debug_loclists
+                0x00000000000183ec      0x155 build/uart.o
+ .debug_loclists
+                0x0000000000018541      0x7c0 build/gpio.o
+ .debug_loclists
+                0x0000000000018d01      0x44a build/timer.o
+ .debug_loclists
+                0x000000000001914b      0x622 build/gic.o
+ .debug_loclists
+                0x000000000001976d     0x1100 build/display.o
+ .debug_loclists
+                0x000000000001a86d      0xc7d build/display_a64_dsi.o
+ .debug_loclists
+                0x000000000001b4ea      0x4c8 build/touch.o
+ .debug_loclists
+                0x000000000001b9b2      0x70d build/touch_gt917s.o
+ .debug_loclists
+                0x000000000001c0bf      0xf4b build/usb.o
+ .debug_loclists
+                0x000000000001d00a      0x6a9 build/wifi.o
+ .debug_loclists
+                0x000000000001d6b3     0x2b27 build/wifi_rtl8723cs.o
+ .debug_loclists
+                0x00000000000201da      0x54b build/cellular.o
+ .debug_loclists
+                0x0000000000020725     0x15c5 build/modem_eg25g.o
+ .debug_loclists
+                0x0000000000021cea      0x544 build/audio.o
+ .debug_loclists
+                0x000000000002222e      0x570 build/camera.o
+ .debug_loclists
+                0x000000000002279e      0xfd6 build/power.o
+ .debug_loclists
+                0x0000000000023774      0xa29 build/string.o
+ .debug_loclists
+                0x000000000002419d      0x335 build/stdlib.o
+
+.debug_aranges  0x0000000000000000      0x7b0
+ .debug_aranges
+                0x0000000000000000       0x30 build/kmain.o
+ .debug_aranges
+                0x0000000000000030       0x30 build/mm.o
+ .debug_aranges
+                0x0000000000000060       0x30 build/sched.o
+ .debug_aranges
+                0x0000000000000090       0x30 build/process.o
+ .debug_aranges
+                0x00000000000000c0       0x30 build/printk.o
+ .debug_aranges
+                0x00000000000000f0       0x30 build/sync.o
+ .debug_aranges
+                0x0000000000000120       0x30 build/shell.o
+ .debug_aranges
+                0x0000000000000150       0x30 build/board.o
+ .debug_aranges
+                0x0000000000000180       0x30 build/driver.o
+ .debug_aranges
+                0x00000000000001b0       0x30 build/crypto_stub.o
+ .debug_aranges
+                0x00000000000001e0       0x30 build/vmm_stub.o
+ .debug_aranges
+                0x0000000000000210       0x30 build/syscall.o
+ .debug_aranges
+                0x0000000000000240       0x30 build/security.o
+ .debug_aranges
+                0x0000000000000270       0x30 build/net.o
+ .debug_aranges
+                0x00000000000002a0       0x30 build/bloodmoon.o
+ .debug_aranges
+                0x00000000000002d0       0x30 build/compositor.o
+ .debug_aranges
+                0x0000000000000300       0x30 build/gui_graphics.o
+ .debug_aranges
+                0x0000000000000330       0x30 build/gui_widgets.o
+ .debug_aranges
+                0x0000000000000360       0x30 build/phone.o
+ .debug_aranges
+                0x0000000000000390       0x30 build/pkg.o
+ .debug_aranges
+                0x00000000000003c0       0x30 build/crfs.o
+ .debug_aranges
+                0x00000000000003f0       0x30 build/vfs.o
+ .debug_aranges
+                0x0000000000000420       0x30 build/stubs.o
+ .debug_aranges
+                0x0000000000000450       0x30 build/uart.o
+ .debug_aranges
+                0x0000000000000480       0x30 build/gpio.o
+ .debug_aranges
+                0x00000000000004b0       0x30 build/timer.o
+ .debug_aranges
+                0x00000000000004e0       0x30 build/gic.o
+ .debug_aranges
+                0x0000000000000510       0x30 build/display.o
+ .debug_aranges
+                0x0000000000000540       0x30 build/display_a64_dsi.o
+ .debug_aranges
+                0x0000000000000570       0x30 build/touch.o
+ .debug_aranges
+                0x00000000000005a0       0x30 build/touch_gt917s.o
+ .debug_aranges
+                0x00000000000005d0       0x30 build/usb.o
+ .debug_aranges
+                0x0000000000000600       0x30 build/wifi.o
+ .debug_aranges
+                0x0000000000000630       0x30 build/wifi_rtl8723cs.o
+ .debug_aranges
+                0x0000000000000660       0x30 build/cellular.o
+ .debug_aranges
+                0x0000000000000690       0x30 build/modem_eg25g.o
+ .debug_aranges
+                0x00000000000006c0       0x30 build/audio.o
+ .debug_aranges
+                0x00000000000006f0       0x30 build/camera.o
+ .debug_aranges
+                0x0000000000000720       0x30 build/power.o
+ .debug_aranges
+                0x0000000000000750       0x30 build/string.o
+ .debug_aranges
+                0x0000000000000780       0x30 build/stdlib.o
+
+.debug_rnglists
+                0x0000000000000000     0x3cca
+ .debug_rnglists
+                0x0000000000000000       0x2e build/kmain.o
+ .debug_rnglists
+                0x000000000000002e       0xb6 build/mm.o
+ .debug_rnglists
+                0x00000000000000e4      0x141 build/sched.o
+ .debug_rnglists
+                0x0000000000000225       0xc9 build/process.o
+ .debug_rnglists
+                0x00000000000002ee      0x310 build/printk.o
+ .debug_rnglists
+                0x00000000000005fe      0x365 build/sync.o
+ .debug_rnglists
+                0x0000000000000963      0x152 build/shell.o
+ .debug_rnglists
+                0x0000000000000ab5       0x18 build/driver.o
+ .debug_rnglists
+                0x0000000000000acd      0x179 build/crypto_stub.o
+ .debug_rnglists
+                0x0000000000000c46       0xe6 build/vmm_stub.o
+ .debug_rnglists
+                0x0000000000000d2c       0x4d build/syscall.o
+ .debug_rnglists
+                0x0000000000000d79      0x49e build/security.o
+ .debug_rnglists
+                0x0000000000001217      0x36e build/net.o
+ .debug_rnglists
+                0x0000000000001585      0x191 build/bloodmoon.o
+ .debug_rnglists
+                0x0000000000001716      0x2d3 build/compositor.o
+ .debug_rnglists
+                0x00000000000019e9      0x1c9 build/gui_graphics.o
+ .debug_rnglists
+                0x0000000000001bb2      0x22d build/gui_widgets.o
+ .debug_rnglists
+                0x0000000000001ddf       0x88 build/phone.o
+ .debug_rnglists
+                0x0000000000001e67      0x3a9 build/pkg.o
+ .debug_rnglists
+                0x0000000000002210      0x384 build/crfs.o
+ .debug_rnglists
+                0x0000000000002594       0x41 build/vfs.o
+ .debug_rnglists
+                0x00000000000025d5       0x1a build/stubs.o
+ .debug_rnglists
+                0x00000000000025ef       0x4d build/uart.o
+ .debug_rnglists
+                0x000000000000263c      0x105 build/gpio.o
+ .debug_rnglists
+                0x0000000000002741       0x83 build/timer.o
+ .debug_rnglists
+                0x00000000000027c4       0x95 build/gic.o
+ .debug_rnglists
+                0x0000000000002859      0x2c4 build/display.o
+ .debug_rnglists
+                0x0000000000002b1d      0x35a build/display_a64_dsi.o
+ .debug_rnglists
+                0x0000000000002e77       0x87 build/touch.o
+ .debug_rnglists
+                0x0000000000002efe      0x1fd build/touch_gt917s.o
+ .debug_rnglists
+                0x00000000000030fb       0xea build/usb.o
+ .debug_rnglists
+                0x00000000000031e5       0x42 build/wifi.o
+ .debug_rnglists
+                0x0000000000003227      0x440 build/wifi_rtl8723cs.o
+ .debug_rnglists
+                0x0000000000003667       0x2c build/cellular.o
+ .debug_rnglists
+                0x0000000000003693      0x33a build/modem_eg25g.o
+ .debug_rnglists
+                0x00000000000039cd       0x9b build/audio.o
+ .debug_rnglists
+                0x0000000000003a68       0x82 build/camera.o
+ .debug_rnglists
+                0x0000000000003aea      0x18b build/power.o
+ .debug_rnglists
+                0x0000000000003c75       0x3e build/string.o
+ .debug_rnglists
+                0x0000000000003cb3       0x17 build/stdlib.o
+
+.debug_macro    0x0000000000000000     0x54b4
+ .debug_macro   0x0000000000000000       0xf6 build/kmain.o
+ .debug_macro   0x00000000000000f6      0xb9e build/kmain.o
+ .debug_macro   0x0000000000000c94       0x28 build/kmain.o
+ .debug_macro   0x0000000000000cbc       0x7c build/kmain.o
+ .debug_macro   0x0000000000000d38       0x10 build/kmain.o
+ .debug_macro   0x0000000000000d48       0xc4 build/kmain.o
+ .debug_macro   0x0000000000000e0c       0x22 build/kmain.o
+ .debug_macro   0x0000000000000e2e       0x10 build/kmain.o
+ .debug_macro   0x0000000000000e3e       0x10 build/kmain.o
+ .debug_macro   0x0000000000000e4e       0x10 build/kmain.o
+ .debug_macro   0x0000000000000e5e       0x3a build/kmain.o
+ .debug_macro   0x0000000000000e98      0x314 build/kmain.o
+ .debug_macro   0x00000000000011ac       0xd6 build/kmain.o
+ .debug_macro   0x0000000000001282       0xd6 build/kmain.o
+ .debug_macro   0x0000000000001358       0x64 build/kmain.o
+ .debug_macro   0x00000000000013bc       0x88 build/kmain.o
+ .debug_macro   0x0000000000001444       0xa0 build/kmain.o
+ .debug_macro   0x00000000000014e4       0xee build/kmain.o
+ .debug_macro   0x00000000000015d2       0xd0 build/kmain.o
+ .debug_macro   0x00000000000016a2       0x3a build/kmain.o
+ .debug_macro   0x00000000000016dc       0x6a build/kmain.o
+ .debug_macro   0x0000000000001746       0x45 build/mm.o
+ .debug_macro   0x000000000000178b       0x7b build/sched.o
+ .debug_macro   0x0000000000001806       0x1c build/sched.o
+ .debug_macro   0x0000000000001822       0x7b build/process.o
+ .debug_macro   0x000000000000189d       0x16 build/process.o
+ .debug_macro   0x00000000000018b3       0xd6 build/process.o
+ .debug_macro   0x0000000000001989       0x41 build/printk.o
+ .debug_macro   0x00000000000019ca       0x6b build/sync.o
+ .debug_macro   0x0000000000001a35       0x82 build/sync.o
+ .debug_macro   0x0000000000001ab7       0xcd build/shell.o
+ .debug_macro   0x0000000000001b84       0x22 build/shell.o
+ .debug_macro   0x0000000000001ba6       0x1c build/shell.o
+ .debug_macro   0x0000000000001bc2       0x64 build/shell.o
+ .debug_macro   0x0000000000001c26       0x5e build/board.o
+ .debug_macro   0x0000000000001c84       0x2c build/driver.o
+ .debug_macro   0x0000000000001cb0       0x44 build/crypto_stub.o
+ .debug_macro   0x0000000000001cf4      0xbc8 build/crypto_stub.o
+ .debug_macro   0x00000000000028bc       0x4c build/crypto_stub.o
+ .debug_macro   0x0000000000002908       0x72 build/vmm_stub.o
+ .debug_macro   0x000000000000297a      0x1d5 build/syscall.o
+ .debug_macro   0x0000000000002b4f       0xca build/syscall.o
+ .debug_macro   0x0000000000002c19       0x4c build/syscall.o
+ .debug_macro   0x0000000000002c65       0x40 build/syscall.o
+ .debug_macro   0x0000000000002ca5       0x52 build/syscall.o
+ .debug_macro   0x0000000000002cf7       0xa9 build/security.o
+ .debug_macro   0x0000000000002da0      0x30e build/security.o
+ .debug_macro   0x00000000000030ae       0x5f build/security.o
+ .debug_macro   0x000000000000310d      0x196 build/net.o
+ .debug_macro   0x00000000000032a3       0xbe build/bloodmoon.o
+ .debug_macro   0x0000000000003361       0xea build/compositor.o
+ .debug_macro   0x000000000000344b       0x4b build/gui_graphics.o
+ .debug_macro   0x0000000000003496       0xfd build/gui_widgets.o
+ .debug_macro   0x0000000000003593       0x88 build/gui_widgets.o
+ .debug_macro   0x000000000000361b      0x100 build/phone.o
+ .debug_macro   0x000000000000371b       0xa3 build/pkg.o
+ .debug_macro   0x00000000000037be       0x16 build/pkg.o
+ .debug_macro   0x00000000000037d4      0x14e build/crfs.o
+ .debug_macro   0x0000000000003922       0x66 build/vfs.o
+ .debug_macro   0x0000000000003988       0x56 build/stubs.o
+ .debug_macro   0x00000000000039de      0x168 build/uart.o
+ .debug_macro   0x0000000000003b46      0x13e build/gpio.o
+ .debug_macro   0x0000000000003c84       0x97 build/timer.o
+ .debug_macro   0x0000000000003d1b       0xfd build/gic.o
+ .debug_macro   0x0000000000003e18      0x227 build/display.o
+ .debug_macro   0x000000000000403f      0x2a1 build/display_a64_dsi.o
+ .debug_macro   0x00000000000042e0      0x115 build/touch.o
+ .debug_macro   0x00000000000043f5      0x112 build/touch_gt917s.o
+ .debug_macro   0x0000000000004507      0x31b build/usb.o
+ .debug_macro   0x0000000000004822      0x185 build/wifi.o
+ .debug_macro   0x00000000000049a7       0x58 build/wifi.o
+ .debug_macro   0x00000000000049ff      0x2f3 build/wifi_rtl8723cs.o
+ .debug_macro   0x0000000000004cf2      0x124 build/cellular.o
+ .debug_macro   0x0000000000004e16      0x133 build/modem_eg25g.o
+ .debug_macro   0x0000000000004f49      0x1cc build/audio.o
+ .debug_macro   0x0000000000005115      0x1ef build/camera.o
+ .debug_macro   0x0000000000005304      0x150 build/power.o
+ .debug_macro   0x0000000000005454       0x3c build/string.o
+ .debug_macro   0x0000000000005490       0x24 build/stdlib.o
+
+.debug_line     0x0000000000000000    0x1fa6c
+ .debug_line    0x0000000000000000      0x37b build/kmain.o
+ .debug_line    0x000000000000037b      0x95f build/mm.o
+ .debug_line    0x0000000000000cda      0xbf9 build/sched.o
+ .debug_line    0x00000000000018d3      0x921 build/process.o
+ .debug_line    0x00000000000021f4     0x11d9 build/printk.o
+ .debug_line    0x00000000000033cd      0xdb5 build/sync.o
+ .debug_line    0x0000000000004182     0x1085 build/shell.o
+ .debug_line    0x0000000000005207      0x14d build/board.o
+ .debug_line    0x0000000000005354      0x143 build/driver.o
+ .debug_line    0x0000000000005497      0xda8 build/crypto_stub.o
+ .debug_line    0x000000000000623f      0x558 build/vmm_stub.o
+ .debug_line    0x0000000000006797      0x6e2 build/syscall.o
+ .debug_line    0x0000000000006e79     0x22a6 build/security.o
+ .debug_line    0x000000000000911f     0x1f89 build/net.o
+ .debug_line    0x000000000000b0a8      0x9b4 build/bloodmoon.o
+ .debug_line    0x000000000000ba5c     0x149c build/compositor.o
+ .debug_line    0x000000000000cef8     0x10a9 build/gui_graphics.o
+ .debug_line    0x000000000000dfa1     0x1269 build/gui_widgets.o
+ .debug_line    0x000000000000f20a      0x7c3 build/phone.o
+ .debug_line    0x000000000000f9cd     0x246c build/pkg.o
+ .debug_line    0x0000000000011e39     0x1886 build/crfs.o
+ .debug_line    0x00000000000136bf      0x633 build/vfs.o
+ .debug_line    0x0000000000013cf2      0x261 build/stubs.o
+ .debug_line    0x0000000000013f53      0x439 build/uart.o
+ .debug_line    0x000000000001438c      0x80c build/gpio.o
+ .debug_line    0x0000000000014b98      0x571 build/timer.o
+ .debug_line    0x0000000000015109      0x4e8 build/gic.o
+ .debug_line    0x00000000000155f1      0xe17 build/display.o
+ .debug_line    0x0000000000016408      0xf87 build/display_a64_dsi.o
+ .debug_line    0x000000000001738f      0x594 build/touch.o
+ .debug_line    0x0000000000017923      0x949 build/touch_gt917s.o
+ .debug_line    0x000000000001826c      0x6a6 build/usb.o
+ .debug_line    0x0000000000018912      0x5a0 build/wifi.o
+ .debug_line    0x0000000000018eb2     0x253a build/wifi_rtl8723cs.o
+ .debug_line    0x000000000001b3ec      0x784 build/cellular.o
+ .debug_line    0x000000000001bb70     0x1ab7 build/modem_eg25g.o
+ .debug_line    0x000000000001d627      0x619 build/audio.o
+ .debug_line    0x000000000001dc40      0x65c build/camera.o
+ .debug_line    0x000000000001e29c      0xd56 build/power.o
+ .debug_line    0x000000000001eff2      0x726 build/string.o
+ .debug_line    0x000000000001f718      0x354 build/stdlib.o
+
+.debug_str      0x0000000000000000    0x13075
+ .debug_str     0x0000000000000000    0x13075 build/kmain.o
+                                       0x6588 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/mm.o
+                                       0x41c4 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/sched.o
+                                       0x4470 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/process.o
+                                       0x4646 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/printk.o
+                                       0x3fc7 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/sync.o
+                                       0x43b5 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/shell.o
+                                       0x580e (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/board.o
+                                       0x4224 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/driver.o
+                                       0x3dc8 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/crypto_stub.o
+                                       0x422a (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/vmm_stub.o
+                                       0x3eba (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/syscall.o
+                                       0x53e2 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/security.o
+                                       0x5c2b (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/net.o
+                                       0x4b3d (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/bloodmoon.o
+                                       0x4684 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/compositor.o
+                                       0x4fbf (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/gui_graphics.o
+                                       0x4304 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/gui_widgets.o
+                                       0x4bf9 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/phone.o
+                                       0x4912 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/pkg.o
+                                       0x51f7 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/crfs.o
+                                       0x4acc (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/vfs.o
+                                       0x4375 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/stubs.o
+                                       0x465d (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/uart.o
+                                       0x4417 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/gpio.o
+                                       0x4176 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/timer.o
+                                       0x419d (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/gic.o
+                                       0x425e (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/display.o
+                                       0x4f04 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/display_a64_dsi.o
+                                       0x4b4f (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/touch.o
+                                       0x4828 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/touch_gt917s.o
+                                       0x41f2 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/usb.o
+                                       0x4fed (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/wifi.o
+                                       0x47bd (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/wifi_rtl8723cs.o
+                                       0x5536 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/cellular.o
+                                       0x4766 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/modem_eg25g.o
+                                       0x4bb3 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/audio.o
+                                       0x482b (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/camera.o
+                                       0x4a69 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/power.o
+                                       0x4961 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/string.o
+                                       0x3d58 (size before relaxing)
+ .debug_str     0x0000000000013075        0x0 build/stdlib.o
+                                       0x3a8c (size before relaxing)
+
+.debug_line_str
+                0x0000000000000000      0x326
+ .debug_line_str
+                0x0000000000000000      0x326 build/kmain.o
+                                        0x119 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/mm.o
+                                         0x70 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/sched.o
+                                         0x8f (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/process.o
+                                         0xa6 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/printk.o
+                                         0x81 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/sync.o
+                                         0xa0 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/shell.o
+                                         0xd4 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/board.o
+                                         0x8e (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/driver.o
+                                         0x6b (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/crypto_stub.o
+                                         0x83 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/vmm_stub.o
+                                         0x7c (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/syscall.o
+                                         0xee (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/security.o
+                                        0x100 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/net.o
+                                         0x9f (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/bloodmoon.o
+                                         0xa4 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/compositor.o
+                                         0xd1 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/gui_graphics.o
+                                         0x87 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/gui_widgets.o
+                                         0xa2 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/phone.o
+                                         0xb5 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/pkg.o
+                                         0xf0 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/crfs.o
+                                         0x8f (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/vfs.o
+                                         0x87 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/stubs.o
+                                         0x77 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/uart.o
+                                         0x7e (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/gpio.o
+                                         0x6f (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/timer.o
+                                         0x84 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/gic.o
+                                         0x6b (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/display.o
+                                         0x97 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/display_a64_dsi.o
+                                         0x85 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/touch.o
+                                         0xad (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/touch_gt917s.o
+                                         0x7c (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/usb.o
+                                         0xa5 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/wifi.o
+                                         0x9a (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/wifi_rtl8723cs.o
+                                         0xc1 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/cellular.o
+                                         0xaf (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/modem_eg25g.o
+                                         0xae (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/audio.o
+                                         0xa6 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/camera.o
+                                         0x9f (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/power.o
+                                         0xad (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/string.o
+                                         0x76 (size before relaxing)
+ .debug_line_str
+                0x0000000000000326        0x0 build/stdlib.o
+                                         0x62 (size before relaxing)

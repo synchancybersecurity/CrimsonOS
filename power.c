@@ -273,7 +273,7 @@ void pm_init(void)
 
     printk(KERN_INFO "pm: power management initialised\n");
     printk(KERN_INFO "pm: governor=interactive, %d OPPs, %d thermal zones\n",
-           NUM_CPU_OPPs, g_pm.num_thermals);
+           NUM_CPU_OPPS, g_pm.num_thermals);
 }
 
 /*

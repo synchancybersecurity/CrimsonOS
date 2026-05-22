@@ -371,6 +371,18 @@ void sync_exception_handler(uint64_t esr, uint64_t elr, uint64_t spsr)
         return;
     }
     
+    /* External Aborts (EC 0x24-0x25) from non-existent hardware are
+     * expected on QEMU where peripheral registers don't exist.
+     * Treat them as recoverable so drivers can gracefully degrade. */
+    if (ec == 0x24 || ec == 0x25) {
+        uint32_t dfsc = iss & 0x3F;
+        /* External abort (DFSC = 0b010000) — hardware not present */
+        if ((dfsc & 0x38) == 0x10) {
+            printk(KERN_WARN "  External abort at ELR=0x%lx (hardware absent, skipping)\n", elr);
+            return;  /* return to instruction after the faulting one */
+        }
+    }
+
     /* Fatal exception */
     kernel_panic("Synchronous exception - cannot recover");
 }

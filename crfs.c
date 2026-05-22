@@ -150,7 +150,7 @@ typedef struct {
 
 /* ---- In-memory structures ---- */
 
-typedef struct {
+typedef struct crfs_inode_s {
     uint32_t inode_no;
     uint32_t ref_count;
     uint32_t dirty;
@@ -162,7 +162,7 @@ typedef struct {
     void* mapping;
 
     spinlock_t lock;
-    struct crfs_inode* hash_next;   /* Inode cache hash chain */
+    struct crfs_inode_s* hash_next; /* Inode cache hash chain */
 } crfs_inode_t;
 
 /* File handle */

@@ -1,23 +1,24 @@
 #ifndef _CRIMSON_NET_H
-struct net_if;  /* forward declaration */
 #define _CRIMSON_NET_H
 
 #include <crimson/types.h>
 
-typedef struct {
-    uint8_t  bssid[6];
-    uint8_t  ssid[32];
-    int32_t  rssi;
-    uint32_t freq;
-    uint32_t beacon_int;
-    uint32_t caps;
-    uint8_t  channel;
-    uint8_t  ht, vht, he;
-    uint8_t  security;
-    uint32_t akms;
-} wifi_scan_result_t;
-
-typedef struct wifi_interface wifi_interface_t;
+typedef struct net_if {
+    uint8_t  mac[6];
+    uint32_t ip_addr;
+    uint32_t netmask;
+    uint32_t gateway;
+    uint32_t dns1;
+    uint32_t dns2;
+    uint32_t mtu;
+    uint32_t flags;
+    char     name[16];
+    uint64_t rx_bytes, tx_bytes;
+    uint64_t rx_packets, tx_packets;
+    uint64_t rx_errors, tx_errors;
+    int  (*transmit)(struct net_if* dev, const uint8_t* data, uint32_t len);
+    void (*poll)(struct net_if* dev);
+} net_if_t;
 
 void net_init(void);
 void net_register_if(struct net_if* dev);

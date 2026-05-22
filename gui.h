@@ -7,6 +7,7 @@
 #define _CRIMSON_GUI_H
 
 #include <crimson/types.h>
+#include <crimson/display.h>
 #include <crimson/touch.h>
 
 #define GUI_MAX_SURFACES        32
@@ -158,8 +159,8 @@ slider_widget_t*    gui_slider(int32_t x, int32_t y, uint32_t w, uint32_t min, u
 list_widget_t*      gui_list(int32_t x, int32_t y, uint32_t w, uint32_t h);
 progress_widget_t*  gui_progress(int32_t x, int32_t y, uint32_t w, uint32_t initial);
 
-void gui_draw_widget(void* ctx, void* widget);
-void gui_draw_all(void* ctx);
+void gui_draw_widget(gfx_ctx_t* ctx, void* widget);
+void gui_draw_all(gfx_ctx_t* ctx);
 int gui_handle_touch_widget(void* widget, touch_event_t* ev);
 void gui_handle_touch_all(touch_event_t* ev);
 

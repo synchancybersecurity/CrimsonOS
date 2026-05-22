@@ -81,8 +81,8 @@ typedef struct {
     uint32_t gesture;           /* Recognised gesture */
     int32_t  swipe_dx;
     int32_t  swipe_dy;
-    float    pinch_distance;
-    float    rotation_angle;
+    int32_t  pinch_distance;
+    int32_t  rotation_angle;
 
     /* Calibration */
     int32_t x_min, x_max;
@@ -121,6 +121,12 @@ static void touch_read_goodix(void);
 static void touch_enqueue_event(const touch_event_t* ev);
 static int  touch_recognise_gesture(void);
 static void touch_apply_calibration(touch_event_t* ev);
+/* I2C helpers — defined later in file */
+static int  i2c_read_reg(uint8_t addr, uint16_t reg, uint8_t* val);
+static int  i2c_read_burst(uint8_t addr, uint16_t reg, uint8_t* buf, size_t len);
+static int  i2c_write_reg(uint8_t addr, uint16_t reg, uint8_t val);
+static int  i2c_write_burst(uint8_t addr, uint16_t reg,
+                             const uint8_t* buf, size_t len);
 
 /* ---- Public API ---- */
 

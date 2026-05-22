@@ -78,10 +78,10 @@
 #define ISP_H264_BITRATE        0x204
 #define ISP_H264_GOP            0x208
 
-#define CSI2_READ(off)          (*(volatile uint32_t*)((uintptr_t)csi2_base + (off)))
-#define CSI2_WRITE(off, val)    (*(volatile uint32_t*)((uintptr_t)csi2_base + (off)) = (val))
-#define ISP_READ(off)           (*(volatile uint32_t*)((uintptr_t)isp_base + (off)))
-#define ISP_WRITE(off, val)     (*(volatile uint32_t*)((uintptr_t)isp_base + (off)) = (val))
+#define CSI2_READ(off)          (*(volatile uint32_t*)((uintptr_t)g_camera.csi2_base + (off)))
+#define CSI2_WRITE(off, val)    (*(volatile uint32_t*)((uintptr_t)g_camera.csi2_base + (off)) = (val))
+#define ISP_READ(off)           (*(volatile uint32_t*)((uintptr_t)g_camera.isp_base + (off)))
+#define ISP_WRITE(off, val)     (*(volatile uint32_t*)((uintptr_t)g_camera.isp_base + (off)) = (val))
 
 /* Camera sensor ops */
 typedef struct {

@@ -14,29 +14,28 @@
 
 /* ── CPU info ── */
 
-unsigned long cpu_get_core_count(void)
+__attribute__((weak)) unsigned long cpu_get_core_count(void)
 {
-    /* Read MPIDR_EL1 to detect cores — for now return 1 for boot CPU */
     return 1;
 }
 
 /* ── Random number generator ── */
 
-void rng_init(void)
+__attribute__((weak)) void rng_init(void)
 {
     printk(KERN_INFO "[RNG] Random number generator initialized (software PRNG)\n");
 }
 
 /* ── Crypto key storage ── */
 
-void keystore_init(void)
+__attribute__((weak)) void keystore_init(void)
 {
     printk(KERN_INFO "[KEYSTORE] Secure key storage initialized (memory-backed)\n");
 }
 
 /* ── Debug ── */
 
-void debug_stack_trace(void)
+__attribute__((weak)) void debug_stack_trace(void)
 {
     uint64_t fp, lr;
     __asm__ volatile("mov %0, x29" : "=r"(fp));
@@ -61,24 +60,24 @@ void debug_stack_trace(void)
 
 /* ── Interrupt stubs ── */
 
-void interrupt_init(void)
+__attribute__((weak)) void interrupt_init(void)
 {
     printk(KERN_INFO "[IRQ] Interrupt subsystem initialized\n");
 }
 
 /* ── Architecture helpers ── */
 
-void arch_disable_interrupts(void)
+__attribute__((weak)) void arch_disable_interrupts(void)
 {
     __asm__ volatile("msr daifset, #0xF" ::: "memory");
 }
 
-void arch_enable_interrupts(void)
+__attribute__((weak)) void arch_enable_interrupts(void)
 {
     __asm__ volatile("msr daifclr, #0xF" ::: "memory");
 }
 
-void arch_wfe(void)
+__attribute__((weak)) void arch_wfe(void)
 {
     __asm__ volatile("wfe");
 }
@@ -259,7 +258,7 @@ __attribute__((weak)) const char* board_get_name(void)
 /* g_gui is defined in compositor.c as gui_state_t */
 
 __attribute__((weak)) void display_blit(uint32_t dx, uint32_t dy, uint32_t w, uint32_t h,
-                                         const void* src, uint32_t stride)
+                                         const uint32_t* src, uint32_t stride, bool use_alpha)
 {
-    (void)dx; (void)dy; (void)w; (void)h; (void)src; (void)stride;
+    (void)dx; (void)dy; (void)w; (void)h; (void)src; (void)stride; (void)use_alpha;
 }

@@ -17,7 +17,7 @@ static int vfs_initialized = 0;
 
 int fs_init(void)
 {
-    spin_lock_init(&vfs_lock);
+    spinlock_init(&vfs_lock);
     memset(fd_table, 0, sizeof(fd_table));
 
     for (int i = 0; i < FS_MAX_OPEN; i++) {

@@ -51,7 +51,8 @@
 #define CALL_AUDIO_HEADSET      2
 #define CALL_AUDIO_BLUETOOTH    3
 
-typedef struct {
+/* Complete the opaque types forward-declared in phone.h */
+struct phone_call {
     uint32_t id;
     uint32_t state;
     uint32_t type;
@@ -63,17 +64,17 @@ typedef struct {
     uint32_t muted;
     uint32_t recording;
     uint32_t conference;
-    uint32_t encrypted;     /* ZRTP/SRTP encryption active */
-} phone_call_t;
+    uint32_t encrypted;
+};
 
-typedef struct {
+struct phone_contact {
     char name[PHONE_NAME_MAX];
     char number[PHONE_NUMBER_MAX];
-    char photo[64];         /* Path to contact photo */
+    char photo[64];
     char email[64];
     uint32_t favourite;
     uint32_t blocked;
-} phone_contact_t;
+};
 
 typedef struct {
     uint32_t id;
@@ -102,7 +103,7 @@ typedef struct {
     uint32_t audio_len;
 } phone_voicemail_t;
 
-typedef struct {
+struct phone_state {
     /* Active calls */
     phone_call_t calls[8];
     uint32_t num_active_calls;
@@ -127,7 +128,7 @@ typedef struct {
     /* Settings */
     uint32_t default_audio_route;
     uint32_t auto_record_calls;
-    uint32_t encrypted_calls;       /* Require ZRTP */
+    uint32_t encrypted_calls;
     uint32_t caller_id_enabled;
     uint32_t call_waiting_enabled;
     uint32_t voicemail_number[16];
@@ -138,17 +139,20 @@ typedef struct {
     /* State */
     cell_modem_t* modem;
     spinlock_t lock;
-} phone_state_t;
+};
 
-static phone_state_t g_phone;
+static struct phone_state g_phone;
+
+/* Forward declaration for internal helper used before its definition */
+static phone_sms_thread_t* phone_get_or_create_thread(const char* number);
 
 /* ---- Public API ---- */
 
-void phone_init(cell_modem_t* modem)
+void phone_init(void* modem_ptr)
 {
     memset(&g_phone, 0, sizeof(g_phone));
     spinlock_init(&g_phone.lock);
-    g_phone.modem = modem;
+    g_phone.modem = (cell_modem_t*)modem_ptr;
     g_phone.default_audio_route = CALL_AUDIO_HANDSET;
     g_phone.encrypted_calls = 1;   /* ZRTP encryption by default */
 

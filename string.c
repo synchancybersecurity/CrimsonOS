@@ -7,6 +7,7 @@
 
 #include <crimson/types.h>
 #include <crimson/string.h>
+#include <crimson/memory.h>
 
 /* Memory operations */
 

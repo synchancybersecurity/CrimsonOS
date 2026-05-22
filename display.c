@@ -375,7 +375,7 @@ static void backlight_set(uint32_t pct)
 
 void display_init(void)
 {
-    spin_lock_init(&disp_lock);
+    spinlock_init(&disp_lock);
 
     printk(KERN_INFO "[DISP] Display driver initializing...\n");
     printk(KERN_INFO "[DISP] Resolution: %ux%u, pitch=%u\n",

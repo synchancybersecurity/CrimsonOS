@@ -25,6 +25,7 @@
  */
 
 #include <crimson/types.h>
+#include <crimson/wifi.h>
 #include <crimson/printk.h>
 #include <crimson/memory.h>
 #include <crimson/spinlock.h>
@@ -34,31 +35,7 @@
 #include <crimson/fs.h>
 #include <crimson/crypto.h>
 
-/* Forward declaration from wifi.c */
-typedef struct wifi_driver wifi_driver_t;
-typedef struct {
-    uint32_t index, mode, state;
-    uint8_t  mac[6];
-    uint8_t  connected_bssid[6];
-    uint8_t  connected_ssid[33];
-    uint32_t auth_type;
-    uint8_t  pmk[32];
-    uint32_t freq, bw;
-    int32_t  last_rssi;
-    uint8_t  ap_ssid[33];
-    uint8_t  ap_channel;
-    uint32_t ap_num_sta;
-    uint32_t monitor_active;
-    void (*monitor_rx_cb)(const uint8_t*, uint32_t, int32_t);
-    void*    scan_results;
-    uint32_t scan_count;
-    uint32_t power_save, dtim_period;
-    wifi_driver_t* driver;
-    void*    driver_priv;
-    spinlock_t lock;
-} wifi_interface_t;
-
-void wifi_rx_frame(wifi_interface_t*, const uint8_t*, uint32_t, int32_t);
+/* wifi_interface_t, wifi_driver_t, wifi_rx_frame declared via wifi.h */
 
 /* ── A64 MMC1 SDIO host ────────────────────────────────────────── */
 

@@ -43,7 +43,7 @@ endif
 # Compiler flags
 CFLAGS  = -Wall -Wextra -O2 -g3
 CFLAGS += -ffreestanding -nostdlib -nostartfiles
-CFLAGS += -march=armv8-a+crc
+CFLAGS += -march=armv8-a+crc+crypto
 CFLAGS += $(BOARD_FLAGS)
 CFLAGS += -DCRIMSON_OS_VERSION=\"0.1.0-alpha\"
 CFLAGS += -DCRIMSON_CODENAME=\"BloodMoon\"
@@ -58,8 +58,14 @@ CFLAGS += -Wno-unused-parameter
 # We create a symlink crimson -> . so the include path works
 CFLAGS += -I$(SRC_DIR)
 
+# Flags for files that use ARMv8 crypto/SIMD instructions.
+# -mgeneral-regs-only forbids SIMD in the rest of the kernel (safe for
+# interrupt handlers), but crypto_stub.c and wifi_rtl8723cs.c use AESE/
+# AESMC/PMULL so they need the SIMD register file available.
+CFLAGS_CRYPTO = $(filter-out -mgeneral-regs-only,$(CFLAGS))
+
 # Assembly flags
-ASFLAGS  = -march=armv8-a+crc
+ASFLAGS  = -march=armv8-a+crc+crypto
 ASFLAGS += $(BOARD_FLAGS)
 ASFLAGS += -I$(SRC_DIR)
 
@@ -102,10 +108,14 @@ DRV_SRCS = \
     timer.c \
     gic.c \
     display.c \
+    display_a64_dsi.c \
     touch.c \
+    touch_gt917s.c \
     usb.c \
     wifi.c \
+    wifi_rtl8723cs.c \
     cellular.c \
+    modem_eg25g.c \
     audio.c \
     camera.c \
     power.c
@@ -160,7 +170,27 @@ $(BUILD_DIR)/%.o: %.S
 	@echo "[AS] $<"
 	@$(CC) $(ASFLAGS) -c $< -o $@
 
-# C sources
+# Files that use ARM crypto/SIMD instructions — compiled without
+# -mgeneral-regs-only so the assembler can access v0-v31 registers.
+$(BUILD_DIR)/crypto_stub.o: crypto_stub.c
+	@echo "[CC] $< (crypto)"
+	@$(CC) $(CFLAGS_CRYPTO) -c $< -o $@
+
+$(BUILD_DIR)/wifi_rtl8723cs.o: wifi_rtl8723cs.c
+	@echo "[CC] $< (crypto)"
+	@$(CC) $(CFLAGS_CRYPTO) -c $< -o $@
+
+# Files that use double/float (GPS, audio DSP) — also compiled without
+# -mgeneral-regs-only.
+$(BUILD_DIR)/cellular.o: cellular.c
+	@echo "[CC] $< (fp)"
+	@$(CC) $(CFLAGS_CRYPTO) -c $< -o $@
+
+$(BUILD_DIR)/modem_eg25g.o: modem_eg25g.c
+	@echo "[CC] $< (fp)"
+	@$(CC) $(CFLAGS_CRYPTO) -c $< -o $@
+
+# C sources (generic rule — must come after the per-file overrides above)
 $(BUILD_DIR)/%.o: %.c
 	@echo "[CC] $<"
 	@$(CC) $(CFLAGS) -c $< -o $@

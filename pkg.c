@@ -36,7 +36,7 @@ static const uint8_t CRIMSON_OFFICIAL_PUBKEY[PKG_PUBKEY_LEN] = {
 
 void pkg_init(void)
 {
-    spin_lock_init(&pkg_lock);
+    spinlock_init(&pkg_lock);
     memset(&g_pkg_state, 0, sizeof(g_pkg_state));
 
     strcpy(g_pkg_state.install_root, "/apps");
@@ -230,7 +230,7 @@ int pkg_verify_signature(const char* path, pkg_header_t* hdr)
     int fd = fs_open(path, FS_O_RDONLY);
     if (fd < 0) return -1;
 
-    struct stat st;
+    fs_stat_t st;
     if (fs_fstat(fd, &st) < 0) {
         fs_close(fd);
         return -1;
@@ -291,7 +291,7 @@ int pkg_verify_hash(const char* path, pkg_header_t* hdr)
     int fd = fs_open(path, FS_O_RDONLY);
     if (fd < 0) return -1;
 
-    struct stat st;
+    fs_stat_t st;
     if (fs_fstat(fd, &st) < 0) {
         fs_close(fd);
         return -1;
@@ -372,14 +372,14 @@ int pkg_extract(const char* pkg_path, const char* dest, pkg_header_t* hdr)
         /* Decompress if needed */
         if (hdr->compression == PKG_COMP_LZ4 && fe.compressed_size < fe.size) {
             /* LZ4 decompress - placeholder */
-            int out_fd = fs_open(fpath, FS_O_WRONLY | FS_O_CREATE);
+            int out_fd = fs_open(fpath, FS_O_WRONLY | FS_O_CREAT);
             if (out_fd >= 0) {
                 /* For now write compressed data (real impl has LZ4_decompress) */
                 fs_write(out_fd, fdata, fe.compressed_size);
                 fs_close(out_fd);
             }
         } else {
-            int out_fd = fs_open(fpath, FS_O_WRONLY | FS_O_CREATE);
+            int out_fd = fs_open(fpath, FS_O_WRONLY | FS_O_CREAT);
             if (out_fd >= 0) {
                 fs_write(out_fd, fdata, fe.size);
                 fs_chmod(fpath, fe.perms);
@@ -452,7 +452,7 @@ int pkg_db_save(void)
     /* Create database directory */
     fs_mkdir("/data/pkg", 0755);
 
-    int fd = fs_open(g_pkg_state.db_path, FS_O_WRONLY | FS_O_CREATE | FS_O_TRUNC);
+    int fd = fs_open(g_pkg_state.db_path, FS_O_WRONLY | FS_O_CREAT | FS_O_TRUNC);
     if (fd < 0) {
         printk(ERR "Cannot save package database\n");
         return -1;
@@ -1127,11 +1127,11 @@ void pkg_format_size(uint32_t bytes, char* out, size_t out_len)
     if (bytes < 1024)
         snprintf(out, out_len, "%u B", bytes);
     else if (bytes < 1024 * 1024)
-        snprintf(out, out_len, "%.1f KB", bytes / 1024.0);
-    else if (bytes < 1024 * 1024 * 1024)
-        snprintf(out, out_len, "%.1f MB", bytes / (1024.0 * 1024));
+        snprintf(out, out_len, "%u.%u KB", bytes/1024, (bytes%1024)*10/1024);
+    else if (bytes < 1024u * 1024 * 1024)
+        snprintf(out, out_len, "%u.%u MB", bytes/1048576, (bytes%1048576)*10/1048576);
     else
-        snprintf(out, out_len, "%.1f GB", bytes / (1024.0 * 1024 * 1024));
+        snprintf(out, out_len, "%u GB", bytes/1073741824u);
 }
 
 const char* pkg_perm_name(uint32_t perm)

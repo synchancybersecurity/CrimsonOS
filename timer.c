@@ -61,8 +61,10 @@ static spinlock_t timer_lock = SPINLOCK_INIT;
 /* Scheduler timer callback */
 static timer_callback_t sched_callback = NULL;
 
+#define TIMER_ID_SCHED  0   /* Scheduler heartbeat timer ID */
+
 /* Forward declarations */
-static uint64_t timer_get_ticks(void);
+uint64_t timer_get_ticks(void);
 static void timer_update_soft_timers(void);
 
 /*
@@ -326,7 +328,7 @@ void timer_irq_handler(void)
     
     /* Call scheduler tick callback */
     if (sched_callback) {
-        sched_callback();
+        sched_callback(NULL);
     }
     
     /* Check software timers */

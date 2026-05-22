@@ -59,26 +59,32 @@ typedef struct {
     float       anim_progress;
 } widget_t;
 
-/* ── Button ── */
-typedef struct {
+/* Font metrics (matches gui_graphics.c) */
+#ifndef FONT_W
+#define FONT_W  8
+#define FONT_H  16
+#endif
+
+/* Named struct definitions satisfying the forward declarations in gui.h */
+struct button_widget {
     widget_t    base;
     char        text[64];
-    uint32_t    icon;       /* Unicode or index */
-    uint32_t    style;      /* 0=filled, 1=outlined, 2=text-only */
+    uint32_t    icon;
+    uint32_t    style;
     void        (*on_click)(void*);
     void*       click_data;
-} button_widget_t;
+};
+typedef struct button_widget button_widget_t;
 
-/* ── Label ── */
-typedef struct {
+struct label_widget {
     widget_t    base;
     char        text[128];
-    uint32_t    align;      /* 0=left, 1=center, 2=right */
+    uint32_t    align;
     uint32_t    font_scale;
-} label_widget_t;
+};
+typedef struct label_widget label_widget_t;
 
-/* ── Text Input ── */
-typedef struct {
+struct textinput_widget {
     widget_t    base;
     char        text[256];
     char        placeholder[64];
@@ -86,28 +92,28 @@ typedef struct {
     uint32_t    cursor_pos;
     uint32_t    show_cursor;
     uint32_t    cursor_blink_time;
-    uint32_t    password;   /* 1=show dots */
+    uint32_t    password;
     uint32_t    focused;
     void        (*on_change)(const char*);
-} textinput_widget_t;
+};
+typedef struct textinput_widget textinput_widget_t;
 
-/* ── Switch ── */
-typedef struct {
+struct switch_widget {
     widget_t    base;
     uint32_t    on;
-    uint32_t    anim_x;     /* Thumb position for animation */
+    uint32_t    anim_x;
     void        (*on_toggle)(uint32_t state);
-} switch_widget_t;
+};
+typedef struct switch_widget switch_widget_t;
 
-/* ── Slider ── */
-typedef struct {
+struct slider_widget {
     widget_t    base;
     uint32_t    min, max, value;
     uint32_t    dragging;
     void        (*on_change)(uint32_t val);
-} slider_widget_t;
+};
+typedef struct slider_widget slider_widget_t;
 
-/* ── List item ── */
 typedef struct {
     char        text[128];
     char        sub[128];
@@ -116,8 +122,7 @@ typedef struct {
     void        (*on_click)(void);
 } list_item_t;
 
-/* ── List ── */
-typedef struct {
+struct list_widget {
     widget_t    base;
     list_item_t items[64];
     uint32_t    item_count;
@@ -125,15 +130,16 @@ typedef struct {
     uint32_t    selected_idx;
     uint32_t    item_height;
     void        (*on_select)(uint32_t idx);
-} list_widget_t;
+};
+typedef struct list_widget list_widget_t;
 
-/* ── Progress bar ── */
-typedef struct {
+struct progress_widget {
     widget_t    base;
-    uint32_t    progress;   /* 0-100 */
+    uint32_t    progress;
     uint32_t    indeterminate;
     uint32_t    anim_offset;
-} progress_widget_t;
+};
+typedef struct progress_widget progress_widget_t;
 
 /* ── Internal widget pool ── */
 #define MAX_WIDGETS     256
