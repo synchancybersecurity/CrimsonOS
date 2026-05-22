@@ -178,7 +178,7 @@ void vprintk(const char* fmt, va_list args)
                     } else {
                         num = va_arg(args, unsigned int);
                     }
-                    fmt_puts("0x");
+                    /* No automatic 0x prefix — callers add it explicitly */
                     fmt_uint(num, 16, width, pad_char, *p == 'X');
                     break;
                 }

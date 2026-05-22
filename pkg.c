@@ -68,7 +68,7 @@ void pkg_init(void)
 
     printk(INFO "Package Manager initialized v" PKG_VERSION "\n");
     printk(INFO "  Repositories: %d configured\n", g_pkg_state.repo_count);
-    printk(INFO "  Official key: %02x%02x...%02x%02x\n",
+    printk(INFO "  Official key: 0x%02x%02x...%02x%02x\n",
            g_pkg_state.system_pubkey[0], g_pkg_state.system_pubkey[1],
            g_pkg_state.system_pubkey[30], g_pkg_state.system_pubkey[31]);
 }

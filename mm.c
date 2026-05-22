@@ -55,11 +55,16 @@ void pmm_init(uintptr_t base, size_t size)
         pmm_mark_used(phys_base + i * PAGE_SIZE);
     }
     
-    /* Mark kernel pages as used (0x80000 to end of kernel) */
+    /* Mark kernel pages as used (0x40080000 = KERNEL_BASE) */
     extern uintptr_t __kernel_size;
-    size_t kernel_pages = ALIGN_UP((uintptr_t)&__kernel_size, PAGE_SIZE) / PAGE_SIZE;
-    for (size_t i = 0; i < kernel_pages; i++) {
-        pmm_mark_used(0x80000 + i * PAGE_SIZE);
+    uintptr_t kernel_base = 0x40080000;
+    size_t kernel_bytes = ALIGN_UP((uintptr_t)&__kernel_size, PAGE_SIZE);
+    /* Only mark if the kernel region falls within this PMM's managed range */
+    if (kernel_base >= phys_base && kernel_base < phys_base + total_pages * PAGE_SIZE) {
+        size_t kernel_pages = kernel_bytes / PAGE_SIZE;
+        for (size_t i = 0; i < kernel_pages; i++) {
+            pmm_mark_used(kernel_base + i * PAGE_SIZE);
+        }
     }
     
     printk(KERN_DEBUG "PMM: %lu pages total, %lu free\n", total_pages, free_pages);

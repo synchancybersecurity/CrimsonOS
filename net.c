@@ -1009,7 +1009,7 @@ static void tcp_rx(const struct ip_hdr* ip, const uint8_t* data, uint16_t len)
                 sock->snd_una = ack;
                 tcp_process_ack(sock, ack);
                 sock->state = TCP_ESTABLISHED;
-                printk(KERN_INFO "tcp: connection established %08x:%d\n",
+                printk(KERN_INFO "tcp: connection established 0x%08x:%d\n",
                        sock->remote_ip, sock->remote_port);
             }
             break;

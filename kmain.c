@@ -87,7 +87,10 @@ void kernel_main(uintptr_t heap_start, size_t heap_size)
 {
     /* Disable interrupts during init */
     arch_disable_interrupts();
-    
+
+    /* Detect board platform (sets board_name, RAM, CPU count) */
+    board_init_early();
+
     /* Initialize serial output ASAP for debug messages */
     uart_early_init();
 
@@ -96,16 +99,17 @@ void kernel_main(uintptr_t heap_start, size_t heap_size)
 
     /* Show the Crimson OS boot banner */
     crimson_show_banner();
-    
-    printk(KERN_INFO "Crimson OS v%s [%s]\n", 
+
+    printk(KERN_INFO "Crimson OS v%s [%s]\n",
            CRIMSON_VERSION, CRIMSON_CODENAME);
-    printk(KERN_INFO "Kernel loading at 0x%p, size: %lu bytes\n",
-           &__kernel_size, (uint64_t)&__kernel_size);
-    printk(KERN_INFO "Heap: 0x%p - 0x%p (%lu MB)\n",
-           heap_start, heap_start + heap_size, heap_size / (1024*1024));
-    printk(KERN_INFO "CPU: ARM64 (AArch64), %lu cores detected\n",
+    printk(KERN_INFO "Kernel: loaded at %p, size: %lu KB\n",
+           (void*)0x40080000, (uint64_t)&__kernel_size / 1024);
+    printk(KERN_INFO "Heap:   %p – %p  (%lu MB)\n",
+           (void*)heap_start, (void*)(heap_start + heap_size),
+           heap_size / (1024 * 1024));
+    printk(KERN_INFO "CPU:    ARM64 (AArch64), %lu cores\n",
            cpu_get_core_count());
-    printk(KERN_INFO "Board: %s\n", board_get_name());
+    printk(KERN_INFO "Board:  %s\n", board_get_name());
     
     /* ─── Phase 1: Core Subsystems ─── */
     printk(KERN_INFO "[INIT] Phase 1: Core subsystems...\n");

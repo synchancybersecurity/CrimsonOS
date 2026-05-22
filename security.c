@@ -24,7 +24,7 @@ security_state_t g_security;
 
 void security_init(void)
 {
-    printk(CLR_RED "\n[ Security Subsystem Initializing ]" CLR_RESET "\n");
+    printk(CLR_RED "[ Security Subsystem Initializing ]" CLR_RESET "\n");
 
     memset(&g_security, 0, sizeof(g_security));
     spinlock_init(&g_security.lock);
@@ -48,7 +48,7 @@ void security_init(void)
     /* Load default MAC policies */
     mac_load_default_policies();
 
-    printk(CLR_GREEN "[ Security subsystem initialized - Level %d ]" CLR_RESET "\n\n",
+    printk(CLR_GREEN "[ Security subsystem initialized - Level %d ]" CLR_RESET "\n",
            g_security.security_level);
 
     audit_log(AUDIT_SECURITY, 0, 0, 0,
