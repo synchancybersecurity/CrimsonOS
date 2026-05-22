@@ -20,22 +20,29 @@ Crimson OS is an original ARM64 kernel and mobile OS project — not a Linux for
 - ARM64 bootloader — EL3→EL1 transition, basic MMU setup
 - Physical memory allocator — bitmap-based page allocator
 - Basic process scheduler — MLFQ structure, timer-driven
-- UART shell — 28 commands running on real hardware emulation
+- UART shell — 28 commands; `ls` and `cat` now read from CrimsonFS
 - Interrupt controller init — GICv2 setup
 
-**What is written but not fully verified on hardware:**
-- TCP/IP stack — RFC 793 structure, not tested end-to-end
-- Filesystem (CrimsonFS) — has TODO stubs for indirect blocks
-- Virtual memory manager — stub implementation, page walks incomplete
-- Display pipeline — written, not wired to real display hardware
-- Touch pipeline — written, not tested on real touchscreen hardware
+**What is implemented and verified in code:**
+- **Syscalls** — `sys_read`, `sys_write`, `sys_open`, `sys_close`, `sys_lseek` wired through VFS layer
+- **CrimsonFS** — indirect + double-indirect block support; files up to ~1 GB
+- **Crypto** — real AES-256-GCM using ARM64 `AESE`/`AESMC`/`PMULL` hardware instructions; CSPRNG is ChaCha20 seeded from `CNTPCT_EL0` generic timer
+- **Virtual memory** — 4-level ARM64 page table walk: `vmm_unmap`, `vmm_copy_page_tables` (fork), `vmm_free_page_tables` (exit) with `TLBI` maintenance
+- **Display pipeline (A64)** — DSI host init, D-PHY 4-lane 500 Mbps, XBD599/ST7703 panel init sequence for PinePhone Pro
+- **Touch driver** — Goodix GT917S on A64 TWI1 I2C; full contact decode (up to 10 fingers)
+- **DNS resolution** — real RFC 1035 A-record query/response over UDP stack
+- **HTTP GET** — full DNS → TCP connect → HTTP/1.0 request/response path
+- **Network stack** — TCP/IP structure; not tested end-to-end on physical hardware
+
+**What is written but not fully verified on physical hardware:**
+- WiFi/Cellular — firmware loading code written, not tested on real hardware
+- Display/Touch — implemented for PinePhone Pro A64, untested on device
+- Full TCP/IP — stack logic written; no end-to-end hardware test yet
 
 **What is explicitly stubbed (does not work yet):**
-- Crypto — `crypto_stub.c` copies plaintext, RNG is NOT cryptographically secure
-- Most syscalls — `sys_read()`, `sys_write()`, `sys_open()` return `STATUS_UNIMPL`
-- WiFi/Cellular — firmware loading code written, not tested on real hardware
 - Camera, USB — have TODO stubs, not functional
 - Package execution — ELF loader written, not tested with real packages
+- ChaCha20-Poly1305, Ed25519, SHA-256/512 — still stub implementations
 
 ---
 
@@ -125,21 +132,48 @@ make qemu   # boots in QEMU, Ctrl-A X to exit
 
 ---
 
+## Roadmap
+
+| Milestone | Status |
+|-----------|--------|
+| ARM64 boot, MMU, scheduler, GICv2 | ✅ Complete |
+| UART shell (28 commands) | ✅ Complete |
+| CrimsonFS (direct blocks, log-structured) | ✅ Complete |
+| CrimsonFS indirect/double-indirect blocks | ✅ Complete |
+| VFS layer + syscalls (read/write/open/close/lseek) | ✅ Complete |
+| ARM64 4-level page table (unmap, fork copy, free) | ✅ Complete |
+| AES-256-GCM (ARM64 hw crypto) + ChaCha20 CSPRNG | ✅ Complete |
+| A64 DSI display pipeline + XBD599 panel init | ✅ Complete |
+| GT917S touch driver via A64 TWI1 I2C | ✅ Complete |
+| DNS resolution (RFC 1035 UDP) + HTTP GET over TCP | ✅ Complete |
+| Shell `ls`/`cat` reading from CrimsonFS | ✅ Complete |
+| ChaCha20-Poly1305, Ed25519, SHA-256/512 | 🔲 Next |
+| WiFi driver + `wpa_supplicant`-style association | 🔲 Next |
+| Camera pipeline (ISP → CrimsonFS) | 🔲 Next |
+| Package manager + ELF loader (userspace) | 🔲 Next |
+| PinePhone Pro hardware boot (not QEMU) | 🔲 Next |
+| Independent security audit | 🔲 Kickstarter goal |
+
+---
+
 ## Contributing
 
-Most needed:
-- **PinePhone A64 display DSI driver** — blocking hardware boot
-- **PinePhone touch I2C driver** — Goodix GT917S
-- **Syscall implementations** — most return STATUS_UNIMPL
-- **Crypto implementations** — replace stubs with real AES/Ed25519
-- **Security audit** — find vulnerabilities, responsible disclosure to SynChanCyberSecurity@gmail.com
+Most needed right now:
+- **Remaining crypto** — ChaCha20-Poly1305, Ed25519, SHA-256/512 stubs
+- **WiFi** — nl80211-style association on A64 RTL8723CS
+- **Camera** — ISP pipeline, V4L2-compatible capture interface
+- **ELF loader / userspace** — run real binaries, not kernel threads
+- **PinePhone hardware testing** — validate A64 DSI, GT917S, LTE modem
+- **Security audit** — responsible disclosure: SynChanCyberSecurity@gmail.com
 
 ---
 
 ## Credits
 
-Original kernel architecture and codebase by the founder of SynChan Cybersecurity.
-Development partnership by SynChan AI (powered by Claude/Anthropic).
+**SynChan Cybersecurity** — original kernel architecture, design, and direction.  
+Development accelerated with AI assistance (Claude / Anthropic).
+
+Contact: SynChanCyberSecurity@gmail.com
 
 *Built by humans. Assisted by AI. Owned by the community.*
 
