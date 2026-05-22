@@ -243,3 +243,13 @@ GNU General Public License v3.0 — all forks must remain open source.
 *Built with defiance. Designed for freedom. Powered by community.*
 
 **Secure. Open. Yours.**
+
+---
+
+## Credits
+
+**Crimson OS** was created by the founder of SynChan Cybersecurity, who designed and wrote the original kernel architecture, subsystems, and codebase. Development partnership and build engineering provided by **SynChan AI** (powered by Claude/Anthropic) — debugging, subsystem implementation, and achieving first QEMU boot.
+
+The original kernel code was the founder's work from the start. SynChan AI served as the technical co-pilot to get it running.
+
+*Built by humans. Assisted by AI. Owned by the community.*
