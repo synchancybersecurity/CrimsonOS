@@ -230,7 +230,7 @@ The Kickstarter funds that audit. If we cannot raise the money for a professiona
 
 ## Security Disclosure
 
-Found a vulnerability? Email **security@crimson-os.org** — do not open a public issue. 90-day responsible disclosure. Full credit given.
+Found a vulnerability? Email **SynChanCyberSecurity@gmail.com** — do not open a public issue. 90-day responsible disclosure. Full credit given.
 
 ---
 
