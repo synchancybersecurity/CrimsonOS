@@ -298,14 +298,7 @@
 </div>
 
 <script>
-  const PAYPAL_BASE = (typeof window !== 'undefined' && window.PAYPAL_BASE) || null;
 
-  function initPayPalButtons() {
-    document.querySelectorAll('.paypal-btn').forEach(btn => {
-      const amount = btn.dataset.amount;
-      if (PAYPAL_BASE && amount) {
-        btn.href = PAYPAL_BASE + '/' + amount;
-      } else {
         btn.style.opacity = '0.5';
         btn.style.pointerEvents = 'none';
         btn.textContent = 'Payment unavailable';
@@ -345,7 +338,6 @@
     }
   }
 
-  initPayPalButtons();
   fetchPledges();
   setInterval(fetchPledges, 10000);
 
