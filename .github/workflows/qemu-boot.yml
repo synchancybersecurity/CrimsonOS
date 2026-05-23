@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-boot:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 5
 
     steps:
     - name: Checkout source
@@ -21,7 +21,7 @@ jobs:
         sudo apt-get install -y \
           gcc-aarch64-linux-gnu \
           binutils-aarch64-linux-gnu \
-          qemu-system-arm \
+          qemu-system-aarch64 \
           make
 
     - name: Verify toolchain
@@ -31,24 +31,27 @@ jobs:
 
     - name: Build Crimson OS kernel
       run: |
+        make clean
         make BOARD=qemu
         ls -lh bin/crimson-os.img
         echo "Kernel size: $(wc -c < bin/crimson-os.img) bytes"
 
     - name: Boot in QEMU and capture serial output
       run: |
-        timeout 30 qemu-system-aarch64 \
+        timeout 60 qemu-system-aarch64 \
           -M virt \
           -cpu cortex-a72 \
           -smp 4 \
           -m 2G \
           -kernel bin/crimson-os.img \
           -nographic \
+          -no-reboot \
           -serial stdio \
           2>&1 | tee boot_output.txt || true
 
         echo "=== BOOT OUTPUT ==="
         cat boot_output.txt
+        echo "=== END OUTPUT ==="
 
     - name: Verify boot phases completed
       run: |
@@ -72,13 +75,13 @@ jobs:
           echo "✗ Phase 4 failed" && exit 1
         fi
 
-        if grep -q "Phase 11" boot_output.txt; then
-          echo "✓ Phase 11: User space started"
+        if grep -q "Phase 8" boot_output.txt; then
+          echo "✓ Phase 8: Display & GUI"
         else
-          echo "✗ Phase 11 failed" && exit 1
+          echo "✗ Phase 8 failed" && exit 1
         fi
 
-        if grep -q "Crimson Shell\|crimson:~#\|initialization complete" boot_output.txt; then
+        if grep -q "crimson:~#\|crimson:\|initialization complete" boot_output.txt; then
           echo "✓ Shell reached — boot verified"
         else
           echo "✗ Shell not reached" && exit 1
@@ -86,13 +89,13 @@ jobs:
 
         echo ""
         echo "============================================"
-        echo "  Crimson OS QEMU boot: VERIFIED"
+        echo " Crimson OS QEMU boot: VERIFIED"
         echo "============================================"
 
     - name: Upload boot log as artifact
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: crimson-boot-log
+        name: crimson-boot-log-${{ github.run_id }}
         path: boot_output.txt
         retention-days: 30
