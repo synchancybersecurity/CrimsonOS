@@ -184,16 +184,23 @@ void kernel_main(uintptr_t heap_start, size_t heap_size)
     }
     printk(KERN_INFO "[INIT] Crimson Shell started as PID %d\n", shell_pid);
     
-    /* Create GUI render task (60fps compositor loop) */
+#ifndef BOARD_QEMU
+    /* Create GUI render task (60fps compositor loop).
+     * Skipped on QEMU — no framebuffer is initialised so gui_render_frame()
+     * would write through a NULL fb pointer into the identity-mapped ROM at
+     * address 0, corrupting it and eventually crashing at ELR=0x0. */
     struct process_attr gui_attr = {
         .name = "gui-render",
         .entry = crimson_gui_task,
         .priority = PRIO_HIGH,
-        .stack_size = 0x8000,       /* 32KB stack */
+        .stack_size = 0x8000,
         .flags = PROC_FLAG_KERNEL,
     };
     pid_t gui_pid = process_create(&gui_attr);
     printk(KERN_INFO "[INIT] GUI render task started as PID %d\n", gui_pid);
+#else
+    printk(KERN_INFO "[INIT] GUI render task: skipped (QEMU headless mode)\n");
+#endif
 
     /* Create idle task for when nothing else runs */
     struct process_attr idle_attr = {
