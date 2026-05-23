@@ -1,4 +1,4 @@
-<!DOCTYPE html
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -42,7 +42,6 @@
     transition: background 0.2s;
   }
   .hero .cta:hover { background: #cc0029; }
-
   .counter-bar {
     background: #111;
     border: 1px solid #333;
@@ -77,6 +76,7 @@
     height: 100%;
     border-radius: 6px;
     transition: width 0.5s ease;
+    width: 0%;
   }
   .live-dot {
     display: inline-block;
@@ -92,7 +92,6 @@
     50% { opacity: 0.5; transform: scale(1.2); }
     100% { opacity: 1; transform: scale(1); }
   }
-
   .stats {
     display: flex;
     justify-content: center;
@@ -264,10 +263,50 @@
     border-radius: 4px;
     letter-spacing: 1px;
   }
+  .verify-box {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 28px;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .verify-box input {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: #fff;
+    width: 100%;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    font-family: inherit;
+  }
+  .verify-box button {
+    background: linear-gradient(135deg, #ff0033, #cc0029);
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.95rem;
+  }
+  .verify-box button:hover {
+    background: linear-gradient(135deg, #cc0029, #990020);
+  }
+  #verify-status {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 8px;
+    min-height: 1.2em;
+  }
 </style>
 </head>
 <body>
-<script src="config.js"></script>
 
 <div class="hero">
   <h1>CRIMSON OS</h1>
@@ -281,7 +320,7 @@
     <div class="raised"><span id="raised-amount">$0</span> raised</div>
     <div class="goal">of $25,000 goal</div>
     <div class="progress-track">
-      <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+      <div class="progress-fill" id="progress-fill"></div>
     </div>
     <div style="font-size: 0.75rem; color: #666; margin-top: 6px;">
       Updates automatically every 10 seconds
@@ -297,91 +336,14 @@
   </div>
 </div>
 
-<script>
-
-        btn.style.opacity = '0.5';
-        btn.style.pointerEvents = 'none';
-        btn.textContent = 'Payment unavailable';
-      }
-    });
-  }
-
-
-  const PLEDGES_URL = "./pledges.json";
-  const GOAL = 25000;
-
-  async function fetchPledges() {
-    try {
-      const res = await fetch(PLEDGES_URL + '?t=' + Date.now(), { cache: 'no-store' });
-      const data = await res.json();
-
-      document.getElementById('backer-count').textContent = data.backers || 0;
-      document.getElementById('raised-amount').textContent = '$' + (data.raised || 0).toLocaleString();
-      const pct = Math.min(((data.raised || 0) / GOAL) * 100, 100);
-      document.getElementById('progress-fill').style.width = pct + '%';
-
-      const tiers = {
-        believer: 'backers-believer',
-        early_adopter: 'backers-early_adopter',
-        pioneer: 'backers-pioneer',
-        security_pro: 'backers-security_pro',
-        founding_engineer: 'backers-founding_engineer',
-        architect: 'backers-architect'
-      };
-      for (const [key, elId] of Object.entries(tiers)) {
-        const count = (data.tiers && data.tiers[key]) || 0;
-        const el = document.getElementById(elId);
-        if (el) el.textContent = count + ' backer' + (count === 1 ? '' : 's');
-      }
-    } catch (e) {
-      console.log('Pledge poll failed:', e.message);
-    }
-  }
-
-  fetchPledges();
-  setInterval(fetchPledges, 10000);
-
-  async function verifyPledge() {
-    const input = document.getElementById('txid-input').value.trim().toUpperCase();
-    const status = document.getElementById('verify-status');
-    if (!input) { status.textContent = 'Please enter a transaction ID.'; status.style.color = '#ff0033'; return; }
-
-    try {
-      const res = await fetch(PLEDGES_URL + '?t=' + Date.now(), { cache: 'no-store' });
-      const data = await res.json();
-      const txs = data.transactions || [];
-
-      if (txs.includes(input)) {
-        localStorage.setItem('crimson_unlocked', 'true');
-        localStorage.setItem('crimson_txid', input);
-        document.getElementById('download-locked').style.display = 'none';
-        document.getElementById('download-unlocked').style.display = 'block';
-      } else {
-        status.textContent = 'Transaction ID not found. Make sure you pledged $25+ and the payment has cleared.';
-        status.style.color = '#ff0033';
-      }
-    } catch (e) {
-      status.textContent = 'Verification failed. Try again.';
-      status.style.color = '#ff0033';
-    }
-  }
-
-  // Check if already unlocked on page load
-  if (localStorage.getItem('crimson_unlocked') === 'true') {
-    document.getElementById('download-locked').style.display = 'none';
-    document.getElementById('download-unlocked').style.display = 'block';
-  }
-
-</script>
-
 <div class="section">
   <h2>THE MANIFESTO</h2>
-</div>
   <p><strong>Two companies control your phone. That ends now.</strong></p>
   <p>For decades, every smartphone has run one of two operating systems — both controlled by corporations with financial incentives to harvest your data, restrict what you can run, and lock you into their ecosystems.</p>
   <p><strong>Your phone — your most personal computer — runs code you cannot inspect, cannot modify, and cannot trust.</strong></p>
   <p>Crimson OS exists to change this. Built from scratch on an original kernel. Not Android. Not iOS. Not Linux. A completely independent codebase designed from day one for security, privacy, and user sovereignty.</p>
   <p><strong>This is not a modified Android. This is not a Linux phone. This is a third option.</strong></p>
+</div>
 
 <div class="section">
   <h2>THE DIFFERENCE</h2>
@@ -414,18 +376,17 @@
     <strong>Hardware target:</strong> PinePhone Pro (Rockchip RK3399 — 2× Cortex-A72 + 4× Cortex-A53, GICv3).<<br>
     All drivers written against RK3399 register maps. Community-corrected from early A64 scaffolding.
   </p>
-  <div style="text-align: center; margin-top: 30px;">
+
   <div id="download-locked" style="text-align: center; margin-top: 30px;">
-    <div style="background: #111; border: 1px solid #333; border-radius: 12px; padding: 28px; max-width: 500px; margin: 0 auto;">
+    <div class="verify-box">
       <div style="font-size: 1.3rem; font-weight: 700; color: #ff0033; margin-bottom: 8px;">🔒 QEMU IMAGE LOCKED</div>
       <p style="color: #888; font-size: 0.9rem; margin-bottom: 16px;">Pledge $25 or more to unlock the bootable image.</p>
-      <div style="margin-bottom: 16px;">
-        <input type="text" id="txid-input" placeholder="Enter PayPal Transaction ID" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 10px 14px; color: #fff; width: 100%; font-size: 0.9rem; margin-bottom: 8px;">
-        <button onclick="verifyPledge()" style="background: linear-gradient(135deg, #ff0033, #cc0029); color: #fff; border: none; padding: 10px 24px; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%;">VERIFY & UNLOCK</button>
-      </div>
-      <p id="verify-status" style="font-size: 0.8rem; color: #666; margin: 0;"></p>
+      <input type="text" id="txid-input" placeholder="Enter PayPal Transaction ID" autocomplete="off">
+      <button onclick="verifyPledge()">VERIFY & UNLOCK</button>
+      <p id="verify-status"></p>
     </div>
   </div>
+
   <div id="download-unlocked" style="text-align: center; margin-top: 30px; display: none;">
     <a href="https://github.com/synchancybersecurity/CrimsonOS/releases/download/v0.1.0-alpha/crimson-os.img" class="download-btn">⬇ DOWNLOAD QEMU IMAGE</a>
     <p style="margin-top: 10px; font-size: 0.8rem; color: #666;">crimson-os.img · ARM64 · ~10 MB · Unlocked for backers</p>
@@ -468,7 +429,8 @@
         <li>✓ Bootable QEMU image</li>
         <li>✓ Discord backer channel</li>
       </ul>
-      <a href="https://www.paypal.com/paypalme/chadwiley86/25" class="paypal-btn" target="_blank" rel="noopener">Pledge $25 via PayPal</a><p style="font-size: 0.75rem; color: #666; margin-top: 8px;">After paying, enter your PayPal transaction ID below to unlock the download.</p>
+      <a href="https://www.paypal.com/paypalme/chadwiley86/25" class="paypal-btn" target="_blank" rel="noopener">Pledge $25 via PayPal</a>
+      <p style="font-size: 0.75rem; color: #666; margin-top: 8px;">After paying, enter your PayPal transaction ID below to unlock the download.</p>
     </div>
 
     <div class="tier">
@@ -600,6 +562,124 @@
   <p>Secure. Open. Yours.</p>
   <p style="margin-top: 10px;">Contact: <a href="mailto:SynChanCyberSecurity@gmail.com">SynChanCyberSecurity@gmail.com</a></p>
 </div>
+
+<script>
+(function() {
+  'use strict';
+
+  const PLEDGES_URL = './pledges.json';
+  const GOAL = 25000;
+
+  const FALLBACK = {
+    backers: 1,
+    raised: 5,
+    tiers: {
+      believer: 1,
+      early_adopter: 0,
+      pioneer: 0,
+      security_pro: 0,
+      founding_engineer: 0,
+      architect: 0
+    },
+    transactions: []
+  };
+
+  function updateUI(data) {
+    const backers = data.backers || 0;
+    const raised = data.raised || 0;
+
+    const backerEl = document.getElementById('backer-count');
+    const raisedEl = document.getElementById('raised-amount');
+    const fillEl = document.getElementById('progress-fill');
+
+    if (backerEl) backerEl.textContent = backers.toLocaleString();
+    if (raisedEl) raisedEl.textContent = '$' + raised.toLocaleString();
+    if (fillEl) {
+      const pct = Math.min((raised / GOAL) * 100, 100);
+      fillEl.style.width = pct.toFixed(2) + '%';
+    }
+
+    const tiers = {
+      believer: 'backers-believer',
+      early_adopter: 'backers-early_adopter',
+      pioneer: 'backers-pioneer',
+      security_pro: 'backers-security_pro',
+      founding_engineer: 'backers-founding_engineer',
+      architect: 'backers-architect'
+    };
+
+    for (const [key, elId] of Object.entries(tiers)) {
+      const count = (data.tiers && data.tiers[key]) || 0;
+      const el = document.getElementById(elId);
+      if (el) {
+        el.textContent = count + ' backer' + (count === 1 ? '' : 's');
+      }
+    }
+  }
+
+  async function fetchPledges() {
+    try {
+      const res = await fetch(PLEDGES_URL + '?t=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      updateUI(data);
+      console.log('[CrimsonOS] Pledges loaded:', data);
+    } catch (e) {
+      console.warn('[CrimsonOS] Pledge fetch failed, using fallback:', e.message);
+      updateUI(FALLBACK);
+    }
+  }
+
+  window.verifyPledge = async function() {
+    const input = document.getElementById('txid-input');
+    const status = document.getElementById('verify-status');
+    if (!input || !status) return;
+
+    const txid = input.value.trim().toUpperCase();
+    if (!txid) {
+      status.textContent = 'Please enter a transaction ID.';
+      status.style.color = '#ff0033';
+      return;
+    }
+
+    status.textContent = 'Verifying...';
+    status.style.color = '#888';
+
+    try {
+      const res = await fetch(PLEDGES_URL + '?t=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      const txs = data.transactions || [];
+
+      if (txs.includes(txid)) {
+        localStorage.setItem('crimson_unlocked', 'true');
+        localStorage.setItem('crimson_txid', txid);
+        document.getElementById('download-locked').style.display = 'none';
+        document.getElementById('download-unlocked').style.display = 'block';
+        status.textContent = '✓ Unlocked! Download available above.';
+        status.style.color = '#00ff66';
+      } else {
+        status.textContent = 'Transaction ID not found. Ensure you pledged $25+ and payment cleared.';
+        status.style.color = '#ff0033';
+      }
+    } catch (e) {
+      status.textContent = 'Verification failed. Try again later.';
+      status.style.color = '#ff0033';
+      console.error('[CrimsonOS] Verify error:', e);
+    }
+  };
+
+  if (localStorage.getItem('crimson_unlocked') === 'true') {
+    const locked = document.getElementById('download-locked');
+    const unlocked = document.getElementById('download-unlocked');
+    if (locked) locked.style.display = 'none';
+    if (unlocked) unlocked.style.display = 'block';
+  }
+
+  fetchPledges();
+  setInterval(fetchPledges, 10000);
+})();
+</script>
 
 </body>
 </html>
