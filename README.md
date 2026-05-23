@@ -1,6 +1,7 @@
 # Crimson OS
 
 [![QEMU Boot](https://github.com/synchancybersecurity/CrimsonOS/actions/workflows/qemu-boot.yml/badge.svg)](https://github.com/synchancybersecurity/CrimsonOS/actions/workflows/qemu-boot.yml)
+[![Release](https://img.shields.io/github/v/release/synchancybersecurity/CrimsonOS?label=release)](https://github.com/synchancybersecurity/CrimsonOS/releases)
 
 ![Crimson OS Logo](IMG_0035.jpeg)
 
