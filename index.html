@@ -372,46 +372,16 @@
     document.getElementById('download-unlocked').style.display = 'block';
   }
 
-  async function verifyPledge() {
-    const input = document.getElementById('txid-input').value.trim().toUpperCase();
-    const status = document.getElementById('verify-status');
-    if (!input) { status.textContent = 'Please enter a transaction ID.'; status.style.color = '#ff0033'; return; }
-
-    try {
-      const res = await fetch(PLEDGES_URL + '?t=' + Date.now(), { cache: 'no-store' });
-      const data = await res.json();
-      const txs = data.transactions || [];
-
-      if (txs.includes(input)) {
-        localStorage.setItem('crimson_unlocked', 'true');
-        localStorage.setItem('crimson_txid', input);
-        document.getElementById('download-locked').style.display = 'none';
-        document.getElementById('download-unlocked').style.display = 'block';
-      } else {
-        status.textContent = 'Transaction ID not found. Make sure you pledged $25+ and the payment has cleared.';
-        status.style.color = '#ff0033';
-      }
-    } catch (e) {
-      status.textContent = 'Verification failed. Try again.';
-      status.style.color = '#ff0033';
-    }
-  }
-
-  // Check if already unlocked on page load
-  if (localStorage.getItem('crimson_unlocked') === 'true') {
-    document.getElementById('download-locked').style.display = 'none';
-    document.getElementById('download-unlocked').style.display = 'block';
-  }
 </script>
 
 <div class="section">
   <h2>THE MANIFESTO</h2>
+</div>
   <p><strong>Two companies control your phone. That ends now.</strong></p>
   <p>For decades, every smartphone has run one of two operating systems — both controlled by corporations with financial incentives to harvest your data, restrict what you can run, and lock you into their ecosystems.</p>
   <p><strong>Your phone — your most personal computer — runs code you cannot inspect, cannot modify, and cannot trust.</strong></p>
   <p>Crimson OS exists to change this. Built from scratch on an original kernel. Not Android. Not iOS. Not Linux. A completely independent codebase designed from day one for security, privacy, and user sovereignty.</p>
   <p><strong>This is not a modified Android. This is not a Linux phone. This is a third option.</strong></p>
-</div>
 
 <div class="section">
   <h2>THE DIFFERENCE</h2>
