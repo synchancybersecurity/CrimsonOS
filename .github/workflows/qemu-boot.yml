@@ -45,17 +45,30 @@ jobs:
           -m 2G \
           -kernel bin/crimson-os.img \
           -nographic \
-          -no-reboot \
-          -serial stdio \
-          2>&1 | tee boot_output.txt || true
+          -serial file:boot_output.txt \
+          -d guest_errors,cpu_reset \
+          -D qemu_debug.log \
+          || true
+
+        echo "=== QEMU DEBUG LOG ==="
+        cat qemu_debug.log 2>/dev/null || echo "(no debug log)"
+        echo "=== END DEBUG LOG ==="
 
         echo "=== BOOT OUTPUT ==="
-        cat boot_output.txt
-        echo "=== END OUTPUT ==="
+        cat boot_output.txt 2>/dev/null || echo "(no boot output)"
+        echo "=== END BOOT OUTPUT ==="
+
+        echo "=== FILE SIZES ==="
+        ls -la boot_output.txt qemu_debug.log 2>/dev/null || true
 
     - name: Verify boot phases completed
       run: |
         echo "Checking for successful boot markers..."
+
+        if [ ! -s boot_output.txt ]; then
+          echo "✗ boot_output.txt is empty — kernel produced no serial output"
+          exit 1
+        fi
 
         if grep -q "Crimson OS v0.1.0" boot_output.txt; then
           echo "✓ Kernel loaded"
@@ -97,5 +110,7 @@ jobs:
       if: always()
       with:
         name: crimson-boot-log-${{ github.run_id }}
-        path: boot_output.txt
+        path: |
+          boot_output.txt
+          qemu_debug.log
         retention-days: 30
