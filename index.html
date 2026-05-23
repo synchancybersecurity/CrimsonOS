@@ -14,7 +14,7 @@
   }
   .hero {
     background: linear-gradient(135deg, #1a0000 0%, #0a0a0a 100%);
-    padding: 80px 20px 60px;
+    padding: 80px 20px 40px;
     text-align: center;
     border-bottom: 1px solid #ff0033;
   }
@@ -28,7 +28,7 @@
   .hero .tagline {
     font-size: 1.2rem;
     color: #888;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
   .hero .cta {
     display: inline-block;
@@ -42,11 +42,58 @@
     transition: background 0.2s;
   }
   .hero .cta:hover { background: #cc0029; }
+
+  /* Pledge counter */
+  .counter-bar {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 0 auto 30px;
+    max-width: 600px;
+    text-align: center;
+  }
+  .counter-bar .backers {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+  }
+  .counter-bar .backers span {
+    color: #ff0033;
+  }
+  .counter-bar .raised {
+    font-size: 1.1rem;
+    color: #aaa;
+    margin-top: 4px;
+  }
+  .counter-bar .raised span {
+    color: #00ff66;
+    font-weight: 700;
+  }
+  .counter-bar .goal {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 2px;
+  }
+  .progress-track {
+    background: #222;
+    border-radius: 6px;
+    height: 12px;
+    margin: 14px 0 6px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    background: linear-gradient(90deg, #ff0033, #cc0029);
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.5s ease;
+  }
+
   .stats {
     display: flex;
     justify-content: center;
     gap: 40px;
-    margin-top: 40px;
+    margin-top: 30px;
     flex-wrap: wrap;
   }
   .stat { text-align: center; }
@@ -184,21 +231,28 @@
     color: #bbb;
   }
   .tier ul li:last-child { border-bottom: none; }
+
+  /* Crimson PayPal buttons */
   .paypal-btn {
     display: inline-block;
-    background: #0070ba;
+    background: linear-gradient(135deg, #ff0033, #cc0029);
     color: #fff;
     padding: 12px 28px;
     border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.1s;
     border: none;
     cursor: pointer;
     width: 100%;
+    box-shadow: 0 2px 8px rgba(255,0,51,0.3);
   }
-  .paypal-btn:hover { background: #005ea6; }
+  .paypal-btn:hover {
+    background: linear-gradient(135deg, #cc0029, #990020);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255,0,51,0.4);
+  }
   .tier.featured {
     border: 2px solid #ff0033;
     position: relative;
@@ -224,6 +278,20 @@
 <div class="hero">
   <h1>CRIMSON OS</h1>
   <p class="tagline">Independent Mobile Operating System</p>
+
+  <!-- Pledge Counter -->
+  <div class="counter-bar">
+    <div class="backers"><span id="backer-count">0</span> backers</div>
+    <div class="raised"><span id="raised-amount">$0</span> raised</div>
+    <div class="goal">of $25,000 goal</div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+    </div>
+    <div style="font-size: 0.75rem; color: #666; margin-top: 6px;">
+      Updated manually · Real-time count coming soon
+    </div>
+  </div>
+
   <a href="#pledge" class="cta">BACK NOW</a>
   <div class="stats">
     <div class="stat"><div class="num">13,684</div><div class="label">Lines of C/ASM</div></div>
@@ -232,6 +300,22 @@
     <div class="stat"><div class="num">v0.1.0</div><div class="label">BloodMoon Alpha</div></div>
   </div>
 </div>
+
+<script>
+  // ===== PLEDGE COUNTER =====
+  // Edit these numbers to update the counter:
+  const BACKERS = 0;        // Number of people who pledged
+  const RAISED = 0;         // Dollars raised
+  const GOAL = 25000;       // Funding goal
+
+  function updateCounter() {
+    document.getElementById('backer-count').textContent = BACKERS;
+    document.getElementById('raised-amount').textContent = '$' + RAISED.toLocaleString();
+    const pct = Math.min((RAISED / GOAL) * 100, 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+  }
+  updateCounter();
+</script>
 
 <div class="section">
   <h2>THE MANIFESTO</h2>
