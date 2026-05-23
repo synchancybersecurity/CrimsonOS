@@ -78,6 +78,20 @@
     border-radius: 6px;
     transition: width 0.5s ease;
   }
+  .live-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #00ff66;
+    border-radius: 50%;
+    margin-right: 6px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+  }
 
   .stats {
     display: flex;
@@ -189,6 +203,15 @@
     color: #666;
     margin-bottom: 8px;
   }
+  .tier .backers-count .live-dot-inline {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #00ff66;
+    border-radius: 50%;
+    margin-right: 4px;
+    animation: pulse 2s infinite;
+  }
   .tier .delivery { font-size: 0.8rem; color: #666; margin-bottom: 16px; }
   .tier ul {
     list-style: none;
@@ -250,6 +273,9 @@
   <p class="tagline">Independent Mobile Operating System</p>
 
   <div class="counter-bar">
+    <div style="font-size: 0.75rem; color: #666; margin-bottom: 8px;">
+      <span class="live-dot"></span>LIVE UPDATES
+    </div>
     <div class="backers"><span id="backer-count">0</span> backers</div>
     <div class="raised"><span id="raised-amount">$0</span> raised</div>
     <div class="goal">of $25,000 goal</div>
@@ -257,7 +283,7 @@
       <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
     </div>
     <div style="font-size: 0.75rem; color: #666; margin-top: 6px;">
-      Updated manually · Real-time count coming soon
+      Updates automatically every 10 seconds
     </div>
   </div>
 
@@ -271,16 +297,39 @@
 </div>
 
 <script>
-  const BACKERS = 0;
-  const RAISED = 0;
+  const PLEDGES_URL = 'https://raw.githubusercontent.com/synchancybersecurity/CrimsonOS/main/pledges.json';
   const GOAL = 25000;
-  function updateCounter() {
-    document.getElementById('backer-count').textContent = BACKERS;
-    document.getElementById('raised-amount').textContent = '$' + RAISED.toLocaleString();
-    const pct = Math.min((RAISED / GOAL) * 100, 100);
-    document.getElementById('progress-fill').style.width = pct + '%';
+
+  async function fetchPledges() {
+    try {
+      const res = await fetch(PLEDGES_URL + '?t=' + Date.now(), { cache: 'no-store' });
+      const data = await res.json();
+
+      document.getElementById('backer-count').textContent = data.backers || 0;
+      document.getElementById('raised-amount').textContent = '$' + (data.raised || 0).toLocaleString();
+      const pct = Math.min(((data.raised || 0) / GOAL) * 100, 100);
+      document.getElementById('progress-fill').style.width = pct + '%';
+
+      const tiers = {
+        believer: 'backers-believer',
+        early_adopter: 'backers-early_adopter',
+        pioneer: 'backers-pioneer',
+        security_pro: 'backers-security_pro',
+        founding_engineer: 'backers-founding_engineer',
+        architect: 'backers-architect'
+      };
+      for (const [key, elId] of Object.entries(tiers)) {
+        const count = (data.tiers && data.tiers[key]) || 0;
+        const el = document.getElementById(elId);
+        if (el) el.textContent = count + ' backer' + (count === 1 ? '' : 's');
+      }
+    } catch (e) {
+      console.log('Pledge poll failed:', e.message);
+    }
   }
-  updateCounter();
+
+  fetchPledges();
+  setInterval(fetchPledges, 10000);
 </script>
 
 <div class="section">
@@ -344,7 +393,7 @@
     <div class="tier">
       <div class="price">$5</div>
       <div class="label">Believer</div>
-      <div class="backers-count">0 backers</div>
+      <div class="backers-count"><span class="live-dot-inline"></span><span id="backers-believer">0 backers</span></div>
       <div class="delivery">Estimated delivery: Dec 2026</div>
       <ul>
         <li>✓ Crimson wallpaper pack</li>
@@ -357,7 +406,7 @@
     <div class="tier featured">
       <div class="price">$25</div>
       <div class="label">Early Adopter</div>
-      <div class="backers-count">0 backers</div>
+      <div class="backers-count"><span class="live-dot-inline"></span><span id="backers-early_adopter">0 backers</span></div>
       <div class="delivery">Estimated delivery: Dec 2026</div>
       <ul>
         <li>✓ Digital reward</li>
@@ -371,7 +420,7 @@
     <div class="tier">
       <div class="price">$75</div>
       <div class="label">Pioneer</div>
-      <div class="backers-count">0 backers</div>
+      <div class="backers-count"><span class="live-dot-inline"></span><span id="backers-pioneer">0 backers</span></div>
       <div class="delivery">🌍 Ships anywhere · Feb 2027</div>
       <ul>
         <li>✓ Beta build access</li>
@@ -385,7 +434,7 @@
     <div class="tier">
       <div class="price">$150</div>
       <div class="label">Security Pro</div>
-      <div class="backers-count">0 backers</div>
+      <div class="backers-count"><span class="live-dot-inline"></span><span id="backers-security_pro">0 backers</span></div>
       <div class="delivery">Estimated delivery: Feb 2027</div>
       <ul>
         <li>✓ NeTwiz Pentesting toolkit early access</li>
@@ -398,7 +447,7 @@
     <div class="tier">
       <div class="price">$300</div>
       <div class="label">Founding Engineer</div>
-      <div class="backers-count">0 backers</div>
+      <div class="backers-count"><span class="live-dot-inline"></span><span id="backers-founding_engineer">0 backers</span></div>
       <div class="delivery">Estimated delivery: Jul 2027</div>
       <ul>
         <li>✓ 1:1 with lead developer</li>
@@ -412,7 +461,7 @@
     <div class="tier">
       <div class="price">$1,000</div>
       <div class="label">Architect</div>
-      <div class="backers-count">0 backers</div>
+      <div class="backers-count"><span class="live-dot-inline"></span><span id="backers-architect">0 backers</span></div>
       <div class="delivery">🌍 Ships anywhere · Jul 2027</div>
       <ul>
         <li>✓ First hardware units when produced</li>
