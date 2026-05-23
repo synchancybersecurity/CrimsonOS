@@ -267,6 +267,7 @@
 </style>
 </head>
 <body>
+<script src="config.js"></script>
 
 <div class="hero">
   <h1>CRIMSON OS</h1>
@@ -297,6 +298,22 @@
 </div>
 
 <script>
+  const PAYPAL_BASE = (typeof window !== 'undefined' && window.PAYPAL_BASE) || null;
+
+  function initPayPalButtons() {
+    document.querySelectorAll('.paypal-btn').forEach(btn => {
+      const amount = btn.dataset.amount;
+      if (PAYPAL_BASE && amount) {
+        btn.href = PAYPAL_BASE + '/' + amount;
+      } else {
+        btn.style.opacity = '0.5';
+        btn.style.pointerEvents = 'none';
+        btn.textContent = 'Payment unavailable';
+      }
+    });
+  }
+
+
   const PLEDGES_URL = 'https://raw.githubusercontent.com/synchancybersecurity/CrimsonOS/main/pledges.json';
   const GOAL = 25000;
 
@@ -328,6 +345,7 @@
     }
   }
 
+  initPayPalButtons();
   fetchPledges();
   setInterval(fetchPledges, 10000);
 </script>
