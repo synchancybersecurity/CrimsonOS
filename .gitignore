@@ -1,3 +1,4 @@
 bin/
 build/
 crimson
+config.js

@@ -1,0 +1,2 @@
+// Copy this to config.js and fill in your real PayPal.me URL
+window.PAYPAL_BASE = "https://www.paypal.com/paypalme/YOUR_HANDLE";
