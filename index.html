@@ -135,6 +135,88 @@
     transition: background 0.2s;
   }
   .download-btn:hover { background: #00cc52; }
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+  .tier {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 28px 24px;
+    text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .tier:hover {
+    border-color: #ff0033;
+    transform: translateY(-4px);
+  }
+  .tier .price {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #ff0033;
+    margin-bottom: 6px;
+  }
+  .tier .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #888;
+    margin-bottom: 8px;
+  }
+  .tier .delivery {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 16px;
+  }
+  .tier ul {
+    list-style: none;
+    text-align: left;
+    margin: 16px 0 24px;
+    padding: 0;
+  }
+  .tier ul li {
+    padding: 6px 0;
+    border-bottom: 1px solid #222;
+    font-size: 0.9rem;
+    color: #bbb;
+  }
+  .tier ul li:last-child { border-bottom: none; }
+  .paypal-btn {
+    display: inline-block;
+    background: #0070ba;
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  .paypal-btn:hover { background: #005ea6; }
+  .tier.featured {
+    border: 2px solid #ff0033;
+    position: relative;
+  }
+  .tier.featured::before {
+    content: "MOST POPULAR";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff0033;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
 </style>
 </head>
 <body>
@@ -142,24 +224,12 @@
 <div class="hero">
   <h1>CRIMSON OS</h1>
   <p class="tagline">Independent Mobile Operating System</p>
-  <a href="#back" class="cta">BACK NOW</a>
+  <a href="#pledge" class="cta">BACK NOW</a>
   <div class="stats">
-    <div class="stat">
-      <div class="num">13,684</div>
-      <div class="label">Lines of C/ASM</div>
-    </div>
-    <div class="stat">
-      <div class="num">86</div>
-      <div class="label">Source Files</div>
-    </div>
-    <div class="stat">
-      <div class="num">ARM64</div>
-      <div class="label">AArch64 Native</div>
-    </div>
-    <div class="stat">
-      <div class="num">v0.1.0</div>
-      <div class="label">BloodMoon Alpha</div>
-    </div>
+    <div class="stat"><div class="num">13,684</div><div class="label">Lines of C/ASM</div></div>
+    <div class="stat"><div class="num">86</div><div class="label">Source Files</div></div>
+    <div class="stat"><div class="num">ARM64</div><div class="label">AArch64 Native</div></div>
+    <div class="stat"><div class="num">v0.1.0</div><div class="label">BloodMoon Alpha</div></div>
   </div>
 </div>
 
@@ -175,107 +245,37 @@
 <div class="section">
   <h2>THE DIFFERENCE</h2>
   <table>
-    <tr>
-      <th>Feature</th>
-      <th>CRIMSON OS</th>
-      <th>Android</th>
-      <th>iOS</th>
-    </tr>
-    <tr>
-      <td>Open Source Kernel</td>
-      <td class="check">✓ 100% GPLv3</td>
-      <td>Partial</td>
-      <td class="cross">✗ No</td>
-    </tr>
-    <tr>
-      <td>Kernel Lineage</td>
-      <td>Original (Crimson Core)</td>
-      <td>Linux fork</td>
-      <td>BSD/XNU</td>
-    </tr>
-    <tr>
-      <td>Google Dependencies</td>
-      <td class="check">✓ Zero</td>
-      <td class="cross">✗ Deep</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Apple Dependencies</td>
-      <td class="check">✓ Zero</td>
-      <td>None</td>
-      <td class="cross">✗ Full</td>
-    </tr>
-    <tr>
-      <td>Native Pentest Tools</td>
-      <td class="check">✓ NetWiz arsenal</td>
-      <td>Root required</td>
-      <td>Jailbreak only</td>
-    </tr>
-    <tr>
-      <td>Multi-Network Browser</td>
-      <td class="check">✓ BloodMoon (Tor+I2P+Clear)</td>
-      <td>App required</td>
-      <td>App required</td>
-    </tr>
-    <tr>
-      <td>Capability Security Model</td>
-      <td class="check">✓ Original MAC + caps</td>
-      <td>SELinux bolt-on</td>
-      <td>Sandboxed only</td>
-    </tr>
-    <tr>
-      <td>User Modifiable</td>
-      <td class="check">✓ Full</td>
-      <td>Root required</td>
-      <td class="cross">✗ None</td>
-    </tr>
+    <tr><th>Feature</th><th>CRIMSON OS</th><th>Android</th><th>iOS</th></tr>
+    <tr><td>Open Source Kernel</td><td class="check">✓ 100% GPLv3</td><td>Partial</td><td class="cross">✗ No</td></tr>
+    <tr><td>Kernel Lineage</td><td>Original (Crimson Core)</td><td>Linux fork</td><td>BSD/XNU</td></tr>
+    <tr><td>Google Dependencies</td><td class="check">✓ Zero</td><td class="cross">✗ Deep</td><td>None</td></tr>
+    <tr><td>Apple Dependencies</td><td class="check">✓ Zero</td><td>None</td><td class="cross">✗ Full</td></tr>
+    <tr><td>Native Pentest Tools</td><td class="check">✓ NetWiz arsenal</td><td>Root required</td><td>Jailbreak only</td></tr>
+    <tr><td>Multi-Network Browser</td><td class="check">✓ BloodMoon (Tor+I2P+Clear)</td><td>App required</td><td>App required</td></tr>
+    <tr><td>Capability Security Model</td><td class="check">✓ Original MAC + caps</td><td>SELinux bolt-on</td><td>Sandboxed only</td></tr>
+    <tr><td>User Modifiable</td><td class="check">✓ Full</td><td>Root required</td><td class="cross">✗ None</td></tr>
   </table>
 </div>
 
 <div class="section">
   <h2>THIS IS REAL</h2>
-  <p>This is not a concept. The kernel is written. The code is real. It compiles with <strong>zero warnings</strong> and boots through all 11 init phases in QEMU.</p>
+  <p>This is not a concept. The kernel is written. The code is real. It compiles with <strong>zero warnings</strong> and boots through all 8 init phases in QEMU.</p>
   <div class="stats">
-    <div class="stat">
-      <div class="num">13,684</div>
-      <div class="label">Lines of C/ASM</div>
-    </div>
-    <div class="stat">
-      <div class="num">86</div>
-      <div class="label">Source Files</div>
-    </div>
-    <div class="stat">
-      <div class="num">ARM64</div>
-      <div class="label">AArch64 Native</div>
-    </div>
-    <div class="stat">
-      <div class="num">6</div>
-      <div class="label">Cores (RK3399)</div>
-    </div>
-    <div class="stat">
-      <div class="num">MLFQ</div>
-      <div class="label">5-Priority Scheduler</div>
-    </div>
-    <div class="stat">
-      <div class="num">RFC 793</div>
-      <div class="label">TCP Stack</div>
-    </div>
-    <div class="stat">
-      <div class="num">GPLv3</div>
-      <div class="label">License</div>
-    </div>
+    <div class="stat"><div class="num">13,684</div><div class="label">Lines of C/ASM</div></div>
+    <div class="stat"><div class="num">86</div><div class="label">Source Files</div></div>
+    <div class="stat"><div class="num">ARM64</div><div class="label">AArch64 Native</div></div>
+    <div class="stat"><div class="num">6</div><div class="label">Cores (RK3399)</div></div>
+    <div class="stat"><div class="num">MLFQ</div><div class="label">5-Priority Scheduler</div></div>
+    <div class="stat"><div class="num">RFC 793</div><div class="label">TCP Stack</div></div>
+    <div class="stat"><div class="num">GPLv3</div><div class="label">License</div></div>
   </div>
   <p style="margin-top: 20px; font-size: 0.9rem; color: #888;">
     <strong>Hardware target:</strong> PinePhone Pro (Rockchip RK3399 — 2× Cortex-A72 + 4× Cortex-A53, GICv3).<<br>
     All drivers written against RK3399 register maps. Community-corrected from early A64 scaffolding.
   </p>
   <div style="text-align: center; margin-top: 30px;">
-    <a href="https://github.com/synchancybersecurity/CrimsonOS/releases/download/v0.1.0-alpha/crimson-os.img" class="download-btn">
-      ⬇ DOWNLOAD QEMU IMAGE
-    </a>
-    <p style="margin-top: 10px; font-size: 0.8rem; color: #666;">
-      crimson-os.img · ARM64 · ~10 MB · QEMU virt ready
-    </p>
+    <a href="https://github.com/synchancybersecurity/CrimsonOS/releases/download/v0.1.0-alpha/crimson-os.img" class="download-btn">⬇ DOWNLOAD QEMU IMAGE</a>
+    <p style="margin-top: 10px; font-size: 0.8rem; color: #666;">crimson-os.img · ARM64 · ~10 MB · QEMU virt ready</p>
   </div>
 </div>
 
@@ -286,51 +286,132 @@
   </div>
 </div>
 
+<div class="section" id="pledge">
+  <h2>BACK THE PROJECT</h2>
+  <p>Fund the next phase. Every pledge directly accelerates development — no middlemen, no platform fees. PayPal processes your payment securely. Your credentials are never seen by us.</p>
+
+  <div class="tiers">
+    <div class="tier">
+      <div class="price">$5</div>
+      <div class="label">Believer</div>
+      <div class="delivery">Estimated delivery: Dec 2026</div>
+      <ul>
+        <li>✓ Crimson wallpaper pack</li>
+        <li>✓ Name in CONTRIBUTORS.md</li>
+        <li>✓ Dev log newsletter</li>
+      </ul>
+      <a href="https://www.paypal.com/paypalme/chadwiley86/5" class="paypal-btn" target="_blank" rel="noopener">Pledge $5 via PayPal</a>
+    </div>
+
+    <div class="tier featured">
+      <div class="price">$25</div>
+      <div class="label">Early Adopter</div>
+      <div class="delivery">Estimated delivery: Dec 2026</div>
+      <ul>
+        <li>✓ Digital reward</li>
+        <li>✓ First access to builds</li>
+        <li>✓ Bootable QEMU image</li>
+        <li>✓ Discord backer channel</li>
+      </ul>
+      <a href="https://www.paypal.com/paypalme/chadwiley86/25" class="paypal-btn" target="_blank" rel="noopener">Pledge $25 via PayPal</a>
+    </div>
+
+    <div class="tier">
+      <div class="price">$75</div>
+      <div class="label">Pioneer</div>
+      <div class="delivery">🌍 Ships anywhere · Feb 2027</div>
+      <ul>
+        <li>✓ Beta build access</li>
+        <li>✓ Roadmap vote priority</li>
+        <li>✓ Sticker pack</li>
+        <li>✓ Everything in Early Adopter</li>
+      </ul>
+      <a href="https://www.paypal.com/paypalme/chadwiley86/75" class="paypal-btn" target="_blank" rel="noopener">Pledge $75 via PayPal</a>
+    </div>
+
+    <div class="tier">
+      <div class="price">$150</div>
+      <div class="label">Security Pro</div>
+      <div class="delivery">Estimated delivery: Feb 2027</div>
+      <ul>
+        <li>✓ NeTwiz Pentesting toolkit early access</li>
+        <li>✓ Digital reward</li>
+        <li>✓ Everything in Pioneer</li>
+      </ul>
+      <a href="https://www.paypal.com/paypalme/chadwiley86/150" class="paypal-btn" target="_blank" rel="noopener">Pledge $150 via PayPal</a>
+    </div>
+
+    <div class="tier">
+      <div class="price">$300</div>
+      <div class="label">Founding Engineer</div>
+      <div class="delivery">Estimated delivery: Jul 2027</div>
+      <ul>
+        <li>✓ 1:1 with lead developer</li>
+        <li>✓ Free updates for life</li>
+        <li>✓ Digital reward</li>
+        <li>✓ Everything in Security Pro</li>
+      </ul>
+      <a href="https://www.paypal.com/paypalme/chadwiley86/300" class="paypal-btn" target="_blank" rel="noopener">Pledge $300 via PayPal</a>
+    </div>
+
+    <div class="tier">
+      <div class="price">$1,000</div>
+      <div class="label">Architect</div>
+      <div class="delivery">🌍 Ships anywhere · Jul 2027</div>
+      <ul>
+        <li>✓ First hardware units when produced</li>
+        <li>✓ Lifetime OTA updates</li>
+        <li>✓ Advisory board seat</li>
+        <li>✓ Everything in Founding Engineer</li>
+      </ul>
+      <a href="https://www.paypal.com/paypalme/chadwiley86/1000" class="paypal-btn" target="_blank" rel="noopener">Pledge $1,000 via PayPal</a>
+    </div>
+  </div>
+
+  <p style="margin-top: 30px; font-size: 0.85rem; color: #666; text-align: center;">
+    Payments processed securely by PayPal. You do not need a PayPal account — credit/debit cards accepted.<br>
+    Crimson OS / SynChan CyberSecurity does not store or see your payment credentials.<br>
+    All tiers include estimated delivery dates. Digital rewards delivered via email. Physical rewards ship worldwide.
+  </p>
+</div>
+
 <div class="section">
   <h2>ROADMAP</h2>
-
   <div class="roadmap-item complete">
     <div class="date">✅ COMPLETE · MAY 2026</div>
     <h3>Kernel Alpha — First Boot Verified</h3>
-    <p>13,684 lines of original C/ARM64 Assembly. All 11 init phases verified in QEMU. Interactive shell with 28 commands. Scheduler, memory manager, TCP/IP stack, security model, sandbox, IPC, display pipeline, touch pipeline, BloodMoon browser, NetWiz arsenal all built. GitHub live.</p>
+    <p>13,684 lines of original C/ARM64 Assembly. All 8 init phases verified in QEMU. Interactive shell with 28 commands. Scheduler, memory manager, TCP/IP stack, security model, sandbox, IPC, display pipeline, touch pipeline, BloodMoon browser, NetWiz arsenal all built. GitHub live.</p>
   </div>
-
   <div class="roadmap-item complete">
     <div class="date">✅ COMPLETE · MAY 2026</div>
     <h3>Community Launch</h3>
     <p>Open sourced under GPLv3. Featured in r/degoogle, r/opensource, r/pinephone, r/PINE64official. GitHub repo live with all 86 source files. Campaign page live.</p>
   </div>
-
   <div class="roadmap-item complete">
     <div class="date">✅ COMPLETE · MAY 2026</div>
     <h3>Core Subsystems — Real Implementations</h3>
     <p>AES-256-GCM on ARM64 hardware crypto instructions (AESE/AESMC/PMULL). ChaCha20 CSPRNG seeded from ARM generic timer. VFS syscalls wired end-to-end. CrimsonFS indirect blocks — files up to 1 GB. Full 4-level ARM64 page table walk (fork, unmap, process exit). <strong>RK3399</strong> MIPI DSI pipeline and XBD599 panel init for PinePhone Pro. GT917S touch driver over <strong>RK3399 I2C5 (DesignWare)</strong>. Real DNS resolution over UDP + HTTP GET over TCP. Shell ls/cat reading live from CrimsonFS. Zero-warning build. CI badge passing on every commit.</p>
   </div>
-
   <div class="roadmap-item">
-    <div class="date">NOW · KICKSTARTER</div>
-    <h3>Kickstarter Launch — Fund the Audit</h3>
+    <div class="date">NOW · FUNDING</div>
+    <h3>Security Audit — Fund the Audit</h3>
     <p>$25,000 goal. Funds a third-party professional security audit of the kernel — required before claiming production readiness. Early Adopter backers get the first bootable QEMU image. Pioneer tier gets BloodMoon beta builds and roadmap vote.</p>
   </div>
-
   <div class="roadmap-item">
     <div class="date">MONTH 1–3 · HARDWARE</div>
     <h3>PinePhone Pro First Boot</h3>
     <p>RK3399 DSI display driver and GT917S touch I2C5 are written and targeting PinePhone Pro hardware. Campaign funds the device. Remaining work: WiFi (RTL8723CS on RK3399 SDIO0), LTE modem AT commands, and SD card boot. First real hardware boot. Bootable SD card image released to Early Adopter backers.</p>
   </div>
-
   <div class="roadmap-item">
     <div class="date">MONTH 3–6 · ALPHA 0.2</div>
     <h3>Public Alpha — Crimson OS 0.2.0</h3>
     <p>BloodMoon browser live on real network with Tor and I2P routing. Crimson Store running real packages. NetWiz pentest suite fully operational on hardware. All backers receive the flashable image. Security audit complete.</p>
   </div>
-
   <div class="roadmap-item">
     <div class="date">MONTH 6–12 · BETA</div>
     <h3>Beta + Multi-Device Support</h3>
     <p>Full phone stack — calls, SMS, data. Sony Xperia and Librem 5 ports. Community contributor program. Expanded device support based on community demand. Stable daily-driver quality target.</p>
   </div>
-
   <div class="roadmap-item">
     <div class="date">YEAR 2 · HARDWARE</div>
     <h3>Crimson Hardware v1</h3>
@@ -340,7 +421,7 @@
 
 <div class="section">
   <h2>RISKS & HONESTY</h2>
-  <p>This is a software Kickstarter. There is no hardware to manufacture, no supply chain to manage, and no FCC certification required. The kernel is already written and the code is publicly auditable.</p>
+  <p>This is a software project. There is no hardware to manufacture, no supply chain to manage, and no FCC certification required. The kernel is already written and the code is publicly auditable.</p>
   <p>The primary risk is time. Porting a kernel to new hardware always takes longer than expected. We are committing to transparency: every development update — including setbacks — will be shared with backers in real time.</p>
   <p><strong>We are not selling a finished product. We are inviting you to fund the next phase of something already in motion.</strong></p>
 </div>
@@ -348,7 +429,7 @@
 <div class="section" id="back">
   <h2>JOIN THE MOVEMENT</h2>
   <p>The Third Option Starts Here.</p>
-  <p>Get notified when the Kickstarter goes live. Be first in line.</p>
+  <p>Get notified when major milestones drop. Be first in line.</p>
   <p style="color: #888; font-size: 0.9rem;">No spam. Just launch day notification and dev logs.</p>
   <p style="margin-top: 30px;">
     <a href="https://github.com/synchancybersecurity/CrimsonOS" class="cta">View on GitHub</a>
