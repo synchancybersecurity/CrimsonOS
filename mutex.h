@@ -9,7 +9,7 @@ struct process;
 
 typedef struct {
     struct process* owner;
-    volatile int locked;
+    volatile uint32_t locked;
     spinlock_t wait_lock;
     wait_queue_t waiters;
 } mutex_t;

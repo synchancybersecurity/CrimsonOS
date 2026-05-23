@@ -274,11 +274,11 @@ static int eg25g_get_signal(cell_modem_t* modem)
         modem->rat = 2; /* RAT_LTE */
         /* Parse RSSI,RSRP,SINR,RSRQ */
         /* Parse: skip first comma-field, then rsrp,sinr,rsrq */
-        while (*p && *p != ',') p++; if (*p) p++;
+        while (*p && *p != ',') { p++; } if (*p) { p++; }
         modem->lte.rsrp = (int32_t)atoi(p);
-        while (*p && *p != ',') p++; if (*p) p++;
+        while (*p && *p != ',') { p++; } if (*p) { p++; }
         modem->lte.snr  = (int32_t)atoi(p);
-        while (*p && *p != ',') p++; if (*p) p++;
+        while (*p && *p != ',') { p++; } if (*p) { p++; }
         modem->lte.rsrq = (int32_t)atoi(p);
     }
     return 0;
@@ -585,24 +585,24 @@ static int eg25g_gnss_read(cell_modem_t* modem,
     const char* p = at_extract(resp, "+QGPSLOC: ");
     if (!p) return -1;
     /* Skip UTC field, then parse lat/lon as integer degrees × 1e6 */
-    while (*p && *p != ',') p++; if (*p) p++;
+    while (*p && *p != ',') { p++; } if (*p) { p++; }
     /* lat: integer part + fractional — read as fixed-point */
     long lat_int = atol(p);
     while (*p && *p != '.') p++;
     long lat_frac = 0;
     if (*p == '.') { p++; lat_frac = atol(p); }
     *lat = (double)lat_int + (double)lat_frac * 1e-6;
-    while (*p && *p != ',') p++; if (*p) p++;
+    while (*p && *p != ',') { p++; } if (*p) { p++; }
     long lon_int = atol(p);
     while (*p && *p != '.') p++;
     long lon_frac = 0;
     if (*p == '.') { p++; lon_frac = atol(p); }
     *lon = (double)lon_int + (double)lon_frac * 1e-6;
     /* skip hdop, read alt */
-    while (*p && *p != ',') p++; if (*p) p++;
+    while (*p && *p != ',') { p++; } if (*p) { p++; }
     long hdop_i = atol(p);
     *acc = (float)(hdop_i * 5);
-    while (*p && *p != ',') p++; if (*p) p++;
+    while (*p && *p != ',') { p++; } if (*p) { p++; }
     *alt = (double)atol(p);
     return 0;
 }
@@ -616,7 +616,7 @@ static int eg25g_get_cell_info(cell_modem_t* modem)
     if (p) {
         modem->rat = 2;
         /* Skip to numeric fields: "LTE","FDD",mcc,mnc,... */
-        for (int i = 0; i < 4; i++) { while (*p && *p != ',') p++; if (*p) p++; }
+        for (int i = 0; i < 4; i++) { while (*p && *p != ',') { p++; } if (*p) { p++; } }
         /* Parse comma-separated: mcc,mnc,cellid(hex),pci,earfcn,bw,rsrp,rsrq,sinr */
         #define NEXT_FIELD(dst, type) do { dst=(type)strtoul(p,NULL,10); while(*p&&*p!=',')p++; if(*p)p++; } while(0)
         NEXT_FIELD(modem->lte.mcc,   uint32_t);

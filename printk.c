@@ -110,7 +110,7 @@ void vprintk(const char* fmt, va_list args)
             p++;
             
             /* Parse flags */
-            bool left_align = false;
+            bool left_align __attribute__((unused)) = false;
             char pad_char = ' ';
             int width = 0;
             bool is_long = false;
@@ -464,7 +464,7 @@ int vsnprintf(char* str, size_t size, const char* fmt, va_list args)
         if (*p == '%' && *(p + 1)) {
             p++;
 
-            bool left_align = false;
+            bool left_align __attribute__((unused)) = false;
             char pad_char = ' ';
             int width = 0;
             bool is_long = false;

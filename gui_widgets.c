@@ -401,7 +401,7 @@ static void draw_switch(gfx_ctx_t* ctx, switch_widget_t* sw)
     gfx_fill_rounded(ctx, b->x, b->y + 4, b->w, b->h - 8, (b->h - 8) / 2, track_color);
 
     /* Thumb */
-    uint32_t thumb_x = sw->on ? b->x + b->w - b->h : b->x;
+    int32_t thumb_x = sw->on ? (int32_t)(b->x + b->w - b->h) : (int32_t)b->x;
     /* Animated position */
     uint32_t tx = b->x + sw->anim_x;
     gfx_fill_circle(ctx, (int32_t)(tx + (b->h - 4) / 2), (int32_t)(b->y + (int32_t)b->h / 2),

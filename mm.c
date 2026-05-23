@@ -212,8 +212,8 @@ size_t pmm_get_free_pages(void)
  */
 void kmalloc_init(void)
 {
-    extern uintptr_t __heap_start;
-    extern uintptr_t __heap_end;
+    extern char __heap_start[];
+    extern char __heap_end[];
     
     heap_start = (heap_block_t*)&__heap_start;
     heap_size = (uintptr_t)&__heap_end - (uintptr_t)&__heap_start;
@@ -242,7 +242,7 @@ void* kmalloc(size_t size)
     spin_lock(&heap_lock);
     
     heap_block_t* current = heap_start;
-    heap_block_t* prev = NULL;
+    heap_block_t* prev __attribute__((unused)) = NULL;
     
     while (current != NULL) {
         /* Check for corruption */

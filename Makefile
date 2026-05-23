@@ -36,8 +36,13 @@ else ifeq ($(BOARD),rpi3)
     BOARD_FLAGS = -DBOARD_RPI3 -mcpu=cortex-a53
 else ifeq ($(BOARD),pinephone)
     BOARD_FLAGS = -DBOARD_PINEPHONE -mcpu=cortex-a53
+ BOARD_FLAGS = -DBOARD_PINEPHONE_PRO -mcpu=cortex-a72+crc+crypto -mtune=cortex-a72
+ BOARD_FLAGS = -DBOARD_PINEPHONE_PRO -mcpu=cortex-a72+crc+crypto -mtune=cortex-a72
+else ifeq ($(BOARD),pinephone-pro)
+ BOARD_FLAGS = -DBOARD_PINEPHONE_PRO -mcpu=cortex-a72+crc+crypto -mtune=cortex-a72
 else
     BOARD_FLAGS = -DBOARD_QEMU -mcpu=cortex-a72
+ BOARD_FLAGS = -DBOARD_PINEPHONE_PRO -mcpu=cortex-a72+crc+crypto -mtune=cortex-a72
 endif
 
 # Compiler flags

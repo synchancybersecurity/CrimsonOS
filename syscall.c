@@ -362,7 +362,7 @@ static long sys_cr_fb_blit(long dst_x, long dst_y, long w, long h, long src, lon
 {
     (void)fmt;
     display_blit((uint32_t)dst_x, (uint32_t)dst_y, (uint32_t)w, (uint32_t)h,
-                 (const uint32_t*)(uintptr_t)src, (uint32_t)w * 4);
+                 (const uint32_t*)(uintptr_t)src, (uint32_t)w * 4, false);
     return 0;
 }
 

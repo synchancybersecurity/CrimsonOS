@@ -192,7 +192,7 @@ int bm_tab_navigate(int tab_id, const char* url)
 {
     for (int i = 0; i < TAB_MAX; i++) {
         bm_tab_t* tab = &bm_tabs[i];
-        if (tab->in_use && tab->id == tab_id) {
+        if (tab->in_use && tab->id == (uint32_t)tab_id) {
             spin_lock(&tab->lock);
             strncpy(tab->url, url, TAB_URL_MAX - 1);
             tab->loading = 1;
@@ -227,7 +227,7 @@ void bm_tab_close(int tab_id)
 {
     for (int i = 0; i < TAB_MAX; i++) {
         bm_tab_t* tab = &bm_tabs[i];
-        if (tab->in_use && tab->id == tab_id) {
+        if (tab->in_use && tab->id == (uint32_t)tab_id) {
             spin_lock(&tab->lock);
             if (tab->content_buf) kfree(tab->content_buf);
             tab->in_use = 0;
@@ -245,7 +245,7 @@ void bm_tab_set_network(int tab_id, uint32_t network)
 {
     for (int i = 0; i < TAB_MAX; i++) {
         bm_tab_t* tab = &bm_tabs[i];
-        if (tab->in_use && tab->id == tab_id) {
+        if (tab->in_use && tab->id == (uint32_t)tab_id) {
             uint32_t old = tab->network;
             tab->network = network;
             printk(KERN_INFO "bloodmoon: tab %d: %s -> %s\n",

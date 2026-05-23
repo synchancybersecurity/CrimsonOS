@@ -66,7 +66,7 @@ void board_init_early(void)
     board_ram = 2048;
     board_cpus = 4;
 #elif defined(BOARD_PINEPHONE_PRO)
-    board_name = "PinePhone Pro (RK3399S)";
+    board_name = "PinePhone Pro (RK3399)";
     board_ram = 4096;
     board_cpus = 6;
 #elif defined(BOARD_LIBREM5)

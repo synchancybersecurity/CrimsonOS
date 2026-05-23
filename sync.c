@@ -15,7 +15,7 @@
 #include <crimson/spinlock.h>
 
 /* Freestanding compare-and-swap for uint32_t using ldaxr/stlxr */
-static inline int cas32(uint32_t* ptr, uint32_t expected, uint32_t desired)
+static inline int cas32(volatile uint32_t* ptr, uint32_t expected, uint32_t desired)
 {
     uint32_t old, tmp;
     __asm__ volatile(
