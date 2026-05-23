@@ -43,7 +43,6 @@
   }
   .hero .cta:hover { background: #cc0029; }
 
-  /* Pledge counter */
   .counter-bar {
     background: #111;
     border: 1px solid #333;
@@ -58,23 +57,14 @@
     font-weight: 800;
     color: #fff;
   }
-  .counter-bar .backers span {
-    color: #ff0033;
-  }
+  .counter-bar .backers span { color: #ff0033; }
   .counter-bar .raised {
     font-size: 1.1rem;
     color: #aaa;
     margin-top: 4px;
   }
-  .counter-bar .raised span {
-    color: #00ff66;
-    font-weight: 700;
-  }
-  .counter-bar .goal {
-    font-size: 0.85rem;
-    color: #666;
-    margin-top: 2px;
-  }
+  .counter-bar .raised span { color: #00ff66; font-weight: 700; }
+  .counter-bar .goal { font-size: 0.85rem; color: #666; margin-top: 2px; }
   .progress-track {
     background: #222;
     border-radius: 6px;
@@ -97,11 +87,7 @@
     flex-wrap: wrap;
   }
   .stat { text-align: center; }
-  .stat .num {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #ff0033;
-  }
+  .stat .num { font-size: 2.2rem; font-weight: 700; color: #ff0033; }
   .stat .label { font-size: 0.85rem; color: #888; }
   .section {
     max-width: 900px;
@@ -116,16 +102,8 @@
     padding-left: 16px;
   }
   .section p { margin-bottom: 16px; color: #ccc; }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-  }
-  th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #333;
-  }
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+  th, td { padding: 12px; text-align: left; border-bottom: 1px solid #333; }
   th { color: #ff0033; font-weight: 600; }
   .check { color: #00ff66; }
   .cross { color: #ff0033; }
@@ -141,11 +119,7 @@
     text-transform: uppercase;
     letter-spacing: 1px;
   }
-  .roadmap-item h3 {
-    font-size: 1.3rem;
-    margin: 6px 0 10px;
-    color: #fff;
-  }
+  .roadmap-item h3 { font-size: 1.3rem; margin: 6px 0 10px; color: #fff; }
   .roadmap-item p { color: #aaa; font-size: 0.95rem; }
   .footer {
     text-align: center;
@@ -196,10 +170,7 @@
     text-align: center;
     transition: border-color 0.2s, transform 0.2s;
   }
-  .tier:hover {
-    border-color: #ff0033;
-    transform: translateY(-4px);
-  }
+  .tier:hover { border-color: #ff0033; transform: translateY(-4px); }
   .tier .price {
     font-size: 2.4rem;
     font-weight: 800;
@@ -211,13 +182,14 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #888;
+    margin-bottom: 4px;
+  }
+  .tier .backers-count {
+    font-size: 0.75rem;
+    color: #666;
     margin-bottom: 8px;
   }
-  .tier .delivery {
-    font-size: 0.8rem;
-    color: #666;
-    margin-bottom: 16px;
-  }
+  .tier .delivery { font-size: 0.8rem; color: #666; margin-bottom: 16px; }
   .tier ul {
     list-style: none;
     text-align: left;
@@ -231,8 +203,6 @@
     color: #bbb;
   }
   .tier ul li:last-child { border-bottom: none; }
-
-  /* Crimson PayPal buttons */
   .paypal-btn {
     display: inline-block;
     background: linear-gradient(135deg, #ff0033, #cc0029);
@@ -279,7 +249,6 @@
   <h1>CRIMSON OS</h1>
   <p class="tagline">Independent Mobile Operating System</p>
 
-  <!-- Pledge Counter -->
   <div class="counter-bar">
     <div class="backers"><span id="backer-count">0</span> backers</div>
     <div class="raised"><span id="raised-amount">$0</span> raised</div>
@@ -302,12 +271,9 @@
 </div>
 
 <script>
-  // ===== PLEDGE COUNTER =====
-  // Edit these numbers to update the counter:
-  const BACKERS = 0;        // Number of people who pledged
-  const RAISED = 0;         // Dollars raised
-  const GOAL = 25000;       // Funding goal
-
+  const BACKERS = 0;
+  const RAISED = 0;
+  const GOAL = 25000;
   function updateCounter() {
     document.getElementById('backer-count').textContent = BACKERS;
     document.getElementById('raised-amount').textContent = '$' + RAISED.toLocaleString();
@@ -378,6 +344,7 @@
     <div class="tier">
       <div class="price">$5</div>
       <div class="label">Believer</div>
+      <div class="backers-count">0 backers</div>
       <div class="delivery">Estimated delivery: Dec 2026</div>
       <ul>
         <li>✓ Crimson wallpaper pack</li>
@@ -390,6 +357,7 @@
     <div class="tier featured">
       <div class="price">$25</div>
       <div class="label">Early Adopter</div>
+      <div class="backers-count">0 backers</div>
       <div class="delivery">Estimated delivery: Dec 2026</div>
       <ul>
         <li>✓ Digital reward</li>
@@ -403,6 +371,7 @@
     <div class="tier">
       <div class="price">$75</div>
       <div class="label">Pioneer</div>
+      <div class="backers-count">0 backers</div>
       <div class="delivery">🌍 Ships anywhere · Feb 2027</div>
       <ul>
         <li>✓ Beta build access</li>
@@ -416,6 +385,7 @@
     <div class="tier">
       <div class="price">$150</div>
       <div class="label">Security Pro</div>
+      <div class="backers-count">0 backers</div>
       <div class="delivery">Estimated delivery: Feb 2027</div>
       <ul>
         <li>✓ NeTwiz Pentesting toolkit early access</li>
@@ -428,6 +398,7 @@
     <div class="tier">
       <div class="price">$300</div>
       <div class="label">Founding Engineer</div>
+      <div class="backers-count">0 backers</div>
       <div class="delivery">Estimated delivery: Jul 2027</div>
       <ul>
         <li>✓ 1:1 with lead developer</li>
@@ -441,6 +412,7 @@
     <div class="tier">
       <div class="price">$1,000</div>
       <div class="label">Architect</div>
+      <div class="backers-count">0 backers</div>
       <div class="delivery">🌍 Ships anywhere · Jul 2027</div>
       <ul>
         <li>✓ First hardware units when produced</li>
