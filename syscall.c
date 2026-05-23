@@ -420,7 +420,3 @@ static long sys_cr_proc_set_cap(long cap, long enable, long, long, long, long)
 }
 
 /* timespec for nanosleep */
-struct timespec {
-    long tv_sec;
-    long tv_nsec;
-};
