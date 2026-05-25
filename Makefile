@@ -260,3 +260,13 @@ clean:
 	@echo "[CLEAN] Removing build artifacts..."
 	@rm -rf $(BUILD_DIR) $(BIN_DIR)
 	@rm -f crimson
+
+# --- Product configuration targets (CrimsonOS v0.2.0 Forge) ---
+config-phone:
+	cp configs/phone_defconfig .config
+
+config-dsot:
+	cp configs/dsot_defconfig .config
+
+config-compute:
+	cp configs/compute_defconfig .config
