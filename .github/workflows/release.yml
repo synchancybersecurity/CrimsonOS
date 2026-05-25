@@ -1,0 +1,36 @@
+name: CrimsonOS Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  CROSS_COMPILE: aarch64-linux-gnu-
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config: [phone, dsot, compute]
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu
+      - run: cp configs/${{ matrix.config }}_defconfig .config && make CROSS_COMPILE=aarch64-linux-gnu- -j$(nproc)
+      - run: mv Image Image-${{ matrix.config }} && mv kernel.elf kernel-${{ matrix.config }}.elf
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            Image-${{ matrix.config }}
+            kernel-${{ matrix.config }}.elf
+          tag_name: ${{ github.ref_name }}
+          name: CrimsonOS ${{ github.ref_name }}
+          body: |
+            ## CrimsonOS Kernel ${{ github.ref_name }}
+            - `Image-phone` — PinePhone Pro / RK3399
+            - `Image-dsot` — S32G3 flight hardware
+            - `Image-compute` — Server ARM64
+            Apache License 2.0 — SynChanCyberSecurity LLC
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
