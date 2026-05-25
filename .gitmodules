@@ -1,0 +1,6 @@
+[submodule "crimson-os"]
+	path = crimson-os
+	url = https://github.com/synchancybersecurity/crimson-os.git
+[submodule "crimsonos"]
+	path = crimsonos
+	url = https://github.com/synchancybersecurity/CrimsonOS.git
