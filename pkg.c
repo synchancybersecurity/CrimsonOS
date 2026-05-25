@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS - Package Manager
  * .crimson package format with Ed25519 signing

@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS — Realtek RTL8723CS WiFi Driver
  * Board: PinePhone Pro (Allwinner A64)

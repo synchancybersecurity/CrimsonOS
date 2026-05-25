@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS - Display Subsystem Header
  * Framebuffer management, graphics context, 2D primitives

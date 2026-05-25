@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS - Core Type Definitions
  * All fundamental types used across the entire kernel

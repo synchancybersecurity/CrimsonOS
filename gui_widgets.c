@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS - GUI Widget System
  * Buttons, labels, text input, scroll views, lists, switches, sliders

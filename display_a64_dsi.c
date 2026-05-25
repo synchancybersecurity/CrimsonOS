@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS - Allwinner A64 MIPI DSI + D-PHY Controller
  * Board: PinePhone Pro

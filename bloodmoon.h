@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS - BloodMoon Browser Header
  * Multi-Network Browser Engine (ClearNet/Tor/I2P/Freenet)

@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS - GUI Compositor & Window Manager
  * Surfaces, app launcher, lock screen, status bar, notifications

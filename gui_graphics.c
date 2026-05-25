@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS - Graphics Rendering Engine
  * 2D primitives, font rendering, gradients, alpha blending

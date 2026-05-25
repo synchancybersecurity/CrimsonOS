@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 #ifndef _CRIMSON_SYSCALL_H
 #define _CRIMSON_SYSCALL_H
 

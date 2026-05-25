@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS - Firmware Loader & Radio Integration
  * WiFi: RTL8723CS / WCN36xx firmware loading + WPA2 supplicant

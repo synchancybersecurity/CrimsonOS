@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS - Touch Input Pipeline
  * Complete pipeline: IRQ → debounce → calibrate → gesture → dispatch

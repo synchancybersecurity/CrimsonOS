@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS — Quectel EG25-G LTE Modem Driver
  * Board: PinePhone Pro (Allwinner A64)

@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS - Security Subsystem Header
  * MAC, Verified Boot, Sandboxing, Exploit Mitigations (ASLR/NX/CFI)

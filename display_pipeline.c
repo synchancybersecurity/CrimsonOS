@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS - Display Pipeline
  * Wires the display driver framebuffer to the GUI compositor.

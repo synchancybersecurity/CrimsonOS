@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 SynChanCyberSecurity LLC. All Rights Reserved. */
 /*
  * Crimson OS - Virtual Filesystem (VFS) Layer
  * Provides POSIX-like file operations on top of CrimsonFS
